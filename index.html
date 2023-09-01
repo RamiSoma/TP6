@@ -1,13 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TP6 Ingenieria Software</title>
     <link href="./styles.css" rel="stylesheet">
 </head>
 <body>
-    <h1>Trabajo Practico Ing en Software</h1>
+    <div class="navbar">
+        <a class="navbar-title" href="#">DeliverEat!</a>
+    </div>
+
+    <h1>Realizar Pedido</h1>
+
+    <h2>Dirección del Comercio:</h2>
+    <label for="calle">Calle:</label>
+    <input type="text" id="comercio_calle" name="calle" required>
+
+    <label for="numero">Número:</label>
+    <input type="text" id="comercio_numero" name="numero" required>
+
+    <label for="ciudad">Ciudad:</label>
+    <select id="comercio_ciudad" name="ciudad" required>
+        <option value="ciudad1">Córdoba</option>
+        <option value="ciudad2">Villa Allende</option>
+        <option value="ciudad3">Calera  </option>
+        <!-- Agrega aquí las ciudades disponibles -->
+    </select>
+
+    <h2>Búsqueda de Productos:</h2>
+    <label for="busqueda">Buscar:</label>
+    <input type="text" id="busqueda" name="busqueda" required>
+
+    <h4>Adjuntar Foto (opcional):</h4>
+    <input type="file" id="foto" name="foto" accept="image/jpeg" max-size="5242880">
+
+    <h2>Dirección de Entrega:</h2>
+    <label for="calle">Calle:</label>
+    <input type="text" id="entrega_calle" name="calle" required>
+
+    <label for="numero">Número:</label>
+    <input type="text" id="entrega_numero" name="numero" required>
+
+    <label for="ciudad">Ciudad:</label>
+    <select id="entrega_ciudad" name="ciudad" required>
+        <option value="ciudad1">Córdoba</option>
+        <option value="ciudad2">Villa Allende</option>
+        <option value="ciudad3">Calera  </option>
+        <!-- Agrega aquí las ciudades disponibles -->
+    </select>
+
+    <label for="referencia">Referencia (opcional):</label>
+    <input type="text" id="referencia" name="referencia">
+
+    <h2>Forma de Pago:</h2>
+    <input type="radio" id="efectivo" name="forma_pago" value="efectivo" required>
+    <label for="efectivo">Efectivo</label>
+
+    <input type="radio" id="tarjeta" name="forma_pago" value="tarjeta" required>
+    <label for="tarjeta">Tarjeta de Débito/Crédito</label>
+
+    <div id="tarjeta_info" style="display: none;">
+        <h3>Información de Tarjeta:</h3>
+        <label for="numero_tarjeta">Número de Tarjeta:</label>
+        <input type="text" id="numero_tarjeta" name="numero_tarjeta">
+
+        <label for="fecha_vencimiento">Fecha de Vencimiento (MM/AAAA):</label>
+        <input type="text" id="fecha_vencimiento" name="fecha_vencimiento">
+
+        <label for="cvc">CVC:</label>
+        <input type="text" id="cvc" name="cvc">
+    </div>
+
+    <h2>Fecha y Hora de Recepción:</h2>
+    <input type="radio" id="lo_antes_posible" name="recepcion" value="lo_antes_posible" required>
+    <label for="lo_antes_posible">Lo antes posible</label>
+
+    <input type="radio" id="fecha_hora_programada" name="recepcion" value="fecha_hora_programada" required>
+    <label for="fecha_hora_programada">Programar fecha/hora de entrega:</label>
+    <input type="datetime-local" id="fecha_hora_entrega" name="fecha_hora_entrega">
+
+    <h2>Carrito de Compras:</h2>
+    <!-- Aquí puedes incluir los productos seleccionados en el carrito -->
+
+    <h2>Forma de Pago:</h2>
+    <input type="radio" id="efectivo" name="forma_pago" value="efectivo" required>
+    <label for="efectivo">Efectivo</label>
+
+    <input type="radio" id="tarjeta" name="forma_pago" value="tarjeta" required>
+    <label for="tarjeta">Tarjeta de Débito/Crédito</label>
+
+    <div id="tarjeta_info" style="display: none;">
+        <h3>Información de Tarjeta:</h3>
+        <label for="numero_tarjeta">Número de Tarjeta:</label>
+        <input type="text" id="numero_tarjeta" name="numero_tarjeta">
+
+        <label for="nombre_apellido">Nombre y Apellido del Titular:</label>
+        <input type="text" id="nombre_apellido" name="nombre_apellido">
+
+        <label for="fecha_vencimiento">Fecha de Vencimiento (MM/AAAA):</label>
+        <input type="text" id="fecha_vencimiento" name="fecha_vencimiento">
+
+        <label for="cvc">CVC:</label>
+        <input type="text" id="cvc" name="cvc">
+    </div>
+
+    <h2>Fecha y Hora de Recepción:</h2>
+    <input type="radio" id="lo_antes_posible" name="recepcion" value="lo_antes_posible" required>
+    <label for="lo_antes_posible">Lo antes posible</label>
+
+    <input type="radio" id="fecha_hora_programada" name="recepcion" value="fecha_hora_programada" required>
+    <label for="fecha_hora_programada">Programar fecha/hora de entrega:</label>
+    <input type="datetime-local" id="fecha_hora_entrega" name="fecha_hora_entrega">
+
+    <button type="submit">Realizar Pedido</button>
+        
 
     <script src="./main.js" type="module"></script>
 </body>
