@@ -13,112 +13,120 @@
     </div>
     
     <h1>Realizar Pedido</h1>
-    <div id="section">
-        <h2>Dirección del Comercio:</h2>
-        <label for="calle">Calle:</label>
-        <input type="text" id="comercio_calle" name="calle" required>
-
-        <label for="numero">Número:</label>
-        <input type="text" id="comercio_numero" name="numero" required>
-
-        <label for="ciudad">Ciudad:</label>
-        <select id="comercio_ciudad" name="ciudad" required>
-            <option value="ciudad1">Calera</option>
-            <option value="ciudad2">Córdoba</option>
-            <option value="ciudad3">Cosquín</option>
-            <option value="ciudad4">Mendiolaza</option>
-            <option value="ciudad5">Villa Allende</option>
-            <option value="ciudad6">Villa Carlos Paz</option>
-            <option value="ciudad6">San BOWER XD</option>
-            <option value="ciudad6">Curso 221 - edificio Central</option>
-
-            <!-- Agrega aquí las ciudades disponibles -->
-        </select>
-    </div>
+    <form>
+        <div id="section">
+            <h2>Dirección del Comercio:</h2>
+            <label for="calle">Calle:</label>
+            <input type="text" id="comercio_calle" name="calle" required>
     
-    <div id="section">
-        <h2>Búsqueda de Productos:</h2>
-        <label for="busqueda">Buscar:</label>
-        <input type="text" id="busqueda" name="busqueda" required>
-
-        <h4>Adjuntar Foto (opcional):</h4>
-        <input type="file" id="foto" name="foto" accept="image/jpeg" max-size="5242880">
-    </div>
+            <label for="numero">Número:</label>
+            <input type="number" id="comercio_numero" name="numero" required>
     
-    <div id="section">
-        <h2>Dirección de Entrega:</h2>
-        <label for="calle">Calle:</label>
-        <input type="text" id="entrega_calle" name="calle" required>
-
-        <label for="numero">Número:</label>
-        <input type="text" id="entrega_numero" name="numero" required>
-
-        <label for="ciudad">Ciudad:</label>
-        <select id="entrega_ciudad" name="ciudad" required>
-            <option value="ciudad1">Córdoba</option>
-            <option value="ciudad2">Villa Allende</option>
-            <option value="ciudad3">Calera  </option>
-            <!-- Agrega aquí las ciudades disponibles -->
-        </select>
-
-        <label for="referencia">Referencia (opcional):</label>
-        <input type="text" id="referencia" name="referencia">
-    </div>
+            <label for="ciudad">Ciudad:</label>
+            <select id="comercio_ciudad" name="ciudad" required>
+                <option value="ciudad1">Calera</option>
+                <option value="ciudad2">Córdoba</option>
+                <option value="ciudad3">Cosquín</option>
+                <option value="ciudad4">Mendiolaza</option>
+                <option value="ciudad5">Villa Allende</option>
+                <option value="ciudad6">Villa Carlos Paz</option>
+                <option value="ciudad6">San BOWER XD</option>
+                <option value="ciudad6">Curso 221 - edificio Central</option>
     
-
-    <h2>Carrito de Compras:</h2>
-    <!-- Aquí puedes incluir los productos seleccionados en el carrito -->
-    <div id="section" class="radio-label">
-        <h2>Forma de Pago:</h2>
-
-        <div>
-            <input type="radio" id="efectivo" name="forma_pago">
-            <label for="efectivo" class="radio-label">
-                <span class="custom-radio"></span> Efectivo
-            </label>
-        </div>
-    
-        <div>
-            <input type="radio" id="tarjeta" name="forma_pago">
-            <label for="tarjeta" class="radio-label">
-                <span class="custom-radio"></span> Tarjeta de Débito/Crédito
-            </label>
-        </div>
-
-        <div id="tarjeta_info" style="display: none;">
-            <h3>Información de Tarjeta:</h3>
-            <label for="numero_tarjeta">Número de Tarjeta:</label>
-            <input type="text" id="numero_tarjeta" name="numero_tarjeta">
-
-            <label for="fecha_vencimiento">Fecha de Vencimiento (MM/AAAA):</label>
-            <input type="text" id="fecha_vencimiento" name="fecha_vencimiento">
-
-            <label for="cvc">CVC:</label>
-            <input type="text" id="cvc" name="cvc">
-        </div>
-
-    </div>
-    
-    <div id="section" class="radio-label">
-        <h2>Fecha y Hora de Recepción:</h2>
-        <div>
-            <input type="radio" id="lo_antes_posible" name="recepcion">
-            <label for="lo_antes_posible" class="radio-label">
-                <span class="custom-radio"></span> Lo antes posible
-            </label>
+                <!-- Agrega aquí las ciudades disponibles -->
+            </select>
         </div>
         
-        <div>
-            <input type="radio" id="fecha_hora_programada" name="recepcion">
-            <label for="fecha_hora_programada" class="radio-label">
-                <span class="custom-radio"></span> Programar fecha/hora de entrega:
-            </label>
-            <input type="datetime-local" id="fecha_hora_entrega" name="fecha_hora_entrega">
-        </div>
-
-    </div>
+        <div id="section">
+            <h2>Búsqueda de Productos:</h2>
+            <label for="busqueda">Buscar:</label>
+            <input type="text" id="busqueda" name="busqueda" required>
     
-    <button type="submit">Realizar Pedido</button>
+            <h4>Adjuntar Foto (opcional):</h4>
+            <input type="file" id="foto" name="foto" accept="image/jpeg" max-size="5242880">
+        </div>
+        
+        <div id="section">
+            <h2>Dirección de Entrega:</h2>
+            <label for="calle">Calle:</label>
+            <input type="text" id="entrega_calle" name="calle" required>
+    
+            <label for="numero">Número:</label>
+            <input type="number" id="entrega_numero" name="numero" required>
+    
+            <label for="ciudad">Ciudad:</label>
+            <select id="entrega_ciudad" name="ciudad" required>
+                <option value="ciudad1">Calera</option>
+                <option value="ciudad2">Córdoba</option>
+                <option value="ciudad3">Cosquín</option>
+                <option value="ciudad4">Mendiolaza</option>
+                <option value="ciudad5">Villa Allende</option>
+                <option value="ciudad6">Villa Carlos Paz</option>
+                <option value="ciudad6">San BOWER XD</option>
+                <option value="ciudad6">Curso 221 - edificio Central</option>
+                <!-- Agrega aquí las ciudades disponibles -->
+            </select>
+    
+            <label for="referencia">Referencia (opcional):</label>
+            <input type="text" id="referencia" name="referencia">
+        </div>
+        
+    
+        <h2>Carrito de Compras:</h2>
+        <!-- Aquí puedes incluir los productos seleccionados en el carrito -->
+        <div id="section" class="radio-label">
+            <h2>Forma de Pago:</h2>
+    
+            <div>
+                <input type="radio" id="efectivo" name="forma_pago">
+                <label for="efectivo" class="radio-label">
+                    <span class="custom-radio"></span> Efectivo
+                </label>
+            </div>
+        
+            <div>
+                <input type="radio" id="tarjeta" name="forma_pago">
+                <label for="tarjeta" class="radio-label">
+                    <span class="custom-radio"></span> Tarjeta de Débito/Crédito
+                </label>
+            </div>
+    
+            <div id="tarjeta_info" style="display: none;">
+                <h3>Información de Tarjeta:</h3>
+                <label for="numero_tarjeta">Número de Tarjeta:</label>
+                <input type="text" id="numeroTarjeta" pattern="[0-9]{16}" placeholder="XXXXXXXXXXXXXXXX" maxlength="16" required>
+    
+                <label for="fecha_vencimiento">Fecha de Vencimiento (MM/AAAA):</label>
+                <input type="text" id="fechaVencimiento" pattern="[0-9]{6}" placeholder="XXXXXX" maxlength="6" required>
+    
+                <label for="cvc">CVC:</label>
+                <input type="number" id="cvc" name="cvc" pattern="[0-9]{3}" placeholder="XXX" maxlength="3" required>
+            </div>
+    
+        </div>
+        
+        <div id="section" class="radio-label">
+            <h2>Fecha y Hora de Recepción:</h2>
+            <div>
+                <input type="radio" id="lo_antes_posible" name="recepcion">
+                <label for="lo_antes_posible" class="radio-label">
+                    <span class="custom-radio"></span> Lo antes posible
+                </label>
+            </div>
+            
+            <div>
+                <input type="radio" id="fecha_hora_programada" name="recepcion">
+                <label for="fecha_hora_programada" class="radio-label">
+                    <span class="custom-radio"></span> Programar fecha/hora de entrega:
+                </label>
+                <input type="datetime-local" id="fecha_hora_entrega" name="fecha_hora_entrega">
+            </div>
+    
+        </div>
+        
+        <button type="submit">Realizar Pedido</button>
+    </form>
+    
         
 
     <script src="./main.js" type="module"></script>
