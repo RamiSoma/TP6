@@ -34,6 +34,8 @@ button[type="submit"] {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    display: block;
+    margin: 30px;
 }
 
 button[type="submit"]:hover {
@@ -79,4 +81,9 @@ button[type="submit"]:hover {
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
+}
+
+.section{
+    background-color: #444;
+    margin: 50px;
 }
