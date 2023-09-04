@@ -66,13 +66,22 @@
 
     <h2>Carrito de Compras:</h2>
     <!-- Aquí puedes incluir los productos seleccionados en el carrito -->
-    <div id="section">
+    <div id="section" class="radio-label">
         <h2>Forma de Pago:</h2>
-        <input type="radio" id="efectivo" name="forma_pago" value="efectivo" required>
-        Efectivo
 
-        <input type="radio" id="tarjeta" name="forma_pago" value="tarjeta" required>
-        Tarjeta de Débito/Crédito
+        <div>
+            <input type="radio" id="efectivo" name="forma_pago">
+            <label for="efectivo" class="radio-label">
+                <span class="custom-radio"></span> Efectivo
+            </label>
+        </div>
+    
+        <div>
+            <input type="radio" id="tarjeta" name="forma_pago">
+            <label for="tarjeta" class="radio-label">
+                <span class="custom-radio"></span> Tarjeta de Débito/Crédito
+            </label>
+        </div>
 
         <div id="tarjeta_info" style="display: none;">
             <h3>Información de Tarjeta:</h3>
@@ -88,14 +97,22 @@
 
     </div>
     
-    <div id="section">
+    <div id="section" class="radio-label">
         <h2>Fecha y Hora de Recepción:</h2>
-        <input type="radio" id="lo_antes_posible" name="recepcion" value="lo_antes_posible" required>
-        Lo antes posible
-
-        <input type="radio" id="fecha_hora_programada" name="recepcion" value="fecha_hora_programada" required>
-        Programar fecha/hora de entrega:
-        <input type="datetime-local" id="fecha_hora_entrega" name="fecha_hora_entrega">
+        <div>
+            <input type="radio" id="lo_antes_posible" name="recepcion">
+            <label for="lo_antes_posible" class="radio-label">
+                <span class="custom-radio"></span> Lo antes posible
+            </label>
+        </div>
+        
+        <div>
+            <input type="radio" id="fecha_hora_programada" name="recepcion">
+            <label for="fecha_hora_programada" class="radio-label">
+                <span class="custom-radio"></span> Programar fecha/hora de entrega:
+            </label>
+            <input type="datetime-local" id="fecha_hora_entrega" name="fecha_hora_entrega">
+        </div>
 
     </div>
     

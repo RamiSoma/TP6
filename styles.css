@@ -15,6 +15,12 @@ label {
     color: #444; /* Color de etiquetas gris */
 }
 
+.radio-label label {
+    display: inline;
+    vertical-align: middle;
+    /* Hacer que el texto esté en línea con el radio button */ /*NO FUNCIONA*/
+  }
+
 input[type="text"], select, datetime-local {
     width: 80%;
     padding: 10px;
@@ -86,4 +92,18 @@ button[type="submit"]:hover {
 .section{
     background-color: #444;
     margin: 50px;
+}
+
+.custom-radio {
+    display: inline-block;
+    /* width: 20px;
+    height: 20px;
+    background-color: #ccc;
+    border-radius: 50%;
+    position: relative; */
+    vertical-align: middle; /* Alinear verticalmente con el texto */
+  }
+
+.radio-label div {
+    margin-bottom: 10px; /* Agregar espacio de 10px entre las opciones */
 }
