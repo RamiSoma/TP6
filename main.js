@@ -7,6 +7,43 @@ const tarjetaInfoDiv = document.getElementById("tarjeta_info");
 const efectivoRadioButton = document.getElementById("efectivo");
 const efectivoInfoDiv = document.getElementById("efectivo_info");
 
+const inputImagen = document.getElementById('imagenInput');
+
+function subirImagen() {
+    var imagenMostrada = document.getElementById('imagenMostrada');
+
+    if (inputImagen.files.length === 0) {
+        console.log('Selecciona una imagen para subir.')
+        imagenMostrada.style.display = 'none';
+        return;
+    }
+
+    var imagen = inputImagen.files[0];
+
+    if (imagen.type !== 'image/jpeg') {
+        console.log('Por favor, selecciona una imagen en formato JPG.')
+        imagenMostrada.style.display = 'none';
+        return;
+    }
+
+    if (imagen.size > 5 * 1024 * 1024) {
+        alert('La imagen es demasiado grande. Inténtelo nuevamente.')
+        imagenMostrada.style.display = 'none';
+        return;
+    }
+
+    // Mostrar la imagen seleccionada
+    var reader = new FileReader();
+    reader.onload = function(e) {
+        imagenMostrada.src = e.target.result
+        imagenMostrada.style.display = 'block'
+        imagenMostrada.style.maxWidth = '500px'; // Ancho fijo de 300 píxeles
+        imagenMostrada.style.maxHeight = '300px'
+    }
+
+    reader.readAsDataURL(imagen);
+}
+
 // Agregar un evento de cambio al botón de opción de tarjeta
 tarjetaRadioButton.addEventListener("change", function () {
     if (tarjetaRadioButton.checked) {
@@ -28,3 +65,5 @@ efectivoRadioButton.addEventListener("change", function () {
         tarjetaInfoDiv.style.display = "none";
     }
 });
+
+inputImagen.addEventListener("change", subirImagen)
