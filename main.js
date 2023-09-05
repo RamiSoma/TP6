@@ -1,5 +1,3 @@
-
-
 // Obtener referencia a los elementos HTML relevantes
 const tarjetaRadioButton = document.getElementById("tarjeta");
 const tarjetaInfoDiv = document.getElementById("tarjeta_info");
@@ -8,6 +6,9 @@ const efectivoRadioButton = document.getElementById("efectivo");
 const efectivoInfoDiv = document.getElementById("efectivo_info");
 
 const inputImagen = document.getElementById('imagenInput');
+
+const fechaVencimientoInput = document.getElementById("fechaVencimiento");
+var banderaPrueba = 0
 
 function subirImagen() {
     var imagenMostrada = document.getElementById('imagenMostrada');
@@ -82,3 +83,21 @@ document.getElementById("pedidoForm").addEventListener("submit", function (event
     }
     */
 })
+
+// NO FUNCIONA LO QUE QUIERO HACER LPM
+// fechaVencimientoInput.addEventListener("input", function () {
+//     const valor = fechaVencimientoInput.value;
+
+//     // Verificar si el valor tiene el formato MM/AAAA completo
+//     if (/^(0[1-9]|1[0-2])\/\d{4}$/.test(valor)) {
+//         // El formato es válido, no hacemos nada especial
+//     } else {
+//         // El formato no es válido, eliminamos caracteres no permitidos
+//         fechaVencimientoInput.value = valor.replace(/[^\d\/]/g, "");
+//     }
+
+//     // Si ya se ingresaron dos dígitos para el mes y no se ha ingresado el año, automáticamente agregar "/"
+//     if (valor.length === 2 && !valor.includes("/")) {
+//         fechaVencimientoInput.value = valor + "/";
+//     }
+// });

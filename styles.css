@@ -1,24 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Poppins:wght@300;400&display=swap');
-
+/* 
 body {
     font-family: Arial, Helvetica, sans-serif;
     background-color: #f0f0f0; /* Color de fondo gris claro */
-    color: #333; /* Color de texto gris oscuro */
-}
+    /* Color de texto negro  */
 
 h1, h2, h3 {
-    color: #666; /* Color de encabezados gris medio */
-}
-
-.inline-container {
-    display: flex;
-    display: inline-block; /* Hace que los elementos se muestren en línea */
+    color: #0f0f0f;; /* Color de encabezados gris medio */
 }
 
 label {
     display: block;
     margin-bottom: 5px;
-    color: #444; /* Color de etiquetas gris */
+    color: #0f0f0f; /* Color de etiquetas gris */
+    font-weight: bolder;
+    font-size: larger;
 }
 
 .radio-label label {
@@ -27,12 +23,16 @@ label {
     /* Hacer que el texto esté en línea con el radio button */ /*NO FUNCIONA*/
   }
 
-input[type="text"], select, datetime-local {
+input[type="text"], select, datetime-local, input[type="number"] {
     width: 80%;
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ccc; /* Borde gris claro */
     border-radius: 5px;
+}
+
+.inputTarjeta {
+    width: 40%;
 }
 
 input[type="radio"] {
@@ -119,4 +119,29 @@ body {
     font-weight: lighter;
     font-size: larger;
     background-color: #ECCDB4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* .titulo {
+    display: flex;
+    justify-content: center;
+    color: #313552;
+    background-color: #EEE6CE;
+    font-size: 45px;
+    margin: 10px;
+    width: 215px;
+} */
+
+h1.titulo {
+    text-align: center; /* Centrar el texto horizontalmente */
+    /* margin: 0 auto; Centrar el bloque horizontalmente */
+    padding: 20px 0; /* Agregar espacio en la parte superior e inferior */
+    display: flex;
+    justify-content: center;
+    color: #0f0f0f;
+    background-color: #eccdb7;
+    font-size: 30px;
+    margin: 10px;
 }

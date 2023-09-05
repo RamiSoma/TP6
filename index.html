@@ -10,11 +10,11 @@
 </head>
 <body>
     <div class="navbar">
-        <a class="navbar-title" href="#">DeliverEat!</a>
+        <!-- <a class="navbar-title" href="#">DeliverEat!</a> -->
     </div>
     
-    <h1>Realizar Pedido</h1>
-    <form>
+    <form id="pedidoForm">
+        <h1 class="titulo">REALIZAR PEDIDO</h1>
         <div id="section">
             <h2>Dirección del Comercio:</h2>
             
@@ -103,14 +103,26 @@
     
             <div id="tarjeta_info" style="display: none;">
                 <h3>Información de Tarjeta:</h3>
-                <label for="numeroTarjeta">Número de Tarjeta:</label>
-                <input type="number" id="numeroTarjeta" pattern="[0-9]{16}" placeholder="XXXXXXXXXXXXXXXX" maxlength="16" required>
+                <div>
+                    <label for="numeroTarjeta">Número de Tarjeta:</label>
+                    <input type="number" id="numeroTarjeta" pattern="[0-9]{16}" placeholder="XXXX XXXX XXXX XXXX" maxlength="16" required>
+                </div>
+                    
+                <div class="inputTarjeta">
+                    <label for="nombreTarjeta">Nombre:</label>
+                    <input type="text" id="nombreTarjeta" placeholder="Nombre" required>
+
+                    <label for="apellidoTarjeta">Apellido:</label>
+                    <input type="text" id="apellidoTarjeta" placeholder="Apellido" required>
+                </div>
+
+                <div class="inputTarjeta">
+                    <label for="fechaVencimiento">Fecha de Vencimiento (MM/AAAA):</label>
+                    <input type="number" id="fechaVencimiento" placeholder="XX/XXXX" maxlength="6" required>
     
-                <label for="fechaVencimiento">Fecha de Vencimiento (MM/AAAA):</label>
-                <input type="number" id="fechaVencimiento"  placeholder="XXXXXX" maxlength="6" required>
-    
-                <label for="cvc">CVC:</label>
-                <input type="number" id="cvc" name="cvc" pattern="[0-9]{3}" placeholder="XXX" maxlength="3" required>
+                    <label for="cvc">CVC:</label>
+                    <input type="number" id="cvc" name="cvc" pattern="[0-9]{3}" placeholder="XXX" maxlength="3" required>
+                </div>
             </div>
     
         </div>
