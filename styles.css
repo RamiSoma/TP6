@@ -10,6 +10,11 @@ h1, h2, h3 {
     color: #666; /* Color de encabezados gris medio */
 }
 
+.inline-container {
+    display: flex;
+    display: inline-block; /* Hace que los elementos se muestren en línea */
+}
+
 label {
     display: block;
     margin-bottom: 5px;

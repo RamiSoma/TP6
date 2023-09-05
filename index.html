@@ -17,12 +17,17 @@
     <form>
         <div id="section">
             <h2>Dirección del Comercio:</h2>
-            <label for="comercio_calle">Calle:</label>
-            <input type="text" id="comercio_calle" name="calle" required>
-    
-            <label for="comercio_numero">Número:</label>
-            <input type="number" id="comercio_numero" name="numero" required>
-    
+            
+            <div class="inline-container">
+                <label for="comercio_calle">Calle:</label>
+                <input type="text" id="comercio_calle" name="calle" required>
+            </div>
+            <div class="inline-container">
+                <label for="comercio_numero">Número:</label>
+                <input type="number" id="comercio_numero" name="numero" required>
+            </div>
+            
+               
             <label for="comercio_ciudad">Ciudad:</label>
             <select id="comercio_ciudad" name="ciudad" required>
                 <option value="ciudad1">Calera</option>
