@@ -72,16 +72,24 @@ inputImagen.addEventListener("change", subirImagen)
 
 
 // ACA ADENTRO VAMOS A HACER LAS VALIDACIONES
-document.getElementById("pedidoForm").addEventListener("submit", function (event) {
+document.getElementById("pedidoForm").addEventListener("submit", function (e) {
+    e.preventDefault()
     // PRIMERO OBTENEMOS LOS VALORES DEL DOCUMENTO HTML
     const comercioCalle = document.getElementById("comercio_calle").value;
     const comercioNumero = document.getElementById("comercio_numero").value;
+    
+
 
     /* aca se agregarian las validaciones, en este caso nos fijamos que sean solo letras
     if(esSoloLetras(comercioCalle)){
 
     }
     */
+   if(document.getElementById("fecha_hora_programada").checked){
+        verificarFecha();
+   }
+   
+    
 })
 
 // NO FUNCIONA LO QUE QUIERO HACER LPM
@@ -101,3 +109,15 @@ document.getElementById("pedidoForm").addEventListener("submit", function (event
 //         fechaVencimientoInput.value = valor + "/";
 //     }
 // });
+
+function verificarFecha() {
+    const fechaHoraEntrega = new Date(document.getElementById("fecha_hora_entrega").value);
+    var fechaActual = new Date();
+
+    // Sumar 30 minutos a la fecha actual
+    fechaActual.setMinutes(fechaActual.getMinutes() + 30);
+
+    if (fechaHoraEntrega < fechaActual) {
+        document.getElementById("mensajeError").textContent = "La fecha debe ser al menos 30 minutos en el futuro.";
+    }
+}
