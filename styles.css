@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Poppins:wght@300;400&display=swap');
 
 body {
     font-family: Arial, Helvetica, sans-serif;
@@ -106,4 +107,11 @@ button[type="submit"]:hover {
 
 .radio-label div {
     margin-bottom: 10px; /* Agregar espacio de 10px entre las opciones */
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    font-weight: lighter;
+    font-size: larger;
+    background-color: #ECCDB4;
 }
