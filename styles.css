@@ -159,3 +159,53 @@ h1.titulo {
     cursor: pointer;
 }
 
+
+
+
+label#imagenLabel.custom-button {
+    display: block;
+    background-color: #eccdb7;
+    border: 1px solid #816f62;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: 5px;
+    text-align: center;
+  }
+  
+  label#imagenLabel.custom-button:hover {
+    background-color: #70513a;
+    color: #fff;
+  }
+  
+  /* Input de tipo file */
+  
+  input#imagenInput {
+    display: none;
+  }
+/* Imagen */
+
+img#imagenMostrada {
+    display: block;
+    max-width: 100%;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    padding: 5px;
+  }
+  
+
+input#eliminarImagen {
+    display: block;
+    background-color: #fc0000;
+    color: rgb(0, 0, 0);
+    border: 1px solid #ccc;
+    width: 100%;
+    padding: 5px;
+    cursor: pointer;
+  }
+  
+input#eliminarImagen:hover {
+    background-color: #8b0606;
+    color: #fff;
+
+  }

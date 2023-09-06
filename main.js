@@ -6,6 +6,8 @@ const efectivoRadioButton = document.getElementById("efectivo");
 const efectivoInfoDiv = document.getElementById("efectivo_info");
 
 const inputImagen = document.getElementById('imagenInput');
+const labelImagen = document.getElementById('imagenLabel');
+const eliminarImagen = document.getElementById('eliminarImagen');
 
 const fechaVencimientoInput = document.getElementById("fechaVencimiento");
 
@@ -44,25 +46,28 @@ inputImagen.addEventListener("change", SubirImagen)
 function SubirImagen() {
   var imagenMostrada = document.getElementById('imagenMostrada');
 
-  if (inputImagen.files.length === 0) {
-      console.log('Selecciona una imagen para subir.')
-      imagenMostrada.style.display = 'none';
-      return;
-  }
+    if (inputImagen.files.length === 0) {
+        console.log('Selecciona una imagen para subir.')
+        imagenMostrada.style.display = 'none';
+        eliminarImagen.style.display = 'none';
+        return;
+    }
 
   var imagen = inputImagen.files[0];
 
-  if (imagen.type !== 'image/jpeg') {
-      console.log('Por favor, selecciona una imagen en formato JPG.')
-      imagenMostrada.style.display = 'none';
-      return;
-  }
+    if (imagen.type !== 'image/jpeg') {
+        console.log('Por favor, selecciona una imagen en formato JPG.')
+        imagenMostrada.style.display = 'none';
+        eliminarImagen.style.display = 'none';
+        return;
+    }
 
-  if (imagen.size > 5 * 1024 * 1024) {
-      alert('La imagen es demasiado grande. Inténtelo nuevamente.')
-      imagenMostrada.style.display = 'none';
-      return;
-  }
+    if (imagen.size > 5 * 1024 * 1024) {
+        alert('La imagen es demasiado grande. Inténtelo nuevamente.')
+        imagenMostrada.style.display = 'none';
+        eliminarImagen.style.display = 'none';
+        return;
+    }
 
   // Mostrar la imagen seleccionada
   var reader = new FileReader();
@@ -73,7 +78,9 @@ function SubirImagen() {
       imagenMostrada.style.maxHeight = '300px'
   }
 
-  reader.readAsDataURL(imagen);
+    reader.readAsDataURL(imagen);
+    eliminarImagen.style.display = 'block';
+    labelImagen.style.display = 'none';
 }
 
 // Cuando se toca siguiente, se tiene que pasar a la parte de direcciones
@@ -203,7 +210,18 @@ efectivoRadioButton.addEventListener("change", function () {
     }
 });
 
-// ACA ADENTRO VAMOS A HACER LAS VALIDACIONES -------- ESTO VER QUE ONDA :)
+inputImagen.addEventListener("change", SubirImagen)
+
+eliminarImagen.addEventListener("click",function(){
+  var imagenMostrada = document.getElementById('imagenMostrada');
+
+  eliminarImagen.style.display = 'none';
+  imagenMostrada.src = '#';
+  imagenMostrada.style.display = 'none';
+  labelImagen.style.display = 'block';
+})
+
+// ACA ADENTRO VAMOS A HACER LAS VALIDACIONES
 document.getElementById("pedidoForm").addEventListener("submit", function (e) {
     e.preventDefault()
     // PRIMERO OBTENEMOS LOS VALORES DEL DOCUMENTO HTML
