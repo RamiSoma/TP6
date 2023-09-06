@@ -25,6 +25,8 @@ const seccionDirecciones = document.getElementById("seccion-direcciones");
 const seccionFormaPago = document.getElementById("seccion-forma-pago");
 const seccionRecepcion = document.getElementById("seccion-recepcion");
 
+// Variables de los datos del negocio
+var productosBusqueda;
 // Variables de la tarjeta
 var numeroTarjetaInput = document.getElementById('numeroTarjeta');
 var cvcInput = document.getElementById('cvc');
@@ -96,8 +98,17 @@ eliminarImagen.addEventListener("click",function(){
   labelImagen.style.display = 'block';
 })
 
-// Cuando se toca siguiente, se tiene que pasar a la parte de direcciones
-botonSiguienteProducto.addEventListener("click", AbrirDirecciones)
+// Cuando se toca siguiente, se tiene que pasar a la parte de direcciones y se hacen las validaciones de primer campo
+botonSiguienteProducto.addEventListener("click", function(){
+    productosBusqueda = document.getElementById("busqueda").value;
+    if ( productosBusqueda != "") {
+        AbrirDirecciones();
+        document.getElementById("mensajeError").textContent = "";
+    }else{
+        document.getElementById("mensajeError").textContent = "Debe ingresar una cadena de texto en la búsqueda.";
+    }
+    
+})
 
 // Funcion que hace que se oculte lo de productos y se habilite lo de las direcciones
 function AbrirDirecciones() {
