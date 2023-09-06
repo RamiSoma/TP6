@@ -28,10 +28,8 @@ const seccionRecepcion = document.getElementById("seccion-recepcion");
 // Variables de los datos del negocio
 var productosBusqueda;
 var comercioCalle;
-var comercioNumero;
 var comercioCiudad;
 var entregaCalle;
-var entregaNumero;
 var entregaCiudad;
 
 // Variables de la tarjeta
@@ -130,10 +128,8 @@ botonAnteriorDirecciones.addEventListener("click", CargarPagina)
 // Agregar listener del boton SIGUIENTE para que pase a la forma de pago
 botonSiguienteDirecciones.addEventListener("click", function(){
     comercioCalle = document.getElementById("comercio_calle").value;
-    comercioNumero = document.getElementById("comercio_numero").value;
     comercioCiudad = document.getElementById("comercio_ciudad").value;
     entregaCalle = document.getElementById("entrega_calle").value;
-    entregaNumero = document.getElementById("entrega_numero").value;
     entregaCiudad = document.getElementById("entrega_ciudad").value;
     if (comercioCalle != "" && comercioNumero != null && entregaCalle != "" && entregaNumero != null) {
         AbrirFormaPago();
