@@ -8,9 +8,41 @@ const efectivoInfoDiv = document.getElementById("efectivo_info");
 const inputImagen = document.getElementById('imagenInput');
 
 const fechaVencimientoInput = document.getElementById("fechaVencimiento");
-var banderaPrueba = 0
 
-function subirImagen() {
+const botonSiguienteProducto = document.getElementById("btn_siguiente1");
+const botonSiguienteDirecciones = document.getElementById("btn_siguiente2");
+
+// Variables de las secciones
+const seccionProductos = document.getElementById("seccion-producto");
+const seccionDirecciones = document.getElementById("seccion-direcciones");
+const seccionFormaPago = document.getElementById("seccion-forma-pago");
+const seccionRecepcion = document.getElementById("seccion-recepcion");
+
+// Primero se carga la página y cuando se carga hacer la funcion cargar página
+window.addEventListener("load", CargarPagina())
+
+// Cargar la pagina, solo mostrando las seccion de productos
+function CargarPagina() {
+  // Seccion del producto queda mostrandose
+  seccionProductos.style.display = "block";
+  // Ocultar demás secciones
+  seccionDirecciones.style.display = "none";
+  seccionFormaPago.style.display = "none";
+  seccionRecepcion.style.display = "none";
+}
+
+
+// Cuando se toca siguiente, se tiene que pasar a la parte de direcciones
+botonSiguienteProducto.addEventListener("click", AbrirDirecciones())
+
+// Funcion que hace que se oculte 
+function AbrirDirecciones() {
+  seccionProductos.style.display = "none";
+  seccionDirecciones.style.display = "block";
+}
+
+// Funcion que valida el subir la imagen
+function SubirImagen() {
     var imagenMostrada = document.getElementById('imagenMostrada');
 
     if (inputImagen.files.length === 0) {
@@ -67,7 +99,7 @@ efectivoRadioButton.addEventListener("change", function () {
     }
 });
 
-inputImagen.addEventListener("change", subirImagen)
+inputImagen.addEventListener("change", SubirImagen())
 
 
 
@@ -79,7 +111,7 @@ document.getElementById("pedidoForm").addEventListener("submit", function (e) {
     const comercioNumero = document.getElementById("comercio_numero").value;
     
 
-
+    
     /* aca se agregarian las validaciones, en este caso nos fijamos que sean solo letras
     if(esSoloLetras(comercioCalle)){
 
@@ -104,13 +136,13 @@ document.getElementById("pedidoForm").addEventListener("submit", function (e) {
 //         fechaVencimientoInput.value = valor.replace(/[^\d\/]/g, "");
 //     }
 
-//     // Si ya se ingresaron dos dígitos para el mes y no se ha ingresado el año, automáticamente agregar "/"
+//     // Si ya se ingresaron dos dígitos para el mes y no se ha ingresado el aanio, automáticamente agregar "/"
 //     if (valor.length === 2 && !valor.includes("/")) {
 //         fechaVencimientoInput.value = valor + "/";
 //     }
 // });
 
-function verificarFecha() {
+function VerificarFecha() {
     const fechaHoraEntrega = new Date(document.getElementById("fecha_hora_entrega").value);
     var fechaActual = new Date();
 
@@ -122,15 +154,28 @@ function verificarFecha() {
     }
 }
 
+function reemplazarCaracteres(texto, caracteresAReemplazar, caracteresNuevos) {
+  var resultado = '';
+  for (var i = 0; i < texto.length; i++) {
+    var caracterActual = texto.charAt(i);
+    var indice = caracteresAReemplazar.indexOf(caracterActual);
+    if (indice !== -1) {
+      resultado += caracteresNuevos.charAt(indice);
+    } else {
+      resultado += caracterActual;
+    }
+  }
+  return resultado;
+}
 
-//no se como se hace eso de que me diga el elemento
-function validarTarjeta(numeroTarjeta) {
+
+//Fijarse que el textbox acepte solo intergers hasta 15 caracteres
+function ValidarTarjeta() {
+    //Asignamos a la variable numeroTarjeta el numero de tarjeta traido desde la pagina.
+    var numeroTarjeta = document.getElementById('numeroTarjeta').value;  
     // Expresiones regulares para Visa y Mastercard
     var visaPattern = /^4[0-9]{12}(?:[0-9]{3})?$/;
     var mastercardPattern = /^5[1-5][0-9]{14}$/;
-  
-    // Eliminar espacios en blanco y guiones
-    numeroTarjeta = numeroTarjeta.replace(/\s/g, '').replace(/-/g, '');
   
     // Verificar si el número coincide con Visa o Mastercard
     if (visaPattern.test(numeroTarjeta)) {
@@ -142,33 +187,38 @@ function validarTarjeta(numeroTarjeta) {
     }
 }
 
-function validarFechaVencimiento(fechaVencimiento) {
+function ValidarFechaVencimiento() {
+  //asignamos a la variable fechaVencimiento
+
   // Verifica que la fecha de vencimiento esté en el formato "MM/AA"
-  var formatoValido = /^(\d{2})\/(\d{2})$/;
+  var fechaVencimiento = document.getElementById('fechaVencimiento').value;
+  var formatoValido = /^(\d{2})\/(\d{4})$/;
   if (!formatoValido.test(fechaVencimiento)) {
     return false;
   }
 
-  // Extrae el mes y el año de la fecha de vencimiento
+  // Extrae el mes y el anio de la fecha de vencimiento
   var partesFecha = fechaVencimiento.split('/');
   var mes = parseInt(partesFecha[0], 10);
-  var año = parseInt(partesFecha[1], 10);
+  var anio = parseInt(partesFecha[1], 10);
 
   // Obtiene la fecha actual
   var fechaActual = new Date();
-  var añoActual = fechaActual.getFullYear();
+  var anioActual = fechaActual.getFullYear();
   var mesActual = fechaActual.getMonth() + 1; // El mes en JavaScript es de 0 a 11
 
   // Compara la fecha de vencimiento con la fecha actual
-  if (año < añoActual || (año === añoActual && mes < mesActual)) {
+  if (anio < anioActual || (anio === anioActual && mes < mesActual)) {
     return false; // La fecha de vencimiento es anterior a la fecha actual
   }
 
   return true; // La fecha de vencimiento es válida
 }
 
-function validarCodigoSeguridad(codigoSeguridad) {
+//deberia tener en cuenta que tarjeta tiene tipo visa o mastercard
+function ValidarCodigoSeguridad() {
     // Verificar si el código de seguridad es un número válido
+    var codigoSeguridad = document.getElementById('cvc').value;
     if (!/^\d+$/.test(codigoSeguridad)) {
       return 'Inválido';
     }
@@ -180,3 +230,27 @@ function validarCodigoSeguridad(codigoSeguridad) {
       return 'Inválido';
     }
 }
+
+
+
+
+
+
+// Agregar listeners a los campos de entrada
+var numeroTarjetaInput = document.getElementById('numeroTarjeta');
+var cvcInput = document.getElementById('cvc');
+
+numeroTarjetaInput.addEventListener('input', function () {
+  var resultado = ValidarTarjeta();
+  console.log(resultado);
+});
+
+fechaVencimientoInput.addEventListener('input', function () {
+  var resultado = ValidarFechaVencimiento();
+  console.log(resultado);
+});
+
+cvcInput.addEventListener('input', function () {
+  var resultado = ValidarCodigoSeguridad();
+  console.log(resultado);
+});
