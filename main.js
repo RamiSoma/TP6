@@ -121,3 +121,62 @@ function verificarFecha() {
         document.getElementById("mensajeError").textContent = "La fecha debe ser al menos 30 minutos en el futuro.";
     }
 }
+
+
+//no se como se hace eso de que me diga el elemento
+function validarTarjeta(numeroTarjeta) {
+    // Expresiones regulares para Visa y Mastercard
+    var visaPattern = /^4[0-9]{12}(?:[0-9]{3})?$/;
+    var mastercardPattern = /^5[1-5][0-9]{14}$/;
+  
+    // Eliminar espacios en blanco y guiones
+    numeroTarjeta = numeroTarjeta.replace(/\s/g, '').replace(/-/g, '');
+  
+    // Verificar si el número coincide con Visa o Mastercard
+    if (visaPattern.test(numeroTarjeta)) {
+      return 'Visa';
+    } else if (mastercardPattern.test(numeroTarjeta)) {
+      return 'Mastercard';
+    } else {
+      return 'Desconocida';
+    }
+}
+
+function validarFechaVencimiento(fechaVencimiento) {
+  // Verifica que la fecha de vencimiento esté en el formato "MM/AA"
+  var formatoValido = /^(\d{2})\/(\d{2})$/;
+  if (!formatoValido.test(fechaVencimiento)) {
+    return false;
+  }
+
+  // Extrae el mes y el año de la fecha de vencimiento
+  var partesFecha = fechaVencimiento.split('/');
+  var mes = parseInt(partesFecha[0], 10);
+  var año = parseInt(partesFecha[1], 10);
+
+  // Obtiene la fecha actual
+  var fechaActual = new Date();
+  var añoActual = fechaActual.getFullYear();
+  var mesActual = fechaActual.getMonth() + 1; // El mes en JavaScript es de 0 a 11
+
+  // Compara la fecha de vencimiento con la fecha actual
+  if (año < añoActual || (año === añoActual && mes < mesActual)) {
+    return false; // La fecha de vencimiento es anterior a la fecha actual
+  }
+
+  return true; // La fecha de vencimiento es válida
+}
+
+function validarCodigoSeguridad(codigoSeguridad) {
+    // Verificar si el código de seguridad es un número válido
+    if (!/^\d+$/.test(codigoSeguridad)) {
+      return 'Inválido';
+    }
+  
+    // Verificar la longitud del código de seguridad (CVV o CVC)
+    if (codigoSeguridad.length === 3 || codigoSeguridad.length === 4) {
+      return 'Válido';
+    } else {
+      return 'Inválido';
+    }
+  }
