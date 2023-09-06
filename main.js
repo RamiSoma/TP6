@@ -6,6 +6,8 @@ const efectivoRadioButton = document.getElementById("efectivo");
 const efectivoInfoDiv = document.getElementById("efectivo_info");
 
 const inputImagen = document.getElementById('imagenInput');
+const labelImagen = document.getElementById('imagenLabel');
+const eliminarImagen = document.getElementById('eliminarImagen');
 
 const fechaVencimientoInput = document.getElementById("fechaVencimiento");
 
@@ -48,6 +50,7 @@ function SubirImagen() {
     if (inputImagen.files.length === 0) {
         console.log('Selecciona una imagen para subir.')
         imagenMostrada.style.display = 'none';
+        eliminarImagen.style.display = 'none';
         return;
     }
 
@@ -56,12 +59,14 @@ function SubirImagen() {
     if (imagen.type !== 'image/jpeg') {
         console.log('Por favor, selecciona una imagen en formato JPG.')
         imagenMostrada.style.display = 'none';
+        eliminarImagen.style.display = 'none';
         return;
     }
 
     if (imagen.size > 5 * 1024 * 1024) {
         alert('La imagen es demasiado grande. Inténtelo nuevamente.')
         imagenMostrada.style.display = 'none';
+        eliminarImagen.style.display = 'none';
         return;
     }
 
@@ -75,6 +80,8 @@ function SubirImagen() {
     }
 
     reader.readAsDataURL(imagen);
+    eliminarImagen.style.display = 'block';
+    labelImagen.style.display = 'none';
 }
 
 // Agregar un evento de cambio al botón de opción de tarjeta
@@ -99,7 +106,16 @@ efectivoRadioButton.addEventListener("change", function () {
     }
 });
 
-inputImagen.addEventListener("change", SubirImagen)
+inputImagen.addEventListener("change", SubirImagen);
+
+eliminarImagen.addEventListener("click",function(){
+    var imagenMostrada = document.getElementById('imagenMostrada');
+
+    eliminarImagen.style.display = 'none';
+    imagenMostrada.src = '#';
+    imagenMostrada.style.display = 'none';
+    labelImagen.style.display = 'block';
+})
 
 
 
