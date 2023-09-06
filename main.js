@@ -111,13 +111,18 @@ document.getElementById("pedidoForm").addEventListener("submit", function (e) {
 // });
 
 function verificarFecha() {
-    const fechaHoraEntrega = new Date(document.getElementById("fecha_hora_entrega").value);
+    var fechaEntrega = document.getElementById("fecha_hora_entrega").value;
+    const fechaHoraEntrega = new Date(fechaEntrega);
     var fechaActual = new Date();
 
     // Sumar 30 minutos a la fecha actual
     fechaActual.setMinutes(fechaActual.getMinutes() + 30);
 
-    if (fechaHoraEntrega < fechaActual) {
+    if (!fechaEntrega) {
+        document.getElementById("mensajeError").textContent = "Debe ingresar un valor en la fecha.";
+    }else if (fechaHoraEntrega < fechaActual) {
         document.getElementById("mensajeError").textContent = "La fecha debe ser al menos 30 minutos en el futuro.";
+    }else{
+        document.getElementById("mensajeError").textContent = "";
     }
 }
