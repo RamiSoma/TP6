@@ -192,6 +192,8 @@ img#imagenMostrada {
   
 
 input#eliminarImagen {
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
     display: block;
     background-color: #fc0000;
     color: rgb(0, 0, 0);
