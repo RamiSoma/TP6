@@ -83,6 +83,16 @@ function SubirImagen() {
     labelImagen.style.display = 'none';
 }
 
+// Listener para cuando se ELIMINA LA IMAGEN
+eliminarImagen.addEventListener("click",function(){
+  var imagenMostrada = document.getElementById('imagenMostrada');
+
+  eliminarImagen.style.display = 'none';
+  imagenMostrada.src = '#';
+  imagenMostrada.style.display = 'none';
+  labelImagen.style.display = 'block';
+})
+
 // Cuando se toca siguiente, se tiene que pasar a la parte de direcciones
 botonSiguienteProducto.addEventListener("click", AbrirDirecciones)
 
@@ -209,17 +219,6 @@ efectivoRadioButton.addEventListener("change", function () {
         tarjetaInfoDiv.style.display = "none";
     }
 });
-
-inputImagen.addEventListener("change", SubirImagen)
-
-eliminarImagen.addEventListener("click",function(){
-  var imagenMostrada = document.getElementById('imagenMostrada');
-
-  eliminarImagen.style.display = 'none';
-  imagenMostrada.src = '#';
-  imagenMostrada.style.display = 'none';
-  labelImagen.style.display = 'block';
-})
 
 // ACA ADENTRO VAMOS A HACER LAS VALIDACIONES
 document.getElementById("pedidoForm").addEventListener("submit", function (e) {
