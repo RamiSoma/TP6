@@ -25,6 +25,15 @@ const seccionDirecciones = document.getElementById("seccion-direcciones");
 const seccionFormaPago = document.getElementById("seccion-forma-pago");
 const seccionRecepcion = document.getElementById("seccion-recepcion");
 
+// Variables de los datos del negocio
+var productosBusqueda;
+var comercioCalle;
+var comercioNumero;
+var comercioCiudad;
+var entregaCalle;
+var entregaNumero;
+var entregaCiudad;
+
 // Variables de la tarjeta
 var numeroTarjetaInput = document.getElementById('numeroTarjeta');
 var cvcInput = document.getElementById('cvc');
@@ -96,8 +105,17 @@ eliminarImagen.addEventListener("click",function(){
   labelImagen.style.display = 'block';
 })
 
-// Cuando se toca siguiente, se tiene que pasar a la parte de direcciones
-botonSiguienteProducto.addEventListener("click", AbrirDirecciones)
+// Cuando se toca siguiente, se tiene que pasar a la parte de direcciones y se hacen las validaciones de primer campo
+botonSiguienteProducto.addEventListener("click", function(){
+    productosBusqueda = document.getElementById("busqueda").value;
+    if ( productosBusqueda != "") {
+        AbrirDirecciones();
+        document.getElementById("mensajeError").textContent = "";
+    }else{
+        document.getElementById("mensajeError").textContent = "Debe ingresar una cadena de texto en la búsqueda.";
+    }
+    
+})
 
 // Funcion que hace que se oculte lo de productos y se habilite lo de las direcciones
 function AbrirDirecciones() {
@@ -110,7 +128,21 @@ function AbrirDirecciones() {
 botonAnteriorDirecciones.addEventListener("click", CargarPagina)
 
 // Agregar listener del boton SIGUIENTE para que pase a la forma de pago
-botonSiguienteDirecciones.addEventListener("click", AbrirFormaPago)
+botonSiguienteDirecciones.addEventListener("click", function(){
+    comercioCalle = document.getElementById("comercio_calle").value;
+    comercioNumero = document.getElementById("comercio_numero").value;
+    comercioCiudad = document.getElementById("comercio_ciudad").value;
+    entregaCalle = document.getElementById("entrega_calle").value;
+    entregaNumero = document.getElementById("entrega_numero").value;
+    entregaCiudad = document.getElementById("entrega_ciudad").value;
+    if (comercioCalle != "" && comercioNumero != null && entregaCalle != "" && entregaNumero != null) {
+        AbrirFormaPago();
+        document.getElementById("mensajeError").textContent = "";
+    }else{
+        document.getElementById("mensajeError").textContent = "Debe completar todos los campos...";
+    }
+    
+})
 
 // AGREGAR VALIDACIONES Y COSAS DE LA CALLE Y DIRECCIONES
 
@@ -239,27 +271,6 @@ function AbrirRecepcion() {
 
 // Agregar listener del boton ANTERIOR para que vuelva a la forma de pago
 botonAnteriorRecepcion.addEventListener("click", AbrirFormaPago)
-
-// ACA ADENTRO VAMOS A HACER LAS VALIDACIONES
-document.getElementById("pedidoForm").addEventListener("submit", function (e) {
-    e.preventDefault()
-    // PRIMERO OBTENEMOS LOS VALORES DEL DOCUMENTO HTML
-    const comercioCalle = document.getElementById("comercio_calle").value;
-    const comercioNumero = document.getElementById("comercio_numero").value;
-    
-
-    
-    /* aca se agregarian las validaciones, en este caso nos fijamos que sean solo letras
-    if(esSoloLetras(comercioCalle)){
-
-    }
-    */
-   if(document.getElementById("fecha_hora_programada").checked){
-        verificarFecha();
-   }
-   
-    
-})
 
 function verificarFecha() {
     var fechaEntrega = document.getElementById("fecha_hora_entrega").value;
