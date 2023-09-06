@@ -179,4 +179,4 @@ function validarCodigoSeguridad(codigoSeguridad) {
     } else {
       return 'Inválido';
     }
-  }
+}
