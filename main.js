@@ -14,7 +14,10 @@ const fechaVencimientoInput = document.getElementById("fechaVencimiento");
 // Variables de botones
 const botonSiguienteProducto = document.getElementById("btn_siguiente1");
 const botonSiguienteDirecciones = document.getElementById("btn_siguiente2");
-const botonAnteriorDirecciones = document.getElementById("btn_anterior1")
+const botonAnteriorDirecciones = document.getElementById("btn_anterior1");
+const botonSiguienteFormaPago = document.getElementById("btn_siguiente3");
+const botonAnteriorFormaPago = document.getElementById("btn_anterior2");
+const botonAnteriorRecepcion = document.getElementById("btn_anterior3");
 
 // Variables de las secciones
 const seccionProductos = document.getElementById("seccion-producto");
@@ -100,6 +103,7 @@ botonSiguienteProducto.addEventListener("click", AbrirDirecciones)
 function AbrirDirecciones() {
   seccionProductos.style.display = "none";
   seccionDirecciones.style.display = "block";
+  seccionFormaPago.style.display = "none";
 }
 
 // Agregar listener del boton ANTERIOR para que vuelva a los productos
@@ -114,7 +118,11 @@ botonSiguienteDirecciones.addEventListener("click", AbrirFormaPago)
 function AbrirFormaPago() {
   seccionDirecciones.style.display = "none";
   seccionFormaPago.style.display = "block";
+  seccionRecepcion.style.display = "none";
 }
+
+// Agregar listener del boton ANTERIOR para que vuelva a las direcciones
+botonAnteriorFormaPago.addEventListener("click", AbrirDirecciones)
 
 // Agregar un evento de cambio al botón de opción de TARJETA
 tarjetaRadioButton.addEventListener("change", function () {
@@ -219,6 +227,18 @@ efectivoRadioButton.addEventListener("change", function () {
         tarjetaInfoDiv.style.display = "none";
     }
 });
+
+// Agregar listener del boton SIGUIENTE para que se pase a la recepcion
+botonSiguienteFormaPago.addEventListener("click", AbrirRecepcion)
+
+// Funcion que pasa a la recepcion
+function AbrirRecepcion() {
+  seccionFormaPago.style.display = "none";
+  seccionRecepcion.style.display = "block";
+}
+
+// Agregar listener del boton ANTERIOR para que vuelva a la forma de pago
+botonAnteriorRecepcion.addEventListener("click", AbrirFormaPago)
 
 // ACA ADENTRO VAMOS A HACER LAS VALIDACIONES
 document.getElementById("pedidoForm").addEventListener("submit", function (e) {
