@@ -19,7 +19,7 @@ const seccionFormaPago = document.getElementById("seccion-forma-pago");
 const seccionRecepcion = document.getElementById("seccion-recepcion");
 
 // Primero se carga la página y cuando se carga hacer la funcion cargar página
-window.addEventListener("load", CargarPagina())
+window.addEventListener("load", CargarPagina)
 
 // Cargar la pagina, solo mostrando las seccion de productos
 function CargarPagina() {
@@ -33,7 +33,7 @@ function CargarPagina() {
 
 
 // Cuando se toca siguiente, se tiene que pasar a la parte de direcciones
-botonSiguienteProducto.addEventListener("click", AbrirDirecciones())
+botonSiguienteProducto.addEventListener("click", AbrirDirecciones)
 
 // Funcion que hace que se oculte 
 function AbrirDirecciones() {
@@ -99,7 +99,7 @@ efectivoRadioButton.addEventListener("change", function () {
     }
 });
 
-inputImagen.addEventListener("change", SubirImagen())
+inputImagen.addEventListener("change", SubirImagen)
 
 
 
@@ -235,10 +235,6 @@ function ValidarCodigoSeguridad() {
       return 'Inválido';
     }
 }
-
-
-
-
 
 
 // Agregar listeners a los campos de entrada
