@@ -5,8 +5,12 @@ body {
     background-color: #f0f0f0; /* Color de fondo gris claro */
     /* Color de texto negro  */
 
-h1, h2, h3 {
+h2, h3 {
     color: #0f0f0f;; /* Color de encabezados gris medio */
+}
+
+h1 {
+    color: white;
 }
 
 h2.titulo {
@@ -24,7 +28,7 @@ h2.titulo {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(113, 192, 113);
+    background-color: #9C89B8;
     border-radius: 15px;
     box-shadow: inset 3px 5px 5px rgba(0,0,0,0.05);
 }
@@ -192,7 +196,7 @@ body {
     font-family: 'Poppins', sans-serif;
     font-weight: lighter;
     font-size: larger;
-    background-color: #f5f5f5;
+    background-color: #f0e6ef;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -227,8 +231,8 @@ h1.titulo {
 
 label#imagenLabel.custom-button {
     display: block;
-    background-color: #eccdb7;
-    border: 1px solid #816f62;
+    background-color: #B8BEDD;
+    border: 1px solid black;
     padding: 5px 10px;
     cursor: pointer;
     transition: 0.3s;
@@ -452,5 +456,8 @@ input#eliminarImagen:hover {
     }
 
 .resumen-pedido{
-    background-color: #999999;
+    background-color: #cbcbcb;
+    padding: 3px;
+    margin-right: 30px;
+    font-weight: bolder;
 }

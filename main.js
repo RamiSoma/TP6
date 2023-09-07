@@ -3,7 +3,7 @@ const tarjetaRadioButton = document.getElementById("tarjeta");
 const tarjetaInfoDiv = document.getElementById("tarjeta_info");
 
 const efectivoRadioButton = document.getElementById("efectivo");
-const efectivoInfoDiv = document.getElementById("efectivo_info");
+const efectivoInfoDiv = document.getElementById("efectivo-info");
 
 const inputImagen = document.getElementById('imagenInput');
 const labelImagen = document.getElementById('imagenLabel');
@@ -271,6 +271,7 @@ efectivoRadioButton.addEventListener("change", function () {
     } else {
         // De lo contrario, ocultar el campo de información de tarjeta
         tarjetaInfoDiv.style.display = "none";
+        efectivoInfoDiv.style.display = "block";
     }
 });
 
