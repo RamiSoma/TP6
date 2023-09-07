@@ -95,8 +95,9 @@ input[type="text"], select, datetime-local, input[type="number"] {
     border-radius: 5px;
 }
 
-.inputTarjeta {
-    width: 40%;
+.error {
+  border: 2px solid red;
+  background-color: rgb(255, 197, 197);
 }
 
 input[type="radio"] {

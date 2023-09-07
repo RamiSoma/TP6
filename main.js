@@ -165,27 +165,59 @@ tarjetaRadioButton.addEventListener("change", function () {
 
 // Agregar listener PARA CUANDO SE INGRESE LA TARJETA
 numeroTarjetaInput.addEventListener('input', function () {
-  var resultado = ValidarTarjeta();
-  console.log(resultado);
+  ValidarTarjeta();
 });
 
-//Fijarse que el textbox acepte solo intergers hasta 15 caracteres
+// Función para formatear el número de tarjeta con espacios cada 4 dígitos
+const input = document.getElementById("numeroTarjeta");
+input.addEventListener("input", () => input.value = formatNumber(input.value.replaceAll(" ", "")));
+
+function formatNumber(number) {
+  return number.split("").reduce((seed, next, index) => {
+    if (index !== 0 && !(index % 4)) {
+      seed += " ";
+    }
+    return seed + next;
+  }, "");
+}
+
 function ValidarTarjeta() {
-  //Asignamos a la variable numeroTarjeta el numero de tarjeta traido desde la pagina.
-  var numeroTarjeta = document.getElementById('numeroTarjeta').value;  
+  // Verificar si el número de tarjeta es un número válido
+  var numeroTarjeta = document.getElementById('numeroTarjeta').value.replace(/\s/g, '');;
+  if (!/^\d+$/.test(numeroTarjeta)) {
+    document.getElementById('numeroTarjeta').className = 'error'; // Aplicar la clase 'error'
+    return 'Inválido';
+  }
+
   // Expresiones regulares para Visa y Mastercard
   var visaPattern = /^4[0-9]{12}(?:[0-9]{3})?$/;
   var mastercardPattern = /^5[1-5][0-9]{14}$/;
 
   // Verificar si el número coincide con Visa o Mastercard
   if (visaPattern.test(numeroTarjeta)) {
-    return 'Visa';
+      document.getElementById('numeroTarjeta').className = ''; // Quitar la clase 'error'
+      return 'Visa';
   } else if (mastercardPattern.test(numeroTarjeta)) {
-    return 'Mastercard';
+      document.getElementById('numeroTarjeta').className = 'error'; // Quitar la clase 'error'
+      return 'Mastercard';
   } else {
-    return 'Desconocida';
+      document.getElementById('numeroTarjeta').className = 'error'; // Aplicar la clase 'error'
+      return 'Desconocida';
   }
 }
+
+// Agregar evento input al código de seguridad
+cvcInput.addEventListener('input', function () {
+  var resultado = ValidarCodigoSeguridad();
+  console.log(resultado);
+
+  // Aquí puedes resaltar el campo de código de seguridad en verde si es válido
+  if (resultado === 'Válido') {
+      cvcInput.style.borderColor = 'green';
+  } else {
+      cvcInput.style.borderColor = ''; // Restablecer el borde
+  }
+});
 
 // Agregar listener cuando se ingresa la FECHA DE VENCIMIENTO
 fechaVencimientoInput.addEventListener('input', function () {
