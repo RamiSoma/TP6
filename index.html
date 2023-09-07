@@ -95,7 +95,10 @@
             <div id="section">
                 <h2>Dirección de Entrega:</h2>
                 <label for="entrega_calle">Calle y número:</label>
-                <input id="entrega_calle" type="text" placeholder="Ingrese una ciudad" list="ciudades" required>
+                <input type="text" id="entrega_calle" name="calle" required>
+
+                <label for="entrega_ciudad">Ciudad:</label>
+                <input id="entrega_ciudad" type="text" placeholder="Ingrese una ciudad" list="ciudades" required>
                 <datalist id="ciudades">
                     <option value="Córdoba"></option>
                     <option value="Carlos Paz"></option>
@@ -162,7 +165,7 @@
                     </div>
 
                     <div class="inputTarjeta">
-                        <label for="fechaVencimiento">Fecha de Vencimiento (MM/AAAA):</label>
+                        <label for="cc-exp">Fecha de Vencimiento (MM/AAAA):</label>
                         <figure class="payment clearfix">
                             <input id="cc-exp" type="tel" class="cc-exp cc-exp__example" placeholder="MM / YYYY" autocompletetype="cc-exp" required="required">
                           </figure>

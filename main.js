@@ -9,7 +9,7 @@ const inputImagen = document.getElementById('imagenInput');
 const labelImagen = document.getElementById('imagenLabel');
 const eliminarImagen = document.getElementById('eliminarImagen');
 
-const fechaVencimientoInput = document.getElementById("fechaVencimiento");
+const fechaVencimientoInput = document.getElementById("cc-exp");
 
 // Variables de botones
 const botonSiguienteProducto = document.getElementById("btn_siguiente1");
@@ -197,7 +197,7 @@ function ValidarFechaVencimiento() {
   //asignamos a la variable fechaVencimiento
 
   // Verifica que la fecha de vencimiento esté en el formato "MM/AAAA"
-  var fechaVencimiento = document.getElementById('fechaVencimiento').value;
+  var fechaVencimiento = document.getElementById('cc-exp').value;
   var formatoValido = /^(\d{2})\/(\d{4})$/;
   if (!formatoValido.test(fechaVencimiento)) {
     return false;

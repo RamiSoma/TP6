@@ -87,7 +87,6 @@ label {
 input[type="text"], select, datetime-local, input[type="number"] {
     width: 80%;
     padding: 10px;
-    margin-bottom: 10px;
     border: 1px solid #ccc; /* Borde gris claro */
     border-radius: 5px;
 }
@@ -271,7 +270,6 @@ input#eliminarImagen:hover {
   
   .payment {
     margin: 0;
-    padding: 1.5em 0.1875em; /* Reemplaza $lh por valores concretos */
     background: transparent;
   }
   
