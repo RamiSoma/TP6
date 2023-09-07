@@ -50,7 +50,7 @@ function CargarPagina() {
   seccionDirecciones.style.display = "none";
   seccionFormaPago.style.display = "none";
   seccionRecepcion.style.display = "none";
-  // botonAnterior.style.display = "none";
+  botonAnterior.style.display = "none";
 }
 
 // Listener para que vea cuando se sube una foto
@@ -124,6 +124,7 @@ function AbrirDirecciones() {
   seccionProductos.style.display = "none";
   seccionDirecciones.style.display = "block";
   seccionFormaPago.style.display = "none";
+  botonAnterior.style.display = "block";
 }
 
 // Agregar listener del boton ANTERIOR para que vuelva a los productos

@@ -450,3 +450,7 @@ input#eliminarImagen:hover {
     display: table;
     clear: both;
     }
+
+.resumen-pedido{
+    background-color: #999999;
+}
