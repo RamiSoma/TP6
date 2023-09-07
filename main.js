@@ -149,7 +149,7 @@ botonSiguienteDirecciones.addEventListener("click", function(){
     comercioCiudad = document.getElementById("comercio_ciudad").value;
     entregaCalle = document.getElementById("entrega_calle").value;
     entregaCiudad = document.getElementById("entrega_ciudad").value;
-    if (comercioCalle != "" && comercioCiudad != null && entregaCalle != "" && entregaCiudad != null) {
+    if (comercioCalle != "" && comercioCiudad != null && entregaCalle != "" && entregaCiudad != "" && comercioCiudad != "" && entregaCiudad != null) {
         AbrirFormaPago();
         document.getElementById("mensajeError").textContent = "";
     }else{
@@ -175,6 +175,7 @@ tarjetaRadioButton.addEventListener("change", function () {
     if (tarjetaRadioButton.checked) {
         // Si se selecciona tarjeta de débito, mostrar el campo de información de tarjeta
         tarjetaInfoDiv.style.display = "block";
+        efectivoInfoDiv.style.display = "none";
     } else {
         // De lo contrario, ocultar el campo de información de tarjeta
         tarjetaInfoDiv.style.display = "none";
