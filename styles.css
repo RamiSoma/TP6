@@ -9,6 +9,10 @@ h1, h2, h3 {
     color: #0f0f0f;; /* Color de encabezados gris medio */
 }
 
+h2.titulo {
+    display: inline-block;
+}
+
 #titulo {
     background-color: red;
 }

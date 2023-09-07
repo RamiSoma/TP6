@@ -47,7 +47,7 @@ function CargarPagina() {
   seccionDirecciones.style.display = "none";
   seccionFormaPago.style.display = "none";
   seccionRecepcion.style.display = "none";
-  
+  // botonAnteriorDirecciones.style.display = "none";
 }
 
 // Listener para que vea cuando se sube una foto
