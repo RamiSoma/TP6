@@ -182,6 +182,7 @@ tarjetaRadioButton.addEventListener("change", function () {
 });
 
 // Agregar listener PARA CUANDO SE INGRESE LA TARJETA
+
 numeroTarjetaInput.addEventListener('input', function () {
   ValidarTarjeta();
 });
@@ -201,9 +202,9 @@ function formatNumber(number) {
 
 function ValidarTarjeta() {
   // Verificar si el número de tarjeta es un número válido
-  var numeroTarjeta = document.getElementById('numeroTarjeta').value.replace(/\s/g, '');;
+  var numeroTarjeta = numeroTarjetaInput.value.replace(/\s/g, '');
   if (!/^\d+$/.test(numeroTarjeta)) {
-    document.getElementById('numeroTarjeta').className = 'error'; // Aplicar la clase 'error'
+    numeroTarjetaInput.className = 'error';; // Aplicar la clase 'error'
     return 'Inválido';
   }
 
@@ -213,13 +214,16 @@ function ValidarTarjeta() {
 
   // Verificar si el número coincide con Visa o Mastercard
   if (visaPattern.test(numeroTarjeta)) {
-      document.getElementById('numeroTarjeta').className = ''; // Quitar la clase 'error'
+      numeroTarjetaInput.className = '';// Quitar la clase 'error'
+      document.getElementById('tipoTarjeta').textContent = 'Visa';
       return 'Visa';
   } else if (mastercardPattern.test(numeroTarjeta)) {
-      document.getElementById('numeroTarjeta').className = 'error'; // Quitar la clase 'error'
+      numeroTarjetaInput.className = '';; // Aplicar la clase 'error'
+      document.getElementById('tipoTarjeta').textContent = 'Mastercard';
       return 'Mastercard';
   } else {
-      document.getElementById('numeroTarjeta').className = 'error'; // Aplicar la clase 'error'
+      numeroTarjetaInput.className = 'error'; // Aplicar la clase 'error'
+      document.getElementById('tipoTarjeta').textContent = 'Desconocida';
       return 'Desconocida';
   }
 }
