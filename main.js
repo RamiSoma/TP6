@@ -3,7 +3,7 @@ const tarjetaRadioButton = document.getElementById("tarjeta");
 const tarjetaInfoDiv = document.getElementById("tarjeta_info");
 
 const efectivoRadioButton = document.getElementById("efectivo");
-const efectivoInfoDiv = document.getElementById("efectivo_info");
+const efectivoInfoDiv = document.getElementById("efectivo-info");
 
 const inputImagen = document.getElementById('imagenInput');
 const labelImagen = document.getElementById('imagenLabel');
@@ -14,10 +14,10 @@ const fechaVencimientoInput = document.getElementById("cc-exp");
 // Variables de botones
 const botonSiguienteProducto = document.getElementById("btn_siguiente1");
 const botonSiguienteDirecciones = document.getElementById("btn_siguiente2");
-const botonAnteriorDirecciones = document.getElementById("btn_anterior1");
+const botonAnterior = document.getElementById("btn-anterior");
 const botonSiguienteFormaPago = document.getElementById("btn_siguiente3");
-const botonAnteriorFormaPago = document.getElementById("btn_anterior2");
-const botonAnteriorRecepcion = document.getElementById("btn_anterior3");
+// const botonAnteriorFormaPago = document.getElementById("btn_anterior2");
+// const botonAnteriorRecepcion = document.getElementById("btn_anterior3");
 
 // Variables de las secciones
 const seccionProductos = document.getElementById("seccion-producto");
@@ -36,6 +36,9 @@ var entregaCiudad;
 var numeroTarjetaInput = document.getElementById('numeroTarjeta');
 var cvcInput = document.getElementById('cvc');
 
+// Variable volver
+var volver = 0;
+
 // Primero se carga la página y cuando se carga hacer la funcion cargar página
 window.addEventListener("load", CargarPagina)
 
@@ -47,7 +50,7 @@ function CargarPagina() {
   seccionDirecciones.style.display = "none";
   seccionFormaPago.style.display = "none";
   seccionRecepcion.style.display = "none";
-  // botonAnteriorDirecciones.style.display = "none";
+  botonAnterior.style.display = "none";
 }
 
 // Listener para que vea cuando se sube una foto
@@ -121,10 +124,24 @@ function AbrirDirecciones() {
   seccionProductos.style.display = "none";
   seccionDirecciones.style.display = "block";
   seccionFormaPago.style.display = "none";
+  botonAnterior.style.display = "block";
 }
 
 // Agregar listener del boton ANTERIOR para que vuelva a los productos
-botonAnteriorDirecciones.addEventListener("click", CargarPagina)
+botonAnterior.addEventListener("click", function () {
+  if (volver === 0) {
+    CargarPagina();
+    volver = 0;
+  }
+  if (volver === 1) {
+    AbrirDirecciones();
+    volver = 0;
+  }
+  if (volver === 2) {
+    AbrirFormaPago();
+    volver === 1;
+  }
+})
 
 // Agregar listener del boton SIGUIENTE para que pase a la forma de pago
 botonSiguienteDirecciones.addEventListener("click", function(){
@@ -147,10 +164,11 @@ function AbrirFormaPago() {
   seccionDirecciones.style.display = "none";
   seccionFormaPago.style.display = "block";
   seccionRecepcion.style.display = "none";
+  volver = 1;
 }
 
 // Agregar listener del boton ANTERIOR para que vuelva a las direcciones
-botonAnteriorFormaPago.addEventListener("click", AbrirDirecciones)
+// botonAnteriorFormaPago.addEventListener("click", AbrirDirecciones)
 
 // Agregar un evento de cambio al botón de opción de TARJETA
 tarjetaRadioButton.addEventListener("change", function () {
@@ -285,6 +303,7 @@ efectivoRadioButton.addEventListener("change", function () {
     } else {
         // De lo contrario, ocultar el campo de información de tarjeta
         tarjetaInfoDiv.style.display = "none";
+        efectivoInfoDiv.style.display = "block";
     }
 });
 
@@ -295,10 +314,11 @@ botonSiguienteFormaPago.addEventListener("click", AbrirRecepcion)
 function AbrirRecepcion() {
   seccionFormaPago.style.display = "none";
   seccionRecepcion.style.display = "block";
+  volver = 2;
 }
 
 // Agregar listener del boton ANTERIOR para que vuelva a la forma de pago
-botonAnteriorRecepcion.addEventListener("click", AbrirFormaPago)
+// botonAnteriorRecepcion.addEventListener("click", AbrirFormaPago)
 
 function verificarFecha() {
     var fechaEntrega = document.getElementById("fecha_hora_entrega").value;

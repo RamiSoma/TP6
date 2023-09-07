@@ -5,12 +5,18 @@ body {
     background-color: #f0f0f0; /* Color de fondo gris claro */
     /* Color de texto negro  */
 
-h1, h2, h3 {
+h2, h3 {
     color: #0f0f0f;; /* Color de encabezados gris medio */
+}
+
+h1 {
+    color: white;
 }
 
 h2.titulo {
     display: inline-block;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 #titulo {
@@ -22,7 +28,7 @@ h2.titulo {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(113, 192, 113);
+    background-color: #9C89B8;
     border-radius: 15px;
     box-shadow: inset 3px 5px 5px rgba(0,0,0,0.05);
 }
@@ -58,29 +64,37 @@ label {
 
 }
 
-.botones_der button {
+.botones-der button {
     float: right;
-    background-color: transparent;
-    border: none;
+    font-family: 'Poppins', sans-serif;
+    margin-top: 5px;
+    cursor: pointer;
 }
 
-
-.botones_izq{
+.botones-izq{
     margin-bottom: 20px;
 }
-.botones_izq button{
+.botones-izq button{
     float: left;
-    background-color: transparent;
+    /* background-color: transparent;
+    border: none; */
+    background-color: #c9c9c9;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
     border: none;
-    width: 60px;
-    height: 60px;
-}
-.botones_izq button i {
-    font-style: normal;
-    font-size: 50px; /* Tamaño de fuente para el ícono */
-    margin-right: 5px; /* Espacio entre el ícono y el texto (ajusta según tus necesidades) */
+    margin-top: 10px;
+    
 }
 
+.botones-izq button i {
+    font-style: normal;
+    /* font-size: 25px; Tamaño de fuente para el ícono */
+    margin-right: 5px; /* Espacio entre el ícono y el texto (ajusta según tus necesidades) */
+    border-radius: 50%;
+    border: none;
+    background-color: #c9c9c9;
+}
 
 .radio-label label {
     display: inline;
@@ -183,7 +197,7 @@ body {
     font-family: 'Poppins', sans-serif;
     font-weight: lighter;
     font-size: larger;
-    background-color: #f5f5f5;
+    background-color: #f0e6ef;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -218,8 +232,8 @@ h1.titulo {
 
 label#imagenLabel.custom-button {
     display: block;
-    background-color: #eccdb7;
-    border: 1px solid #816f62;
+    background-color: #B8BEDD;
+    border: 1px solid black;
     padding: 5px 10px;
     cursor: pointer;
     transition: 0.3s;
@@ -441,3 +455,10 @@ input#eliminarImagen:hover {
     display: table;
     clear: both;
     }
+
+.resumen-pedido{
+    background-color: #cbcbcb;
+    padding: 3px;
+    margin-right: 30px;
+    font-weight: bolder;
+}

@@ -26,9 +26,9 @@
             <h1 class="nombre-app">DeliverEat</h1>
         </div>
         <div class="lo-que-sea">
-            <div class="botones_izq">
-                <button id="btn_anterior1" class="material-symbols-outlined" type="button">
-                    <i class = "icono">arrow_circle_left</i> 
+            <div class="botones-izq">
+                <button id="btn-anterior" class="material-symbols-outlined" type="button">
+                    <i class = "icono">arrow_back_ios</i> 
                 </button>
             </div>
             <!--<div class="lo-que-sea-titulo">-->
@@ -55,8 +55,8 @@
                 <input type="button" id="eliminarImagen" value="Eliminar" style="display: none; "/>
             </div>
             
-            <div class="botones_der">
-                <button id="btn_siguiente1" class="material-symbols-outlined" type="button">arrow_forward</button>
+            <div class="botones-der">
+                <button id="btn_siguiente1" class="botones-der" type="button">Siguiente</button>
             </div>
         </section>
 
@@ -121,8 +121,8 @@
                 <input type="text" id="referencia" name="referencia">
             </div>
 
-            <div class="botones_der">
-                <button id="btn_siguiente2" class="material-symbols-outlined" type="button">arrow_forward</button>
+            <div class="botones-der">
+                <button id="btn_siguiente2" class="botones-der" type="button">Siguiente</button>
                 
             </div>
             
@@ -132,7 +132,13 @@
         <section id="seccion-forma-pago">
             <!-- Aquí puedes incluir los productos seleccionados en el carrito ESTO CREO QUE NO VA -->
             <div id="section" class="radio-label">
-                <h2>Carrito de Compras:</h2>
+                <h2>Resumen de tu pedido:</h2>
+                <div class="resumen-pedido">
+                    <p>Productos: $</p>
+                    <p>Envío: $</p>
+                    <p>Subtotal: $</p>
+                </div>
+                
                 <h2>Forma de Pago:</h2>
         
                 <div>
@@ -140,6 +146,12 @@
                     <label for="efectivo" class="radio-label">
                         <span class="custom-radio"></span> Efectivo
                     </label>
+                </div>
+
+                <div id="efectivo-info" style="display: none;">
+                    <label for="monto">Ingrese el monto con el que va a pagar:</label>
+                    <input type="text" id="monto" placeholder="Ingrese un monto">
+
                 </div>
             
                 <div>
@@ -178,11 +190,11 @@
                 </div>
         
             </div>
-            <div class = "botones_izq">
+            <!-- <div class = "botones_izq">
                 <button id="btn_anterior2" class="material-symbols-outlined" type="button">arrow_back</button>
-            </div>
-            <div class="botones_der">
-                <button id="btn_siguiente3" class="material-symbols-outlined" type="button">arrow_forward</button>
+            </div> -->
+            <div class="botones-der">
+                <button id="btn_siguiente3" class="botones-der" type="button">Siguiente</button>
             </div>
             
 
@@ -206,9 +218,9 @@
                     <input type="datetime-local" id="fecha_hora_entrega" name="fecha_hora_entrega">
                 </div>
                 <button type="submit">Realizar Pedido</button>
-                <div class = "botones_izq">
+                <!-- <div class = "botones_izq">
                     <button id="btn_anterior3" class="material-symbols-outlined" type="button">arrow_back</button>
-                </div>
+                </div> -->
                 
             </div>
         </section>
