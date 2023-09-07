@@ -17,6 +17,16 @@ label {
     font-size: larger;
 }
 
+
+.botones {
+    text-align: right;
+}
+
+.botones button {
+    float: right;
+}
+
+
 .radio-label label {
     display: inline;
     vertical-align: middle;
