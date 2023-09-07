@@ -204,8 +204,12 @@ function formatNumber(number) {
 function ValidarTarjeta() {
   // Verificar si el número de tarjeta es un número válido
   var numeroTarjeta = numeroTarjetaInput.value.replace(/\s/g, '');
+  if (numeroTarjeta === '') {
+    // If the CVC input is empty, reset the background color
+    numeroTarjetaInput.style.backgroundColor = '';
+  }
   if (!/^\d+$/.test(numeroTarjeta)) {
-    numeroTarjetaInput.className = 'error';; // Aplicar la clase 'error'
+    document.getElementById('numeroTarjeta').className = 'error'; // Aplicar la clase 'error'
     return 'Inválido';
   }
 
@@ -215,51 +219,54 @@ function ValidarTarjeta() {
 
   // Verificar si el número coincide con Visa o Mastercard
   if (visaPattern.test(numeroTarjeta)) {
-      numeroTarjetaInput.className = '';// Quitar la clase 'error'
+      document.getElementById('numeroTarjeta').className = '';// Quitar la clase 'error'
+      numeroTarjetaInput.style.backgroundColor = '';
       document.getElementById('tipoTarjeta').textContent = 'Visa';
       return 'Visa';
   } else if (mastercardPattern.test(numeroTarjeta)) {
-      numeroTarjetaInput.className = '';; // Aplicar la clase 'error'
+      document.getElementById('numeroTarjeta').className = ''; // Aplicar la clase 'error'
+      numeroTarjetaInput.style.backgroundColor = '';
       document.getElementById('tipoTarjeta').textContent = 'Mastercard';
       return 'Mastercard';
   } else {
-      numeroTarjetaInput.className = 'error'; // Aplicar la clase 'error'
+      document.getElementById("numeroTarjeta").className = 'error'; // Aplicar la clase 'error'
+      numeroTarjetaInput.style.backgroundColor = 'rgb(255, 197, 197)';
       document.getElementById('tipoTarjeta').textContent = 'Desconocida';
       return 'Desconocida';
   }
 }
 
-// Agregar evento input al código de seguridad
-cvcInput.addEventListener('input', function () {
-  var resultado = ValidarCodigoSeguridad();
-  console.log(resultado);
+// Agregar evento input al input de fecha de vencimiento
+var mensajeError = document.getElementById('mensajeError');
 
-  // Aquí puedes resaltar el campo de código de seguridad en verde si es válido
-  if (resultado === 'Válido') {
-      cvcInput.style.borderColor = 'green';
-  } else {
-      cvcInput.style.borderColor = ''; // Restablecer el borde
-  }
-});
-
-// Agregar listener cuando se ingresa la FECHA DE VENCIMIENTO
 fechaVencimientoInput.addEventListener('input', function () {
-  var resultado = ValidarFechaVencimiento();
-  console.log(resultado);
+  var fechaVencimiento = fechaVencimientoInput.value.trim(); // Remove leading/trailing whitespace
+
+  if (fechaVencimiento === '') {
+    // If the expiration date input is empty, reset the background color and clear the error message
+    fechaVencimientoInput.style.backgroundColor = '';
+    mensajeError.textContent = '';
+  } else if (!ValidarFechaVencimiento()) {
+    // La fecha de vencimiento es inválida, aplica estilos y muestra el mensaje de error
+    fechaVencimientoInput.style.backgroundColor = 'rgb(255, 197, 197)';
+    mensajeError.textContent = 'La fecha de vencimiento debe ser mayor a la fecha actual.';
+  } else {
+    // La fecha de vencimiento es válida, restaura los estilos y elimina el mensaje de error
+    fechaVencimientoInput.style.backgroundColor = ''; // Restaurar el fondo original
+    mensajeError.textContent = ''; // Eliminar el mensaje de error
+  }
 });
 
 // Funcion para validar la fecha de vencimiento
 function ValidarFechaVencimiento() {
-  //asignamos a la variable fechaVencimiento
-
   // Verifica que la fecha de vencimiento esté en el formato "MM/AAAA"
-  var fechaVencimiento = document.getElementById('cc-exp').value;
+  var fechaVencimiento = fechaVencimientoInput.value.replace(/\s/g, '');
   var formatoValido = /^(\d{2})\/(\d{4})$/;
   if (!formatoValido.test(fechaVencimiento)) {
     return false;
   }
 
-  // Extrae el mes y el anio de la fecha de vencimiento
+  // Extrae el mes y el año de la fecha de vencimiento
   var partesFecha = fechaVencimiento.split('/');
   var mes = parseInt(partesFecha[0], 10);
   var anio = parseInt(partesFecha[1], 10);
@@ -279,8 +286,7 @@ function ValidarFechaVencimiento() {
 
 // Agregar listener para cuando se ingresa EL CODIGO DE SEGURIDAD
 cvcInput.addEventListener('input', function () {
-  var resultado = ValidarCodigoSeguridad();
-  console.log(resultado);
+  var resultado = ValidarCodigoSeguridad();;
 });
 
 // Funcion que valida el codigo de seguridad
@@ -288,14 +294,20 @@ cvcInput.addEventListener('input', function () {
 function ValidarCodigoSeguridad() {
   // Verificar si el código de seguridad es un número válido
   var codigoSeguridad = document.getElementById('cvc').value;
+  if (codigoSeguridad === '') {
+    // If the CVC input is empty, reset the background color
+    cvcInput.style.backgroundColor = '';
+  }
   if (!/^\d+$/.test(codigoSeguridad)) {
     return 'Inválido';
   }
 
   // Verificar la longitud del código de seguridad (CVV o CVC)
   if (codigoSeguridad.length === 3 || codigoSeguridad.length === 4) {
+    cvcInput.style.backgroundColor = '';
     return 'Válido';
   } else {
+    cvcInput.style.backgroundColor = 'rgb(255, 197, 197)';
     return 'Inválido';
   }
 }
