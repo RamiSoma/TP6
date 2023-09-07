@@ -9,6 +9,16 @@ h1, h2, h3 {
     color: #0f0f0f;; /* Color de encabezados gris medio */
 }
 
+#titulo {
+    background-color: red;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 label {
     display: block;
     margin-bottom: 5px;
