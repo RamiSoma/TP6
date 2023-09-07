@@ -131,13 +131,12 @@ botonSiguienteDirecciones.addEventListener("click", function(){
     comercioCiudad = document.getElementById("comercio_ciudad").value;
     entregaCalle = document.getElementById("entrega_calle").value;
     entregaCiudad = document.getElementById("entrega_ciudad").value;
-    if (comercioCalle != "" && comercioNumero != null && entregaCalle != "" && entregaNumero != null) {
+    if (comercioCalle != "" && comercioCiudad != null && entregaCalle != "" && entregaCiudad != null) {
         AbrirFormaPago();
         document.getElementById("mensajeError").textContent = "";
     }else{
         document.getElementById("mensajeError").textContent = "Debe completar todos los campos...";
     }
-    
 })
 
 // AGREGAR VALIDACIONES Y COSAS DE LA CALLE Y DIRECCIONES

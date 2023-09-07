@@ -156,17 +156,9 @@ h1.titulo {
     margin: 10px;
 }
 
-.btn-siguiente {
-    font-family: 'Poppins', sans-serif;
-    font-weight: bolder;
+.material-symbols-outlined {
     cursor: pointer;
     /* position: absolute; */
-}
-
-.btn-anterior {
-    font-family: 'Poppins', sans-serif;
-    font-weight: bolder;
-    cursor: pointer;
 }
 
 label#imagenLabel.custom-button {
