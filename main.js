@@ -297,3 +297,31 @@ function reemplazarCaracteres(texto, caracteresAReemplazar, caracteresNuevos) {
   }
   return resultado;
 }
+
+
+$('.cc-exp').payment('formatCardExpiry');
+
+var liveValidateDetails = function() {
+  var live_expiry = $('.cc-exp__example').payment('cardExpiryVal');
+  var live_month = live_expiry["month"];
+  var live_year = live_expiry["year"].slice(-4); // Extract the last 4 characters
+  var live_validateExpiry = $.payment.validateCardExpiry(live_month, live_year);
+  var live_validateCVC = $.payment.validateCardCVC($('.cc-cvc__example').val());
+
+  $('.cc-exp__ouputMonth').text(live_month);
+  $('.cc-exp__ouputYear').text(live_year);
+
+  if (live_validateExpiry) {
+    $('.cc-exp__example').addClass('identified');
+    $('.cc-exp__ouputValid').text('Yes');
+  } else {
+    $('.cc-exp__example').removeClass('identified');
+    $('.cc-exp__ouputValid').text('No');
+  }
+
+  if (live_validateCVC) {
+    $('.cc-cvc__example').addClass('identified');
+  } else {
+    $('.cc-cvc__example').removeClass('identified');
+  }
+}

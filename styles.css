@@ -13,10 +13,24 @@ h1, h2, h3 {
     background-color: red;
 }
 
-header {
+
+.cabecera {
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: rgb(113, 192, 113);
+    border-radius: 15px;
+    box-shadow: inset 3px 5px 5px rgba(0,0,0,0.05);
+}
+
+.logo-app{
+    width: 70px;
+    height: 70px;
+    padding-right: 10px;
+}
+
+.lo-que-sea{
+    display: inline-block;
 }
 
 label {
@@ -28,12 +42,39 @@ label {
 }
 
 
-.botones {
-    text-align: right;
+/*DIV de la cabecera que dice lo que sea*/
+.lo-que-sea-titulo{
+    width: 350px;
+    height: 60px;
 }
 
-.botones button {
+
+.botones {
+    text-align: right;
+
+}
+
+.botones_der button {
     float: right;
+    background-color: transparent;
+    border: none;
+}
+
+
+.botones_izq{
+    margin-bottom: 20px;
+}
+.botones_izq button{
+    float: left;
+    background-color: transparent;
+    border: none;
+    width: 60px;
+    height: 60px;
+}
+.botones_izq button i {
+    font-style: normal;
+    font-size: 50px; /* Tamaño de fuente para el ícono */
+    margin-right: 5px; /* Espacio entre el ícono y el texto (ajusta según tus necesidades) */
 }
 
 
@@ -109,7 +150,7 @@ button[type="submit"]:hover {
 .navbar-title {
     float: left;
     font-size: 24px;
-    color: white; /* Color del título en el navbar */
+    color: rgb(226, 226, 226); /* Color del título en el navbar */
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
@@ -138,7 +179,7 @@ body {
     font-family: 'Poppins', sans-serif;
     font-weight: lighter;
     font-size: larger;
-    background-color: #ECCDB4;
+    background-color: #f5f5f5;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -220,3 +261,180 @@ input#eliminarImagen:hover {
     color: #fff;
 
   }
+
+  input[type="text"],
+  input[type="tel"] {
+    font: inherit;
+    line-height: inherit;
+    padding: 1.5em/6em 1.5em/3em; /* Reemplaza $lh por valores concretos */
+  }
+  
+  .payment {
+    margin: 0;
+    padding: 1.5em 0.1875em; /* Reemplaza $lh por valores concretos */
+    background: transparent;
+  }
+  
+  .cardInfo {
+    font-size: 1.25em;
+  }
+  
+  .cardInfo__personalDetails,
+  .cardInfo__cardDetails {
+    border: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .cardInfo__cardDetails {
+    border-top: solid 1px #eee;
+    margin-top: 0.375em;
+  }
+  
+  .paymentInfo__total {
+    font-size: 1.25em;
+    background: url('https://d2fz1tzabfzgo4.cloudfront.net/demos/lock.svg') no-repeat center left;
+    background-size: 1.5em;
+    margin: 0 0 0.75em 0;
+    padding-left: 2em;
+  }
+  
+  .form-row {
+    margin: 0.375em 0;
+  }
+  
+  label {
+    cursor: pointer;
+    display: inline-block;
+    font-size: 0.75em;
+  }
+  
+  .icon-secure,
+  .cc-num__wrap {
+    position: relative;
+  }
+  
+  .cardInfo_firstname,
+  .cardInfo_surname {
+    width: 48.75%;
+  }
+  
+  .cardInfo_firstname {
+    float: left;
+  }
+  
+  .cardInfo_surname {
+    float: right;
+  }
+  
+  .card {
+    position: absolute;
+    display: block;
+    right: 0.375em;
+    top: 50%;
+    margin-top: -10px;
+    width: 28px;
+    height: 19px;
+    background: url('https://d2fz1tzabfzgo4.cloudfront.net/demos/cards/card.svg') center center;
+    background-size: 100%;
+  }
+  
+  .cardInfo__cc-exp,
+  .cardInfo__cc-cvc {
+    float: left;
+    max-width: 4.875em;
+  }
+  
+  .cardInfo__cc-exp {
+    margin-right: 0.75em;
+  }
+  
+  .cardInfo__cc-exp,
+  .cc-exp__example {
+    max-width: 5.75em !important;
+  }
+  
+  .cc-num.visa + .card {
+    background: url('https://d2fz1tzabfzgo4.cloudfront.net/demos/cards/visa.png') no-repeat center center;
+  }
+  
+  .cc-num.amex + .card {
+    background: url('https://d2fz1tzabfzgo4.cloudfront.net/demos/cards/amex.png') no-repeat center center;
+  }
+  
+  .cc-num.mastercard + .card {
+    background: url('https://d2fz1tzabfzgo4.cloudfront.net/demos/cards/mastercard.png') no-repeat center center;
+  }
+  
+  .cc-num.diners + .card {
+    background: url('https://d2fz1tzabfzgo4.cloudfront.net/demos/cards/diners.png') no-repeat center center;
+  }
+  
+  .cc-num.discover + .card {
+    background: url('https://d2fz1tzabfzgo4.cloudfront.net/demos/cards/discover.png') no-repeat center center;
+  }
+  
+  .cardInfo__submission {
+    clear: both;
+    padding-top: 1.5 - 0.375em; /* Esto parece incorrecto, verifica el valor */
+    margin-bottom: 0.75em;
+  }
+  
+  input[type="text"],
+  input[type="tel"] {
+    width: 100%;
+    display: block;
+    margin-top: 0.35em;
+    padding: 0.35em;
+    background: #fff;
+    border: solid 1px #ccc;
+    border-radius: 0.1875em;
+    box-sizing: border-box;
+    transition: all 0.2s;
+    -webkit-font-smoothing: antialiased;
+  }
+  
+  input[type="text"]:focus,
+  input[type="tel"]:focus {
+    border-color: #fff;
+    box-shadow: 0 0 0.1875em #3498db;
+    outline: none;
+  }
+  
+  input[type="submit"] {
+    font-size: 0.875em;
+    background: #2ecc71;
+    border: solid 1px darken(#2ecc71, 5%);
+    padding: 0.375em 0.5em;
+    color: #fff;
+    border-radius: 0.1875em;
+  }
+  
+  .cancel-link {
+    font-size: 0.875em;
+    float: right;
+    color: #bbb;
+    padding-top: 0.375em;
+    text-decoration: none;
+  }
+  
+  .cc-exp__outputs {
+    margin: 0;
+    padding: 1.5em/6em 0 0;
+    b {
+      color: #999;
+    }
+  }
+  
+  .cc-exp__output {
+    margin-right: 0.75em;
+    &:last-of-type {
+      margin-right: 0;
+    }
+  }
+  
+  .clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+    }
