@@ -43,8 +43,6 @@
             </div>
         </section>
 
-        
-        
         <!-- SECTION DE LAS DIRECCIONES DEL COMERCIO Y DIRECCION DE ENTREGA -->
         <section id="seccion-direcciones">
             <button id="btn_anterior1" class="material-symbols-outlined" type="button">arrow_back</button>
@@ -56,7 +54,13 @@
             </div>
                          
             <label for="comercio_ciudad">Ciudad:</label>
-            <select id="comercio_ciudad" name="ciudad" required>
+            <input id="comercio_ciudad" type="text" placeholder="Ingrese una ciudad" list="ciudades" required>
+            <datalist id="ciudades">
+                <option value="Córdoba"></option>
+                <option value="Carlos Paz"></option>
+            </datalist>
+
+            <!-- <select id="comercio_ciudad" name="ciudad" required>
                 <option value="ciudad1">Calera</option>
                 <option value="ciudad2">Córdoba</option>
                 <option value="ciudad3">Cosquín</option>
@@ -67,17 +71,19 @@
                 <option value="ciudad6">Curso 221 - edificio Central</option>
                 <option value="ciudad6">Rami ramero</option>
 
-                <!-- Agrega aquí las ciudades disponibles -->
-            </select>
+                Agrega aquí las ciudades disponibles
+            </select> -->
     
-            
-
             <div id="section">
                 <h2>Dirección de Entrega:</h2>
                 <label for="entrega_calle">Calle y número:</label>
-                <input type="text" id="entrega_calle" name="calle" required>
+                <input id="entrega_calle" type="text" placeholder="Ingrese una ciudad" list="ciudades" required>
+                <datalist id="ciudades">
+                    <option value="Córdoba"></option>
+                    <option value="Carlos Paz"></option>
+                </datalist>
             
-                <label for="entrega_ciudad">Ciudad:</label>
+                <!-- <label for="entrega_ciudad">Ciudad:</label>
                 <select id="entrega_ciudad" name="ciudad" required>
                     <option value="ciudad1">Calera</option>
                     <option value="ciudad2">Córdoba</option>
@@ -87,8 +93,8 @@
                     <option value="ciudad6">Villa Carlos Paz</option>
                     <option value="ciudad6">San BOWER XD</option>
                     <option value="ciudad6">Curso 221 - edificio Central</option>
-                    <!-- Agrega aquí las ciudades disponibles -->
-                </select>
+                    Agrega aquí las ciudades disponibles
+                </select> -->
         
                 <label for="referencia">Referencia (opcional):</label>
                 <input type="text" id="referencia" name="referencia">
