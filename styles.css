@@ -26,11 +26,12 @@ h2.titulo {
 
 .cabecera {
     display: flex;
-    justify-content: center;
+    justify-content: left;
     align-items: center;
     background-color: #9C89B8;
     border-radius: 15px;
     box-shadow: inset 3px 5px 5px rgba(0,0,0,0.05);
+    
 }
 .group-icon {
   left: 800px;
@@ -42,10 +43,13 @@ h2.titulo {
     width: 70px;
     height: 70px;
     padding-right: 10px;
+    padding-left: 10px;
 }
 
 .lo-que-sea{
-    display: inline-block;
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    gap: 10px;
 }
 
 label {
@@ -78,14 +82,16 @@ label {
 
 .botones-izq{
     margin-bottom: 20px;
+    width: 60px;
+    height: 106px;
 }
 .botones-izq button{
     float: left;
     /* background-color: transparent;
     border: none; */
     background-color: #c9c9c9;
-    width: 30px;
-    height: 30px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     border: none;
     margin-top: 10px;
@@ -94,8 +100,8 @@ label {
 
 .botones-izq button i {
     font-style: normal;
-    /* font-size: 25px; Tamaño de fuente para el ícono */
-    margin-right: 5px; /* Espacio entre el ícono y el texto (ajusta según tus necesidades) */
+    /*font-size: 55px; Tamaño de fuente para el ícono */
+    margin-left: 5px; /* Espacio entre el ícono y el texto (ajusta según tus necesidades) */
     border-radius: 50%;
     border: none;
     background-color: #c9c9c9;
@@ -238,7 +244,8 @@ h1.titulo {
 label#imagenLabel.custom-button {
     display: block;
     background-color: #B8BEDD;
-    border: 1px solid black;
+    border: 1px solid rgb(123, 123, 123);
+    color:rgb(123, 123, 123);
     padding: 5px 10px;
     cursor: pointer;
     transition: 0.3s;
@@ -247,7 +254,7 @@ label#imagenLabel.custom-button {
 }
   
 label#imagenLabel.custom-button:hover {
-  background-color: #70513a;
+  background-color: #9C89B8;
   color: #fff;
 }
 
