@@ -32,6 +32,11 @@ h2.titulo {
     border-radius: 15px;
     box-shadow: inset 3px 5px 5px rgba(0,0,0,0.05);
 }
+.group-icon {
+  left: 800px;
+  margin-top: -10px; /* Ajusta la cantidad de espacio entre la cabecera y el grupo de iconos */
+  height: 40px; /* Ajusta la altura del grupo de iconos según tus necesidades */
+}
 
 .logo-app{
     width: 70px;
