@@ -27,10 +27,15 @@ const seccionRecepcion = document.getElementById("seccion-recepcion");
 
 // Variables de los datos del negocio
 var productosBusqueda;
+var totalProductos;
+const totalProductosMostrar = document.getElementById("total-productos");
+const subtotalMostrar = document.getElementById("subtotal");
 var comercioCalle;
 var comercioCiudad;
 var entregaCalle;
 var entregaCiudad;
+var subtotal;
+
 
 // Variables de la tarjeta
 var numeroTarjetaInput = document.getElementById('numeroTarjeta');
@@ -110,7 +115,8 @@ eliminarImagen.addEventListener("click",function(){
 // Cuando se toca siguiente, se tiene que pasar a la parte de direcciones y se hacen las validaciones de primer campo
 botonSiguienteProducto.addEventListener("click", function(){
     productosBusqueda = document.getElementById("busqueda").value;
-    if ( productosBusqueda != "") {
+    totalProductos = document.getElementById("total").value;
+    if ( productosBusqueda != "" && totalProductos != "") {
         AbrirDirecciones();
         document.getElementById("mensajeError").textContent = "";
     }else{
@@ -161,6 +167,9 @@ botonSiguienteDirecciones.addEventListener("click", function(){
 
 // Funcion que pasa a la forma de pago
 function AbrirFormaPago() {
+  totalProductosMostrar.innerHTML = "Productos: $" + totalProductos;
+  subtotal = parseFloat(totalProductos) + 500
+  subtotalMostrar.innerHTML = "Subtotal: $" + subtotal;
   seccionDirecciones.style.display = "none";
   seccionFormaPago.style.display = "block";
   seccionRecepcion.style.display = "none";
@@ -320,9 +329,39 @@ efectivoRadioButton.addEventListener("change", function () {
     } else {
         // De lo contrario, ocultar el campo de información de tarjeta
         tarjetaInfoDiv.style.display = "none";
-        efectivoInfoDiv.style.display = "block";
+        efectivoInfoDiv.style.display = "grid";
     }
 });
+
+//Formateo de moneda
+const moneda = document.getElementById('monto');
+moneda.addEventListener('input', formatCurrency);
+
+
+function formatCurrency(moneda) {
+  // Obtén el valor actual del input
+  let valorInput = moneda.value;
+
+  // Elimina cualquier carácter no numérico (excepto el punto decimal)
+  valorInput = valorInput.replace(/[^0-9.]/g, '');
+
+  // Convierte el valor en un número decimal
+  let number = parseFloat(valorInput);
+
+  // Verifica si el número es válido
+  if (!isNaN(valorInput)) {
+      // Formatea el número en el formato de moneda argentina
+      input.value = number.toLocaleString('es-AR', {
+          style: 'currency',
+          currency: 'ARS'
+      });
+  } else {
+      // Si el número no es válido, muestra un valor vacío o un mensaje de error
+      input.value = '';
+  }
+}
+
+
 
 // Agregar listener del boton SIGUIENTE para que se pase a la recepcion
 botonSiguienteFormaPago.addEventListener("click", AbrirRecepcion)

@@ -292,11 +292,20 @@ input#eliminarImagen:hover {
 }
 
 input[type="text"],
-input[type="tel"] {
+input[type="tel"],
+input[type="number"] {
   font: inherit;
   line-height: inherit;
   padding: 1.5em/6em 1.5em/3em; /* Reemplaza $lh por valores concretos */
 }
+
+/*PONIENDO ORDEN EN LA PARTE DE ELEGIR METODO PAGO -> EFECTIVO*/
+.eft-info{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+}
+
 
 .payment {
   margin: 0;
@@ -409,7 +418,8 @@ label {
 }
 
 input[type="text"],
-input[type="tel"] {
+input[type="tel"],
+input[type="number"] {
   width: 100%;
   display: block;
   margin-top: 0.35em;

@@ -43,8 +43,13 @@
             
             <!-- <h2>Ingresar Producto:</h2> -->
             <div>
-                <label for="busqueda">Ingrese el producto:</label>
+                <label for="busqueda">Ingrese los productos:</label>
                 <input type="text" id="busqueda" name="busqueda" placeholder="Ingrese un producto" required>
+            </div>
+
+            <div>
+                <label for="total">Total a pagar:</label>
+                <input type="number" id="total" name="total" placeholder="Ingrese el total a pagar" required min="0">
             </div>
             
             <h2>Subir Imagen (5MB Máximo)</h2>
@@ -135,9 +140,9 @@
             <div id="section" class="radio-label">
                 <h2>Resumen de tu pedido:</h2>
                 <div class="resumen-pedido">
-                    <p>Productos: $</p>
-                    <p>Envío: $</p>
-                    <p>Subtotal: $</p>
+                    <p id="total-productos"></p>
+                    <p>Envío: $500</p>
+                    <p id="subtotal"></p>
                 </div>
                 
                 <h2>Forma de Pago:</h2>
@@ -149,10 +154,13 @@
                     </label>
                 </div>
 
-                <div id="efectivo-info" style="display: none;">
-                    <label for="monto">Ingrese el monto con el que va a pagar:</label>
-                    <input type="text" id="monto" placeholder="Ingrese un monto">
-
+                <div id="efectivo-info" style = "display: none;" class = "eft-info">
+                    <div class = "efectivo-orden">
+                        <label for="monto">Ingrese el monto con el que va a pagar: $ </label>
+                    </div>
+                  <div class = "efectivo-orden">
+                    <input type="number" id="monto" placeholder="Ingrese un monto">
+                  </div>
                 </div>
             
                 <div>
