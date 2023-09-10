@@ -42,6 +42,9 @@ var subtotal;
 // Variables de la tarjeta
 var numeroTarjetaInput = document.getElementById('numeroTarjeta');
 var cvcInput = document.getElementById('cvc');
+var nombreTarjeta = document.getElementById('nombreTarjeta');
+var expiracion  = document.getElementById('cc-exp');
+var flagTarjeta = false;
 
 // Variable volver
 var volver = 0;
@@ -407,7 +410,7 @@ function formatCurrency(moneda) {
   let valorInput = moneda.value;
 
   // Elimina cualquier carácter no numérico (excepto el punto decimal)
-  valorInput = valorInput.replace(/[^0-9.]/g, '');
+  //valorInput = valorInput.replace(/[^0-9.]/g, '');
 
   // Convierte el valor en un número decimal
   let number = parseFloat(valorInput);
@@ -430,17 +433,28 @@ function formatCurrency(moneda) {
 // Agregar listener del boton SIGUIENTE para que se pase a la recepcion
 botonSiguienteFormaPago.addEventListener("click", function(){
   if (tarjetaRadioButton.checked || efectivoRadioButton.checked) {
-    var montoPaga = document.getElementById("monto");
-    if (efectivoRadioButton.checked && montoPaga != null && montoPaga >= totalProductos) {
-      document.getElementById("mensajeError").textContent = "Ingresar un valor mayor que el monto de compra";
-    }else{
+    var montoPaga = document.getElementById("monto").value;
+    totalProductos = document.getElementById("total").value;
+    if (efectivoRadioButton.checked){
+      if(montoPaga != null && parseInt(montoPaga) > parseInt(totalProductos)){
       AbrirRecepcion();
       document.getElementById("mensajeError").textContent = "";
-    }
+    }else{
+      document.getElementById("mensajeError").textContent = "Ingresar un valor mayor que el monto de compra";
+    }}
+    if (tarjetaRadioButton.checked) {
+      if (tarjetaRadioButton.checked  && nombreTarjeta.value.replace(" ","") != "" && ValidarFechaVencimiento() && ValidarCodigoSeguridad() == 'Válido' && (ValidarTarjeta() == 'Visa' || ValidarTarjeta() == 'Mastercard')) {
+        AbrirRecepcion();
+        document.getElementById("mensajeError").textContent = "";
+      } else {
+        console.log(numeroTarjetaInput.value)
+        console.log(cvcInput.value)
+        console.log(expiracion.value)
+        document.getElementById("mensajeError").textContent = "Deben llenarse todos los campos";
+    }}
   } else {
     document.getElementById("mensajeError").textContent = "Debe seleccionar una forma de pago";
   }
-  
 })
 
 // Funcion que pasa a la recepcion
