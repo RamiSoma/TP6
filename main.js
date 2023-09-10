@@ -39,6 +39,9 @@ var entregaCalle;
 var subtotal;
 
 
+//variables de efectivo
+var moneda = document.getElementById('monto');
+
 // Variables de la tarjeta
 var numeroTarjetaInput = document.getElementById('numeroTarjeta');
 var cvcInput = document.getElementById('cvc');
@@ -401,20 +404,20 @@ efectivoRadioButton.addEventListener("change", function () {
 });
 
 //Formateo de moneda
-const moneda = document.getElementById('monto');
-moneda.addEventListener('input', formatCurrency);
+moneda.addEventListener('input', function(){formatCurrency});
+let formateador = new Intl.NumberFormat('es-AR',{
+  style: 'currency',
+  currency:'ARS',
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2
 
+})
 
 function formatCurrency(moneda) {
   // Obtén el valor actual del input
-  let valorInput = moneda.value;
-
-  // Elimina cualquier carácter no numérico (excepto el punto decimal)
-  //valorInput = valorInput.replace(/[^0-9.]/g, '');
-
-  // Convierte el valor en un número decimal
-  let number = parseFloat(valorInput);
-
+  let valorInput = formateador.format(moneda.value);
+  input.value = valorInput;
+  /*
   // Verifica si el número es válido
   if (!isNaN(valorInput)) {
       // Formatea el número en el formato de moneda argentina
@@ -425,7 +428,7 @@ function formatCurrency(moneda) {
   } else {
       // Si el número no es válido, muestra un valor vacío o un mensaje de error
       input.value = '';
-  }
+  }*/
 }
 
 
