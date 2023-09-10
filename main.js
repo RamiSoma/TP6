@@ -131,10 +131,6 @@ botonSiguienteProducto.addEventListener("click", function(){
     
 })
 
-botonSiguienteFormaPago.addEventListener("click", function(){
-
-})
-
 const sugerencias1 = document.getElementById('sugerencias1');
 const sugerencias2 = document.getElementById('sugerencias2');
 const opciones = ['Córdoba', 'Carlos Paz'];
@@ -219,7 +215,7 @@ botonSiguienteDirecciones.addEventListener("click", function(){
     entregaCalle = document.getElementById("entrega_calle").value;
     entregaCiudad = document.getElementById("entrega_ciudad").value;
     if (comercioCalle != "" && comercioCiudad != null && entregaCalle != "" && entregaCiudad != "" && comercioCiudad != "" && entregaCiudad != null) {
-        if (comercioCiudad in (opciones) && entregaCiudad in (opciones) ) {
+        if ((entregaCiudad.toLowerCase() === "córdoba" || entregaCiudad.toLowerCase() === "cordoba" || entregaCiudad.toLowerCase() === "carlos paz") && (comercioCiudad.toLowerCase() === "córdoba" || comercioCiudad.toLowerCase() === "cordoba" || comercioCiudad.toLowerCase() === "carlos paz") ) {
           AbrirFormaPago();
           document.getElementById("mensajeError").textContent = "";
         } else {
@@ -432,7 +428,20 @@ function formatCurrency(moneda) {
 
 
 // Agregar listener del boton SIGUIENTE para que se pase a la recepcion
-botonSiguienteFormaPago.addEventListener("click", AbrirRecepcion)
+botonSiguienteFormaPago.addEventListener("click", function(){
+  if (tarjetaRadioButton.checked || efectivoRadioButton.checked) {
+    var montoPaga = document.getElementById("monto");
+    if (efectivoRadioButton.checked && montoPaga != null && montoPaga >= totalProductos) {
+      document.getElementById("mensajeError").textContent = "Ingresar un valor mayor que el monto de compra";
+    }else{
+      AbrirRecepcion();
+      document.getElementById("mensajeError").textContent = "";
+    }
+  } else {
+    document.getElementById("mensajeError").textContent = "Debe seleccionar una forma de pago";
+  }
+  
+})
 
 // Funcion que pasa a la recepcion
 function AbrirRecepcion() {
