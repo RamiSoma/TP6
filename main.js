@@ -4,6 +4,8 @@ const tarjetaInfoDiv = document.getElementById("tarjeta_info");
 
 const efectivoRadioButton = document.getElementById("efectivo");
 const efectivoInfoDiv = document.getElementById("efectivo-info");
+const fechaProgramada = document.getElementById("fecha_hora_programada");
+const loAntesPosible = document.getElementById("lo_antes_posible");
 
 const inputImagen = document.getElementById('imagenInput');
 const labelImagen = document.getElementById('imagenLabel');
@@ -124,6 +126,11 @@ botonSiguienteProducto.addEventListener("click", function(){
     }
     
 })
+
+botonSiguienteFormaPago.addEventListener("click", function(){
+  
+})
+
 
 // Funcion que hace que se oculte lo de productos y se habilite lo de las direcciones
 function AbrirDirecciones() {
@@ -434,3 +441,19 @@ var liveValidateDetails = function() {
     $('.cc-cvc__example').removeClass('identified');
   }
 }
+
+fechaProgramada.addEventListener("change", function(){
+  var inputFecha = document.getElementById("fecha_hora_entrega");
+  if (fechaProgramada.checked){
+    inputFecha.style.display = "block";
+  }else{
+    inputFecha.style.display = "none";
+  }
+})
+
+loAntesPosible.addEventListener("change", function(){
+  var inputFecha = document.getElementById("fecha_hora_entrega");
+  if (loAntesPosible.checked){
+    inputFecha.style.display = "none";
+  }
+})
