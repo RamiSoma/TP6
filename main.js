@@ -4,10 +4,14 @@ const tarjetaInfoDiv = document.getElementById("tarjeta_info");
 
 const efectivoRadioButton = document.getElementById("efectivo");
 const efectivoInfoDiv = document.getElementById("efectivo-info");
+const fechaProgramada = document.getElementById("fecha_hora_programada");
+const loAntesPosible = document.getElementById("lo_antes_posible");
 
 const inputImagen = document.getElementById('imagenInput');
 const labelImagen = document.getElementById('imagenLabel');
 const eliminarImagen = document.getElementById('eliminarImagen');
+var comercioCiudad = document.getElementById("comercio_ciudad");
+var entregaCiudad = document.getElementById("entrega_ciudad");
 
 const fechaVencimientoInput = document.getElementById("cc-exp");
 
@@ -30,10 +34,8 @@ var productosBusqueda;
 var totalProductos;
 const totalProductosMostrar = document.getElementById("total-productos");
 const subtotalMostrar = document.getElementById("subtotal");
-var comercioCalle;
-var comercioCiudad;
+var comercioCalle;  
 var entregaCalle;
-var entregaCiudad;
 var subtotal;
 
 
@@ -119,14 +121,71 @@ eliminarImagen.addEventListener("click",function(){
 botonSiguienteProducto.addEventListener("click", function(){
     productosBusqueda = document.getElementById("busqueda").value;
     totalProductos = document.getElementById("total").value;
-    if ( productosBusqueda != "" && totalProductos != "") {
+    if ( productosBusqueda != "" ) {
+      if (totalProductos != "") {
         AbrirDirecciones();
         document.getElementById("mensajeError").textContent = "";
+      }else{
+        document.getElementById("mensajeError").textContent = "Debe indicar el precio del / los productos ingresados";
+      }
     }else{
-        document.getElementById("mensajeError").textContent = "Debe ingresar una cadena de texto en la búsqueda.";
+        document.getElementById("mensajeError").textContent = "Debe ingresar el / los productos a comprar";
     }
     
 })
+
+const sugerencias1 = document.getElementById('sugerencias1');
+const sugerencias2 = document.getElementById('sugerencias2');
+const opciones = ['Córdoba', 'Carlos Paz'];
+
+comercioCiudad.addEventListener('input', function() {
+    const texto = comercioCiudad.value.toLowerCase();
+    sugerencias1.innerHTML = '';
+
+    if (texto.length === 0) {
+        return;
+    }
+
+    const resultados = opciones.filter(opcion => opcion.toLowerCase().includes(texto));
+
+    resultados.forEach(resultado => {
+        const sugerencia = document.createElement('div');
+        sugerencia.textContent = resultado;
+        sugerencia.addEventListener('click', function() {
+          comercioCiudad.value = resultado;
+            sugerencias1.innerHTML = '';
+        });
+        sugerencias1.appendChild(sugerencia);
+    });
+});
+
+entregaCiudad.addEventListener('input', function() {
+  const texto = entregaCiudad.value.toLowerCase();
+  sugerencias2.innerHTML = '';
+
+  if (texto.length === 0) {
+      return;
+  }
+
+  const resultados = opciones.filter(opcion => opcion.toLowerCase().includes(texto));
+
+  resultados.forEach(resultado => {
+      const sugerencia = document.createElement('div');
+      sugerencia.textContent = resultado;
+      sugerencia.addEventListener('click', function() {
+        entregaCiudad.value = resultado;
+          sugerencias2.innerHTML = '';
+      });
+      sugerencias2.appendChild(sugerencia);
+  });
+});
+
+document.addEventListener('click', function(event) {
+    if (event.target !== comercioCiudad && event.target !== sugerencias1 && event.target !== sugerencias2 && event.target !== entregaCiudad && window.getComputedStyle(seccionDirecciones).display !== 'none') {
+        sugerencias1.innerHTML = '';
+        sugerencias2.innerHTML = '';
+    }
+});
 
 // Funcion que hace que se oculte lo de productos y se habilite lo de las direcciones
 function AbrirDirecciones() {
@@ -159,8 +218,13 @@ botonSiguienteDirecciones.addEventListener("click", function(){
     entregaCalle = document.getElementById("entrega_calle").value;
     entregaCiudad = document.getElementById("entrega_ciudad").value;
     if (comercioCalle != "" && comercioCiudad != null && entregaCalle != "" && entregaCiudad != "" && comercioCiudad != "" && entregaCiudad != null) {
-        AbrirFormaPago();
-        document.getElementById("mensajeError").textContent = "";
+        if ((entregaCiudad.toLowerCase() === "córdoba" || entregaCiudad.toLowerCase() === "cordoba" || entregaCiudad.toLowerCase() === "carlos paz") && (comercioCiudad.toLowerCase() === "córdoba" || comercioCiudad.toLowerCase() === "cordoba" || comercioCiudad.toLowerCase() === "carlos paz") ) {
+          AbrirFormaPago();
+          document.getElementById("mensajeError").textContent = "";
+        } else {
+          document.getElementById("mensajeError").textContent = "La ciudad no es válida";
+        }
+        
     }else{
         document.getElementById("mensajeError").textContent = "Debe completar todos los campos...";
     }
@@ -367,7 +431,20 @@ function formatCurrency(moneda) {
 
 
 // Agregar listener del boton SIGUIENTE para que se pase a la recepcion
-botonSiguienteFormaPago.addEventListener("click", AbrirRecepcion)
+botonSiguienteFormaPago.addEventListener("click", function(){
+  if (tarjetaRadioButton.checked || efectivoRadioButton.checked) {
+    var montoPaga = document.getElementById("monto");
+    if (efectivoRadioButton.checked && montoPaga != null && montoPaga >= totalProductos) {
+      document.getElementById("mensajeError").textContent = "Ingresar un valor mayor que el monto de compra";
+    }else{
+      AbrirRecepcion();
+      document.getElementById("mensajeError").textContent = "";
+    }
+  } else {
+    document.getElementById("mensajeError").textContent = "Debe seleccionar una forma de pago";
+  }
+  
+})
 
 // Funcion que pasa a la recepcion
 function AbrirRecepcion() {
@@ -437,3 +514,19 @@ var liveValidateDetails = function() {
     $('.cc-cvc__example').removeClass('identified');
   }
 }
+
+fechaProgramada.addEventListener("change", function(){
+  var inputFecha = document.getElementById("fecha_hora_entrega");
+  if (fechaProgramada.checked){
+    inputFecha.style.display = "block";
+  }else{
+    inputFecha.style.display = "none";
+  }
+})
+
+loAntesPosible.addEventListener("change", function(){
+  var inputFecha = document.getElementById("fecha_hora_entrega");
+  if (loAntesPosible.checked){
+    inputFecha.style.display = "none";
+  }
+})

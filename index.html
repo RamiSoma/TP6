@@ -44,7 +44,7 @@
             <!-- <h2>Ingresar Producto:</h2> -->
             <div>
                 <label for="busqueda">Ingrese los productos:</label>
-                <input type="text" id="busqueda" name="busqueda" placeholder="Ingrese un producto" required>
+                <input type="text" id="busqueda" name="busqueda" placeholder="Ingrese un producto" maxlength="240" required>
             </div>
 
             <div>
@@ -83,6 +83,7 @@
                 <option value="Córdoba"></option>
                 <option value="Carlos Paz"></option>
             </datalist>
+            <div id="sugerencias1" class="sugerencias"></div>
 
             <!-- <select id="comercio_ciudad" name="ciudad" required>
                 <option value="ciudad1">Calera</option>
@@ -109,6 +110,7 @@
                     <option value="Córdoba"></option>
                     <option value="Carlos Paz"></option>
                 </datalist>
+                <div id="sugerencias2" class="sugerencias"></div>
             
                 <!-- <label for="entrega_ciudad">Ciudad:</label>
                 <select id="entrega_ciudad" name="ciudad" required>
@@ -224,7 +226,7 @@
                     <label for="fecha_hora_programada" class="radio-label">
                         <span class="custom-radio"></span> Programar fecha/hora de entrega:
                     </label>
-                    <input type="datetime-local" id="fecha_hora_entrega" name="fecha_hora_entrega">
+                    <input type="datetime-local" id="fecha_hora_entrega" name="fecha_hora_entrega" style="display: none;">
                 </div>
                 <button type="submit">Realizar Pedido</button>
                 <!-- <div class = "botones_izq">
