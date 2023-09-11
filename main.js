@@ -506,6 +506,7 @@ botonSiguienteFormaPago.addEventListener("click", function(){
 // Agregar evento input al campo de entrada monto
 var montoInput = document.getElementById('monto');
 var prevMontoValue = montoInput.value;
+var mensajeError = document.getElementById('mensaje-error'); // Asegúrate de que el mensaje de error tenga el ID correcto
 
 montoInput.addEventListener('input', function () {
     var montoValue = montoInput.value;
@@ -530,6 +531,9 @@ montoInput.addEventListener('input', function () {
     // Actualizar el valor del campo de entrada monto
     montoInput.value = montoValue;
     prevMontoValue = montoValue;
+
+    // Borrar el mensaje de error
+    mensajeError.textContent = '';
 });
 
 
