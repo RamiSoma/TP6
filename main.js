@@ -69,6 +69,33 @@ function CargarPagina() {
   botonAnterior.style.display = "none";
 }
 
+// Agregar evento input al campo de entrada
+var totalInput = document.getElementById('total');
+var prevValue = totalInput.value;
+
+totalInput.addEventListener('input', function () {
+    var inputValue = totalInput.value;
+
+    // Reemplazar puntos por comas y eliminar caracteres no numéricos
+    inputValue = inputValue.replace(/\./g, ',').replace(/[^\d,]/g, '');
+
+    // Verificar si ya hay una coma presente en el valor
+    var commaCount = (inputValue.match(/,/g) || []).length;
+
+    if (commaCount > 1 || inputValue.startsWith(',')) {
+        // Si ya hay una coma como primer carácter o se intenta agregar otra coma,
+        // eliminar la coma recién ingresada y asegurarse de que no sea el primer carácter
+        inputValue = prevValue;
+    }
+
+    // Actualizar el valor del campo de entrada
+    totalInput.value = inputValue;
+    prevValue = inputValue;
+});
+
+
+
+
 // Listener para que vea cuando se sube una foto
 inputImagen.addEventListener("change", SubirImagen)
 
