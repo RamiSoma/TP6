@@ -333,7 +333,7 @@ function ValidarTarjeta() {
   }
 
   // Expresiones regulares para Visa y Mastercard
-  var visaPattern = /^4[0-9]{12}(?:[0-9]{3})?$/;
+  var visaPattern = /^4[0-9]{15}?$/;
   var mastercardPattern = /^5[1-5][0-9]{14}$/;
 
   // Verificar si el número coincide con Visa o Mastercard
