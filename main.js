@@ -537,6 +537,7 @@ function AbrirRecepcion() {
   seccionFormaPago.style.display = "none";
   seccionRecepcion.style.display = "block";
   volver = 2;
+  //botonAnterior.style.display = "none";
 }
 
 // Agregar listener del boton ANTERIOR para que vuelva a la forma de pago
@@ -596,6 +597,7 @@ function confirmarPedido(){
 
     seccionRecepcion.style.display = "none";
     seccionDatos.style.display = "block";
+    botonAnterior.style.display = "none";
 }
 
 function reemplazarCaracteres(texto, caracteresAReemplazar, caracteresNuevos) {
