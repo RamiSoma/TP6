@@ -324,16 +324,20 @@ function formatNumber(number) {
   }, "");
 }
 
+// Función para validar la tarjeta de crédito
 function ValidarTarjeta() {
   // Verificar si el número de tarjeta es un número válido
   var numeroTarjeta = numeroTarjetaInput.value.replace(/\s/g, '');
   if (numeroTarjeta === '') {
-    // If the CVC input is empty, reset the background color
+    // Si el campo de tarjeta está vacío, resetea el fondo y muestra un mensaje de error
     numeroTarjetaInput.style.backgroundColor = '';
+    document.getElementById('mensaje-error').textContent = 'Número de tarjeta requerido';
+    return 'Número de tarjeta requerido';
   }
   if (!/^\d+$/.test(numeroTarjeta)) {
     document.getElementById('numero-tarjeta').className = 'error'; // Aplicar la clase 'error'
-    return 'Inválido';
+    document.getElementById('mensaje-error').textContent = 'Número de tarjeta inválido';
+    return 'Número de tarjeta inválido';
   }
 
   // Expresiones regulares para Visa y Mastercard
@@ -342,20 +346,23 @@ function ValidarTarjeta() {
 
   // Verificar si el número coincide con Visa o Mastercard
   if (visaPattern.test(numeroTarjeta)) {
-      document.getElementById('numero-tarjeta').className = '';// Quitar la clase 'error'
-      numeroTarjetaInput.style.backgroundColor = '';
-      document.getElementById('tipo-tarjeta').textContent = 'Visa';
-      return 'Visa';
+    document.getElementById('numero-tarjeta').className = ''; // Quitar la clase 'error'
+    numeroTarjetaInput.style.backgroundColor = '';
+    document.getElementById('tipo-tarjeta').textContent = 'Visa';
+    document.getElementById('mensaje-error').textContent = '';
+    return 'Visa';
   } else if (mastercardPattern.test(numeroTarjeta)) {
-      document.getElementById('numero-tarjeta').className = ''; // Aplicar la clase 'error'
-      numeroTarjetaInput.style.backgroundColor = '';
-      document.getElementById('tipo-tarjeta').textContent = 'Mastercard';
-      return 'Mastercard';
+    document.getElementById('numero-tarjeta').className = ''; // Quitar la clase 'error'
+    numeroTarjetaInput.style.backgroundColor = '';
+    document.getElementById('tipo-tarjeta').textContent = 'Mastercard';
+    document.getElementById('mensaje-error').textContent = '';
+    return 'Mastercard';
   } else {
-      document.getElementById("numero-tarjeta").className = 'error'; // Aplicar la clase 'error'
-      numeroTarjetaInput.style.backgroundColor = 'rgb(255, 197, 197)';
-      document.getElementById('tipo-tarjeta').textContent = 'Desconocida';
-      return 'Desconocida';
+    document.getElementById('numero-tarjeta').className = 'error'; // Aplicar la clase 'error'
+    numeroTarjetaInput.style.backgroundColor = 'rgb(255, 197, 197)';
+    document.getElementById('tipo-tarjeta').textContent = 'Desconocida';
+    document.getElementById('mensaje-error').textContent = 'Tipo de tarjeta desconocido';
+    return 'Tipo de tarjeta desconocido';
   }
 }
 
@@ -413,25 +420,37 @@ cvcInput.addEventListener('input', function () {
 });
 
 // Funcion que valida el codigo de seguridad
-//deberia tener en cuenta que tarjeta tiene tipo visa o mastercard
+// Debe tener en cuenta qué tipo de tarjeta se ha ingresado (Visa o Mastercard)
+// Función para validar el código de seguridad
 function ValidarCodigoSeguridad() {
   // Verificar si el código de seguridad es un número válido
   var codigoSeguridad = document.getElementById('cvc').value;
   if (codigoSeguridad === '') {
-    // If the CVC input is empty, reset the background color
+    // Si el campo de código de seguridad está vacío, resetea el fondo y muestra un mensaje de error
     cvcInput.style.backgroundColor = '';
+    document.getElementById('mensaje-error').textContent = 'Código de seguridad requerido';
+    return 'Código de seguridad requerido';
   }
   if (!/^\d+$/.test(codigoSeguridad)) {
-    return 'Inválido';
+    document.getElementById('mensaje-error').textContent = 'Código de seguridad inválido';
+    return 'Código de seguridad inválido';
   }
 
-  // Verificar la longitud del código de seguridad (CVV o CVC)
-  if (codigoSeguridad.length === 3 || codigoSeguridad.length === 4) {
+  // Obtener el tipo de tarjeta actual
+  var tipoTarjeta = ValidarTarjeta();
+
+  // Verificar la longitud del código de seguridad (CVV o CVC) según el tipo de tarjeta
+  if (
+    (tipoTarjeta === 'Visa' && codigoSeguridad.length === 3) ||
+    (tipoTarjeta === 'Mastercard' && codigoSeguridad.length === 3)
+  ) {
     cvcInput.style.backgroundColor = '';
+    document.getElementById('mensaje-error').textContent = '';
     return 'Válido';
   } else {
     cvcInput.style.backgroundColor = 'rgb(255, 197, 197)';
-    return 'Inválido';
+    document.getElementById('mensaje-error').textContent = 'Longitud de código de seguridad incorrecta';
+    return 'Longitud de código de seguridad incorrecta';
   }
 }
 
