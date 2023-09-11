@@ -14,6 +14,7 @@ var comercioCiudad = document.getElementById("comercio_ciudad");
 var entregaCiudad = document.getElementById("entrega_ciudad");
 
 const fechaVencimientoInput = document.getElementById("cc-exp");
+var inputMontoProductos = document.getElementById("total")
 
 // Variables de botones
 const botonSiguienteProducto = document.getElementById("btn_siguiente1");
@@ -65,6 +66,16 @@ function CargarPagina() {
 
 // Listener para que vea cuando se sube una foto
 inputImagen.addEventListener("change", SubirImagen)
+
+// Listener para que no pueda ingresar negativos en el total de los productos
+//inputMontoProductos.addEventListener("onkeydown", ValidarMontoPositivo(inputMontoProductos))
+
+// Funcion que valida un monto positivo
+// function ValidarMontoPositivo(event) {
+//   if (event.key === "-" || event.key === "-") {
+//     event.preventDefault();
+//   }
+// }
 
 // Funcion que valida el subir la imagen
 function SubirImagen() {
@@ -434,7 +445,7 @@ function formatCurrency(moneda) {
 botonSiguienteFormaPago.addEventListener("click", function(){
   if (tarjetaRadioButton.checked || efectivoRadioButton.checked) {
     var montoPaga = document.getElementById("monto");
-    if (efectivoRadioButton.checked && montoPaga != null && montoPaga >= totalProductos) {
+    if (efectivoRadioButton.checked && montoPaga != null && montoPaga < totalProductos) {
       document.getElementById("mensajeError").textContent = "Ingresar un valor mayor que el monto de compra";
     }else{
       AbrirRecepcion();

@@ -44,12 +44,12 @@
             <!-- <h2>Ingresar Producto:</h2> -->
             <div>
                 <label for="busqueda">Ingrese los productos:</label>
-                <input type="text" id="busqueda" name="busqueda" placeholder="Ingrese un producto" maxlength="240" required>
+                <input type="text" id="busqueda" name="busqueda" placeholder="Ingrese un producto..." maxlength="240" required>
             </div>
 
             <div>
-                <label for="total">Total a pagar:</label>
-                <input type="number" id="total" name="total" placeholder="Ingrese el total a pagar" required min="0">
+                <label for="total">Ingrese el total de los productos:</label>
+                <input type="number" id="total" name="total" placeholder="$0,00" required min="0" pattern="[0-9]">
             </div>
             
             <h2>Subir Imagen (5MB Máximo)</h2>
@@ -228,7 +228,7 @@
                     </label>
                     <input type="datetime-local" id="fecha_hora_entrega" name="fecha_hora_entrega" style="display: none;">
                 </div>
-                <button type="submit">Realizar Pedido</button>
+                    <button type="submit">Realizar Pedido</button>
                 <!-- <div class = "botones_izq">
                     <button id="btn_anterior3" class="material-symbols-outlined" type="button">arrow_back</button>
                 </div> -->
