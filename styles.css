@@ -36,7 +36,7 @@ h2.titulo {
 .group-icon {
   left: 800px;
   margin-top: -10px; /* Ajusta la cantidad de espacio entre la cabecera y el grupo de iconos */
-  height: 40px; /* Ajusta la altura del grupo de iconos según tus necesidades */
+  height: 60px; /* Ajusta la altura del grupo de iconos según tus necesidades */
 }
 
 .logo-app{

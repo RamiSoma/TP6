@@ -69,6 +69,33 @@ function CargarPagina() {
   botonAnterior.style.display = "none";
 }
 
+// Agregar evento input al campo de entrada
+var totalInput = document.getElementById('total');
+var prevValue = totalInput.value;
+
+totalInput.addEventListener('input', function () {
+    var inputValue = totalInput.value;
+
+    // Reemplazar puntos por comas y eliminar caracteres no numéricos
+    inputValue = inputValue.replace(/\./g, ',').replace(/[^\d,]/g, '');
+
+    // Verificar si ya hay una coma presente en el valor
+    var commaCount = (inputValue.match(/,/g) || []).length;
+
+    if (commaCount > 1 || inputValue.startsWith(',')) {
+        // Si ya hay una coma como primer carácter o se intenta agregar otra coma,
+        // eliminar la coma recién ingresada y asegurarse de que no sea el primer carácter
+        inputValue = prevValue;
+    }
+
+    // Actualizar el valor del campo de entrada
+    totalInput.value = inputValue;
+    prevValue = inputValue;
+});
+
+
+
+
 // Listener para que vea cuando se sube una foto
 inputImagen.addEventListener("change", SubirImagen)
 
@@ -306,7 +333,7 @@ function ValidarTarjeta() {
   }
 
   // Expresiones regulares para Visa y Mastercard
-  var visaPattern = /^4[0-9]{12}(?:[0-9]{3})?$/;
+  var visaPattern = /^4[0-9]{15}?$/;
   var mastercardPattern = /^5[1-5][0-9]{14}$/;
 
   // Verificar si el número coincide con Visa o Mastercard
@@ -463,15 +490,43 @@ botonSiguienteFormaPago.addEventListener("click", function(){
         AbrirRecepcion();
         document.getElementById("mensaje-error").textContent = "";
       } else {
-        console.log(numeroTarjetaInput.value)
-        console.log(cvcInput.value)
-        console.log(expiracion.value)
-        document.getElementById("mensaje-error").textContent = "Deben llenarse todos los campos";
+        document.getElementById("mensajeError").textContent = "Deben llenarse todos los campos";
     }}
   } else {
     document.getElementById("mensaje-error").textContent = "Debe seleccionar una forma de pago";
   }
-})
+});
+
+// Agregar evento input al campo de entrada monto
+var montoInput = document.getElementById('monto');
+var prevMontoValue = montoInput.value;
+
+montoInput.addEventListener('input', function () {
+    var montoValue = montoInput.value;
+
+    // Reemplazar punto por coma y eliminar caracteres no numéricos
+    montoValue = montoValue.replace(/\./g, ',').replace(/[^\d,]/g, '');
+
+    // Verificar si ya hay una coma presente en el valor
+    var commaCount = (montoValue.match(/,/g) || []).length;
+
+    if (commaCount > 1 || montoValue.startsWith(',')) {
+        // Si ya hay una coma como primer carácter o se intenta agregar otra coma,
+        // eliminar la coma recién ingresada y asegurarse de que no sea el primer carácter
+        montoValue = prevMontoValue;
+    }
+
+    // Verificar si el valor es negativo
+    if (montoValue.startsWith('-')) {
+        montoValue = montoValue.substring(1); // Eliminar el signo negativo
+    }
+
+    // Actualizar el valor del campo de entrada monto
+    montoInput.value = montoValue;
+    prevMontoValue = montoValue;
+});
+
+
 
 // Funcion que pasa a la recepcion
 function AbrirRecepcion() {
