@@ -615,7 +615,7 @@ function confirmarPedido(){
     const direccionEntrega = document.getElementById("direccion-entrega");
     const formaPago = document.getElementById("forma-pago");
 
-    montoPagar.textContent = totalProductos + ' + 500 de envío';
+    montoPagar.textContent = '$' + totalProductos + ' + $500 de envío';
     direccionComercio.textContent = comercioCalle + ' - ' + comercioCiudad;
     direccionEntrega.textContent = entregaCalle + ' - ' + entregaCiudad;
     if (efectivoRadioButton.checked) {
