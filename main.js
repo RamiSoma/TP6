@@ -239,7 +239,9 @@ function AbrirDirecciones() {
 }
 
 // Agregar listener del boton ANTERIOR para que vuelva a los productos
-botonAnterior.addEventListener("click", function () {
+botonAnterior.addEventListener("click", volverPag)
+
+function volverPag(){
   if (volver === 0) {
     CargarPagina();
     volver = 0;
@@ -252,7 +254,7 @@ botonAnterior.addEventListener("click", function () {
     AbrirFormaPago();
     volver === 1;
   }
-})
+}
 
 // Agregar listener del boton SIGUIENTE para que pase a la forma de pago
 botonSiguienteDirecciones.addEventListener("click", function(){
@@ -554,6 +556,20 @@ function confirmarPedido(){
       formaPago.textContent = "tarjeta de débito/crédito";
     }
 
+    realizarConfirmacion();
+}
+
+//Funcion para realizarConfirmacion del pedido
+function realizarConfirmacion(){
+  const confirmado = document.getElementById("btn-conf-conf")
+  const cancelado = document.getElementById("btn-conf-canc")
+
+  confirmame.style.opacity = "1";
+  confirmame.style.pointerEvents = "auto";
+
+
+  confirmado.addEventListener("click",function(){
+    confirmame.style.opacity = "0";
     popup.style.opacity = "1";
     popup.style.pointerEvents = "auto";
     // Ocultar el popup después de 5 segundos
@@ -564,7 +580,26 @@ function confirmarPedido(){
 
     seccionRecepcion.style.display = "none";
     seccionDatos.style.display = "block";
+  })
+
+  cancelado.addEventListener("click",function(){
+    volverPag();
+    confirmame.style.opacity = "0";
+    cancelo.style.opacity = "1";
+    cancelo.style.pointerEvents = "auto";
+    // Ocultar el popup después de 5 segundos
+    setTimeout(function () {
+        cancelo.style.opacity = "0";
+        cancelo.style.pointerEvents = "none";
+    }, 3000);
+
+  })
+
+
+
 }
+
+
 
 function reemplazarCaracteres(texto, caracteresAReemplazar, caracteresNuevos) {
   var resultado = '';

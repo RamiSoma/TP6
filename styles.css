@@ -583,3 +583,40 @@ input[type="submit"] {
   opacity: 0;
   pointer-events: none;
 }
+#confirmame {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #db9655; /* Color naranjita */
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  transition: opacity 0.5s ease-in-out;
+}
+#cancelo{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #d35050; /* Color naranjita */
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.confirmame-contenido {
+  font-size: 20px;
+}
+.btn-conf{
+  font-family: 'Poppins', sans-serif;
+  margin-top: 5px;
+  cursor: pointer;
+}
