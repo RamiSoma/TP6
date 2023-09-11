@@ -275,7 +275,7 @@ h1.titulo {
     /* position: absolute; */
 }
 
-label#imagenLabel.custom-button {
+label#imagen-label.custom-button {
     display: block;
     background-color: #B8BEDD;
     border: 1px solid rgb(123, 123, 123);
@@ -286,20 +286,20 @@ label#imagenLabel.custom-button {
     border-radius: 5px;
     text-align: center;
 }
-  
-label#imagenLabel.custom-button:hover {
+
+label#imagen-label.custom-button:hover {
   background-color: #9C89B8;
   color: #fff;
 }
 
 /* Input de tipo file */
 
-input#imagenInput {
+input#imagen-input {
   display: none;
 }
 /* Imagen */
 
-img#imagenMostrada {
+img#imagen-mostrada {
     display: block;
     max-width: 100%;
     margin: 0 auto;
@@ -308,7 +308,7 @@ img#imagenMostrada {
 }
   
 
-input#eliminarImagen {
+input#eliminar-imagen {
     font-family: 'Poppins', sans-serif;
     font-weight: bold;
     display: block;
@@ -320,7 +320,7 @@ input#eliminarImagen {
     cursor: pointer;
   }
   
-input#eliminarImagen:hover {
+input#eliminar-imagen:hover {
     background-color: #8b0606;
     color: #fff;
 }
