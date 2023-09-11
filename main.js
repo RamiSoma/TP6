@@ -490,15 +490,43 @@ botonSiguienteFormaPago.addEventListener("click", function(){
         AbrirRecepcion();
         document.getElementById("mensajeError").textContent = "";
       } else {
-        console.log(numeroTarjetaInput.value)
-        console.log(cvcInput.value)
-        console.log(expiracion.value)
         document.getElementById("mensajeError").textContent = "Deben llenarse todos los campos";
     }}
   } else {
     document.getElementById("mensajeError").textContent = "Debe seleccionar una forma de pago";
   }
-})
+});
+
+// Agregar evento input al campo de entrada monto
+var montoInput = document.getElementById('monto');
+var prevMontoValue = montoInput.value;
+
+montoInput.addEventListener('input', function () {
+    var montoValue = montoInput.value;
+
+    // Reemplazar punto por coma y eliminar caracteres no numéricos
+    montoValue = montoValue.replace(/\./g, ',').replace(/[^\d,]/g, '');
+
+    // Verificar si ya hay una coma presente en el valor
+    var commaCount = (montoValue.match(/,/g) || []).length;
+
+    if (commaCount > 1 || montoValue.startsWith(',')) {
+        // Si ya hay una coma como primer carácter o se intenta agregar otra coma,
+        // eliminar la coma recién ingresada y asegurarse de que no sea el primer carácter
+        montoValue = prevMontoValue;
+    }
+
+    // Verificar si el valor es negativo
+    if (montoValue.startsWith('-')) {
+        montoValue = montoValue.substring(1); // Eliminar el signo negativo
+    }
+
+    // Actualizar el valor del campo de entrada monto
+    montoInput.value = montoValue;
+    prevMontoValue = montoValue;
+});
+
+
 
 // Funcion que pasa a la recepcion
 function AbrirRecepcion() {
