@@ -35,7 +35,7 @@ h2.titulo {
 }
 .group-icon {
   left: 800px;
-  margin-top: -10px; /* Ajusta la cantidad de espacio entre la cabecera y el grupo de iconos */
+  margin-top: -22px; /* Ajusta la cantidad de espacio entre la cabecera y el grupo de iconos */
   height: 60px; /* Ajusta la altura del grupo de iconos según tus necesidades */
 }
 
@@ -61,39 +61,7 @@ label {
 }
 
 
-@media screen and (max-width: 600px) {
-  /* Cambios de estilo para tamaños de pantalla menores o iguales a 600px */
 
-  /* Ajusta el ancho del formulario */
-  form {
-      width: 100%;
-      padding: 20px; /* Agrega un espacio adicional alrededor del formulario */
-  }
-
-  /* Alinea el texto de las etiquetas a la izquierda */
-  label {
-      text-align: left;
-  }
-
-  /* Ajusta el ancho de los campos de entrada */
-  input[type="text"],
-  input[type="email"],
-  input[type="password"],
-  select,
-  textarea {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 10px;
-  }
-
-  /* Ajusta el tamaño de fuente de los botones */
-  input[type="submit"],
-  input[type="reset"],
-  button {
-      font-size: 16px;
-      padding: 10px 20px;
-  }
-}
 
 /*DIV de la cabecera que dice lo que sea*/
 .lo-que-sea-titulo{
@@ -464,6 +432,7 @@ input[type="number"] {
   box-sizing: border-box;
   transition: all 0.2s;
   -webkit-font-smoothing: antialiased;
+  font-size: 15px;
 }
 
 input[type="text"]:focus,
@@ -619,4 +588,51 @@ input[type="submit"] {
   font-family: 'Poppins', sans-serif;
   margin-top: 5px;
   cursor: pointer;
+}
+
+
+@media screen and (max-width: 600px) {
+  /* Cambios de estilo para tamaños de pantalla menores o iguales a 600px */
+  .container, .form, .group-icon{
+    width: 100%;
+  }
+
+  /* Alinea el texto de las etiquetas a la izquierda */
+  label {
+      text-align: left;
+  }
+
+  /* Ajusta el ancho de los campos de entrada */
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  select,
+  textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+  }
+
+  /* Ajusta el tamaño de fuente de los botones */
+  input[type="submit"],
+  input[type="reset"],
+  button {
+      font-size: 16px;
+      padding: 10px 20px;
+  }
+
+  .contenedor-mapa {
+    position: relative;
+    overflow: hidden;
+    justify-content: center;
+    width: 300px; /* Ancho de la imagen sin agrandar */
+    height:180px; /* Alto de la imagen sin agrandar */
+  }
+  
+  .mapa {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.3s ease; /* Agrega una transición suave al efecto */
+    cursor: pointer;
+  }
 }
