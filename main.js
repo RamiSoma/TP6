@@ -502,30 +502,20 @@ function verificarFecha() {
 }
 
 function confirmarPedido(){
-    const productosMostrar = document.getElementById("productosMostrar");
     const montoPagar = document.getElementById("montoPagar");
     const direccionComercio = document.getElementById("direccionComercio");
     const direccionEntrega = document.getElementById("direccionEntrega");
     const formaPago = document.getElementById("formaPago");
-    const momentoEntrega = document.getElementById("momentoEntrega");
-    var fechaEntrega = document.getElementById("fecha_hora_entrega").value;
 
-    productosMostrar.textContent = productosBusqueda
-    montoPagar.textContent = totalProductos + 500;
-    direccionComercio.textContent = comercioCalle + ' ' + comercioCiudad;
-    direccionEntrega.textContent = entregaCalle + ' ' + entregaCiudad;
+    montoPagar.textContent = totalProductos + ' + 500 de envío';
+    direccionComercio.textContent = comercioCalle + ' - ' + comercioCiudad;
+    direccionEntrega.textContent = entregaCalle + ' - ' + entregaCiudad;
     if (efectivoRadioButton.checked) {
       formaPago.textContent = "efectivo";
     } else {
       formaPago.textContent = "tarjeta de débito/crédito";
     }
-    if (loAntesPosible.checked) {
-      momentoEntrega.textContent = "Lo antes posible";
-    } else {
-      momentoEntrega.textContent = fechaEntrega;
-    }
-    
-    
+
     popup.style.opacity = "1";
     popup.style.pointerEvents = "auto";
     // Ocultar el popup después de 5 segundos
