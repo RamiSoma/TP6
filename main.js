@@ -22,12 +22,14 @@ const botonAnterior = document.getElementById("btn-anterior");
 const botonSiguienteFormaPago = document.getElementById("btn_siguiente3");
 // const botonAnteriorFormaPago = document.getElementById("btn_anterior2");
 // const botonAnteriorRecepcion = document.getElementById("btn_anterior3");
+const botonRealizarPedido = document.getElementById("submit");
 
 // Variables de las secciones
 const seccionProductos = document.getElementById("seccion-producto");
 const seccionDirecciones = document.getElementById("seccion-direcciones");
 const seccionFormaPago = document.getElementById("seccion-forma-pago");
 const seccionRecepcion = document.getElementById("seccion-recepcion");
+const seccionDatos = document.getElementById("seccion-datos");
 
 // Variables de los datos del negocio
 var productosBusqueda;
@@ -139,7 +141,7 @@ botonSiguienteProducto.addEventListener("click", function(){
 
 const sugerencias1 = document.getElementById('sugerencias1');
 const sugerencias2 = document.getElementById('sugerencias2');
-const opciones = ['Córdoba', 'Carlos Paz'];
+const opciones = ['Carlos Paz', 'Córdoba'];
 
 comercioCiudad.addEventListener('input', function() {
     const texto = comercioCiudad.value.toLowerCase();
@@ -439,7 +441,7 @@ botonSiguienteFormaPago.addEventListener("click", function(){
     var montoPaga = document.getElementById("monto").value;
     totalProductos = document.getElementById("total").value;
     if (efectivoRadioButton.checked){
-      if(montoPaga != null && parseInt(montoPaga) > parseInt(totalProductos)){
+      if(montoPaga != null && parseInt(montoPaga) >= parseInt(totalProductos) + 500){
       AbrirRecepcion();
       document.getElementById("mensajeError").textContent = "";
     }else{
@@ -469,6 +471,15 @@ function AbrirRecepcion() {
 
 // Agregar listener del boton ANTERIOR para que vuelva a la forma de pago
 // botonAnteriorRecepcion.addEventListener("click", AbrirFormaPago)
+botonRealizarPedido.addEventListener("click", function(){
+  if(fechaProgramada.checked){
+    if (verificarFecha()){
+      confirmarPedido();
+    }
+  }else{
+    confirmarPedido();
+  }
+})
 
 function verificarFecha() {
     var fechaEntrega = document.getElementById("fecha_hora_entrega").value;
@@ -480,11 +491,51 @@ function verificarFecha() {
 
     if (!fechaEntrega) {
         document.getElementById("mensajeError").textContent = "Debe ingresar un valor en la fecha.";
+        return false;
     }else if (fechaHoraEntrega < fechaActual) {
         document.getElementById("mensajeError").textContent = "La fecha debe ser al menos 30 minutos en el futuro.";
+        return false;
     }else{
         document.getElementById("mensajeError").textContent = "";
+        return true;
     }
+}
+
+function confirmarPedido(){
+    const productosMostrar = document.getElementById("productosMostrar");
+    const montoPagar = document.getElementById("montoPagar");
+    const direccionComercio = document.getElementById("direccionComercio");
+    const direccionEntrega = document.getElementById("direccionEntrega");
+    const formaPago = document.getElementById("formaPago");
+    const momentoEntrega = document.getElementById("momentoEntrega");
+    var fechaEntrega = document.getElementById("fecha_hora_entrega").value;
+
+    productosMostrar.textContent = productosBusqueda
+    montoPagar.textContent = totalProductos + 500;
+    direccionComercio.textContent = comercioCalle + ' ' + comercioCiudad;
+    direccionEntrega.textContent = entregaCalle + ' ' + entregaCiudad;
+    if (efectivoRadioButton.checked) {
+      formaPago.textContent = "efectivo";
+    } else {
+      formaPago.textContent = "tarjeta de débito/crédito";
+    }
+    if (loAntesPosible.checked) {
+      momentoEntrega.textContent = "Lo antes posible";
+    } else {
+      momentoEntrega.textContent = fechaEntrega;
+    }
+    
+    
+    popup.style.opacity = "1";
+    popup.style.pointerEvents = "auto";
+    // Ocultar el popup después de 5 segundos
+    setTimeout(function () {
+        popup.style.opacity = "0";
+        popup.style.pointerEvents = "none";
+    }, 5000);
+
+    seccionRecepcion.style.display = "none";
+    seccionDatos.style.display = "block";
 }
 
 function reemplazarCaracteres(texto, caracteresAReemplazar, caracteresNuevos) {
