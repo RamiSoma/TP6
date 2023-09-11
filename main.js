@@ -1,26 +1,26 @@
 // Obtener referencia a los elementos HTML relevantes
 const tarjetaRadioButton = document.getElementById("tarjeta");
-const tarjetaInfoDiv = document.getElementById("tarjeta_info");
+const tarjetaInfoDiv = document.getElementById("tarjeta-info");
 
 const efectivoRadioButton = document.getElementById("efectivo");
 const efectivoInfoDiv = document.getElementById("efectivo-info");
-const fechaProgramada = document.getElementById("fecha_hora_programada");
-const loAntesPosible = document.getElementById("lo_antes_posible");
+const fechaProgramada = document.getElementById("fecha-hora-programada");
+const loAntesPosible = document.getElementById("lo-antes-posible");
 
-const inputImagen = document.getElementById('imagenInput');
-const labelImagen = document.getElementById('imagenLabel');
-const eliminarImagen = document.getElementById('eliminarImagen');
-var comercioCiudad = document.getElementById("comercio_ciudad");
-var entregaCiudad = document.getElementById("entrega_ciudad");
+const inputImagen = document.getElementById('imagen-input');
+const labelImagen = document.getElementById('imagen-label');
+const eliminarImagen = document.getElementById('eliminar-imagen');
+var comercioCiudad = document.getElementById("comercio-ciudad");
+var entregaCiudad = document.getElementById("entrega-ciudad");
 
 const fechaVencimientoInput = document.getElementById("cc-exp");
 var inputMontoProductos = document.getElementById("total")
 
 // Variables de botones
-const botonSiguienteProducto = document.getElementById("btn_siguiente1");
-const botonSiguienteDirecciones = document.getElementById("btn_siguiente2");
+const botonSiguienteProducto = document.getElementById("btn-siguiente1");
+const botonSiguienteDirecciones = document.getElementById("btn-siguiente2");
 const botonAnterior = document.getElementById("btn-anterior");
-const botonSiguienteFormaPago = document.getElementById("btn_siguiente3");
+const botonSiguienteFormaPago = document.getElementById("btn-siguiente3");
 // const botonAnteriorFormaPago = document.getElementById("btn_anterior2");
 // const botonAnteriorRecepcion = document.getElementById("btn_anterior3");
 const botonRealizarPedido = document.getElementById("submit");
@@ -46,9 +46,9 @@ var subtotal;
 var moneda = document.getElementById('monto');
 
 // Variables de la tarjeta
-var numeroTarjetaInput = document.getElementById('numeroTarjeta');
+var numeroTarjetaInput = document.getElementById('numero-tarjeta');
 var cvcInput = document.getElementById('cvc');
-var nombreTarjeta = document.getElementById('nombreTarjeta');
+var nombreTarjeta = document.getElementById('nombre-tarjeta');
 var expiracion  = document.getElementById('cc-exp');
 var flagTarjeta = false;
 
@@ -84,7 +84,7 @@ inputImagen.addEventListener("change", SubirImagen)
 
 // Funcion que valida el subir la imagen
 function SubirImagen() {
-  var imagenMostrada = document.getElementById('imagenMostrada');
+  var imagenMostrada = document.getElementById('imagen-mostrada');
 
     if (inputImagen.files.length === 0) {
         console.log('Selecciona una imagen para subir.')
@@ -125,7 +125,7 @@ function SubirImagen() {
 
 // Listener para cuando se ELIMINA LA IMAGEN
 eliminarImagen.addEventListener("click",function(){
-  var imagenMostrada = document.getElementById('imagenMostrada');
+  var imagenMostrada = document.getElementById('imagen-mostrada');
 
   eliminarImagen.style.display = 'none';
   imagenMostrada.src = '#';
@@ -140,12 +140,12 @@ botonSiguienteProducto.addEventListener("click", function(){
     if ( productosBusqueda != "" ) {
       if (totalProductos != "") {
         AbrirDirecciones();
-        document.getElementById("mensajeError").textContent = "";
+        document.getElementById("mensaje-error").textContent = "";
       }else{
-        document.getElementById("mensajeError").textContent = "Debe indicar el precio del / los productos ingresados";
+        document.getElementById("mensaje-error").textContent = "Debe indicar el precio del / los productos ingresados";
       }
     }else{
-        document.getElementById("mensajeError").textContent = "Debe ingresar el / los productos a comprar";
+        document.getElementById("mensaje-error").textContent = "Debe ingresar el / los productos a comprar";
     }
     
 })
@@ -229,20 +229,20 @@ botonAnterior.addEventListener("click", function () {
 
 // Agregar listener del boton SIGUIENTE para que pase a la forma de pago
 botonSiguienteDirecciones.addEventListener("click", function(){
-    comercioCalle = document.getElementById("comercio_calle").value;
-    comercioCiudad = document.getElementById("comercio_ciudad").value;
-    entregaCalle = document.getElementById("entrega_calle").value;
-    entregaCiudad = document.getElementById("entrega_ciudad").value;
+    comercioCalle = document.getElementById("comercio-calle").value;
+    comercioCiudad = document.getElementById("comercio-ciudad").value;
+    entregaCalle = document.getElementById("entrega-calle").value;
+    entregaCiudad = document.getElementById("entrega-ciudad").value;
     if (comercioCalle != "" && comercioCiudad != null && entregaCalle != "" && entregaCiudad != "" && comercioCiudad != "" && entregaCiudad != null) {
         if ((entregaCiudad.toLowerCase() === "córdoba" || entregaCiudad.toLowerCase() === "cordoba" || entregaCiudad.toLowerCase() === "carlos paz") && (comercioCiudad.toLowerCase() === "córdoba" || comercioCiudad.toLowerCase() === "cordoba" || comercioCiudad.toLowerCase() === "carlos paz") ) {
           AbrirFormaPago();
-          document.getElementById("mensajeError").textContent = "";
+          document.getElementById("mensaje-error").textContent = "";
         } else {
-          document.getElementById("mensajeError").textContent = "La ciudad no es válida";
+          document.getElementById("mensaje-error").textContent = "La ciudad no es válida";
         }
         
     }else{
-        document.getElementById("mensajeError").textContent = "Debe completar todos los campos...";
+        document.getElementById("mensaje-error").textContent = "Debe completar todos los campos...";
     }
 })
 
@@ -281,7 +281,7 @@ numeroTarjetaInput.addEventListener('input', function () {
 });
 
 // Función para formatear el número de tarjeta con espacios cada 4 dígitos
-const input = document.getElementById("numeroTarjeta");
+const input = document.getElementById("numero-tarjeta");
 input.addEventListener("input", () => input.value = formatNumber(input.value.replaceAll(" ", "")));
 
 function formatNumber(number) {
@@ -301,7 +301,7 @@ function ValidarTarjeta() {
     numeroTarjetaInput.style.backgroundColor = '';
   }
   if (!/^\d+$/.test(numeroTarjeta)) {
-    document.getElementById('numeroTarjeta').className = 'error'; // Aplicar la clase 'error'
+    document.getElementById('numero-tarjeta').className = 'error'; // Aplicar la clase 'error'
     return 'Inválido';
   }
 
@@ -311,25 +311,25 @@ function ValidarTarjeta() {
 
   // Verificar si el número coincide con Visa o Mastercard
   if (visaPattern.test(numeroTarjeta)) {
-      document.getElementById('numeroTarjeta').className = '';// Quitar la clase 'error'
+      document.getElementById('numero-tarjeta').className = '';// Quitar la clase 'error'
       numeroTarjetaInput.style.backgroundColor = '';
-      document.getElementById('tipoTarjeta').textContent = 'Visa';
+      document.getElementById('tipo-tarjeta').textContent = 'Visa';
       return 'Visa';
   } else if (mastercardPattern.test(numeroTarjeta)) {
-      document.getElementById('numeroTarjeta').className = ''; // Aplicar la clase 'error'
+      document.getElementById('numero-tarjeta').className = ''; // Aplicar la clase 'error'
       numeroTarjetaInput.style.backgroundColor = '';
-      document.getElementById('tipoTarjeta').textContent = 'Mastercard';
+      document.getElementById('tipo-tarjeta').textContent = 'Mastercard';
       return 'Mastercard';
   } else {
-      document.getElementById("numeroTarjeta").className = 'error'; // Aplicar la clase 'error'
+      document.getElementById("numero-tarjeta").className = 'error'; // Aplicar la clase 'error'
       numeroTarjetaInput.style.backgroundColor = 'rgb(255, 197, 197)';
-      document.getElementById('tipoTarjeta').textContent = 'Desconocida';
+      document.getElementById('tipo-tarjeta').textContent = 'Desconocida';
       return 'Desconocida';
   }
 }
 
 // Agregar evento input al input de fecha de vencimiento
-var mensajeError = document.getElementById('mensajeError');
+var mensajeError = document.getElementById('mensaje-error');
 
 fechaVencimientoInput.addEventListener('input', function () {
   var fechaVencimiento = fechaVencimientoInput.value.trim(); // Remove leading/trailing whitespace
@@ -454,22 +454,22 @@ botonSiguienteFormaPago.addEventListener("click", function(){
     if (efectivoRadioButton.checked){
       if(montoPaga != null && parseInt(montoPaga) >= parseInt(totalProductos) + 500){
       AbrirRecepcion();
-      document.getElementById("mensajeError").textContent = "";
+      document.getElementById("mensaje-error").textContent = "";
     }else{
-      document.getElementById("mensajeError").textContent = "Ingresar un valor mayor que el monto de compra";
+      document.getElementById("mensaje-error").textContent = "Ingresar un valor mayor que el monto de compra";
     }}
     if (tarjetaRadioButton.checked) {
       if (tarjetaRadioButton.checked  && nombreTarjeta.value.replace(" ","") != "" && ValidarFechaVencimiento() && ValidarCodigoSeguridad() == 'Válido' && (ValidarTarjeta() == 'Visa' || ValidarTarjeta() == 'Mastercard')) {
         AbrirRecepcion();
-        document.getElementById("mensajeError").textContent = "";
+        document.getElementById("mensaje-error").textContent = "";
       } else {
         console.log(numeroTarjetaInput.value)
         console.log(cvcInput.value)
         console.log(expiracion.value)
-        document.getElementById("mensajeError").textContent = "Deben llenarse todos los campos";
+        document.getElementById("mensaje-error").textContent = "Deben llenarse todos los campos";
     }}
   } else {
-    document.getElementById("mensajeError").textContent = "Debe seleccionar una forma de pago";
+    document.getElementById("mensaje-error").textContent = "Debe seleccionar una forma de pago";
   }
 })
 
@@ -493,7 +493,7 @@ botonRealizarPedido.addEventListener("click", function(){
 })
 
 function verificarFecha() {
-    var fechaEntrega = document.getElementById("fecha_hora_entrega").value;
+    var fechaEntrega = document.getElementById("fecha-hora-entrega").value;
     const fechaHoraEntrega = new Date(fechaEntrega);
     var fechaActual = new Date();
 
@@ -501,22 +501,22 @@ function verificarFecha() {
     fechaActual.setMinutes(fechaActual.getMinutes() + 30);
 
     if (!fechaEntrega) {
-        document.getElementById("mensajeError").textContent = "Debe ingresar un valor en la fecha.";
+        document.getElementById("mensaje-error").textContent = "Debe ingresar un valor en la fecha.";
         return false;
     }else if (fechaHoraEntrega < fechaActual) {
-        document.getElementById("mensajeError").textContent = "La fecha debe ser al menos 30 minutos en el futuro.";
+        document.getElementById("mensaje-error").textContent = "La fecha debe ser al menos 30 minutos en el futuro.";
         return false;
     }else{
-        document.getElementById("mensajeError").textContent = "";
+        document.getElementById("mensaje-error").textContent = "";
         return true;
     }
 }
 
 function confirmarPedido(){
-    const montoPagar = document.getElementById("montoPagar");
-    const direccionComercio = document.getElementById("direccionComercio");
-    const direccionEntrega = document.getElementById("direccionEntrega");
-    const formaPago = document.getElementById("formaPago");
+    const montoPagar = document.getElementById("monto-pagar");
+    const direccionComercio = document.getElementById("direccion-comercio");
+    const direccionEntrega = document.getElementById("direccion-entrega");
+    const formaPago = document.getElementById("forma-pago");
 
     montoPagar.textContent = totalProductos + ' + 500 de envío';
     direccionComercio.textContent = comercioCalle + ' - ' + comercioCiudad;
@@ -582,7 +582,7 @@ var liveValidateDetails = function() {
 }
 
 fechaProgramada.addEventListener("change", function(){
-  var inputFecha = document.getElementById("fecha_hora_entrega");
+  var inputFecha = document.getElementById("fecha-hora-entrega");
   if (fechaProgramada.checked){
     inputFecha.style.display = "block";
   }else{
@@ -591,7 +591,7 @@ fechaProgramada.addEventListener("change", function(){
 })
 
 loAntesPosible.addEventListener("change", function(){
-  var inputFecha = document.getElementById("fecha_hora_entrega");
+  var inputFecha = document.getElementById("fecha-hora-entrega");
   if (loAntesPosible.checked){
     inputFecha.style.display = "none";
   }

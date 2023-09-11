@@ -17,7 +17,6 @@
         <!-- <a class="navbar-title" href="#">DeliverEat!</a> -->
     </div>
     
-
     <div id="pedidoForm">
 
         <!-- SECTION DE SELECCIONAR LOS PRODUCTOS -->
@@ -54,31 +53,30 @@
             
             <h2>Subir Imagen (5MB Máximo)</h2>
         
-            <input type="file" id="imagenInput" accept=".jpg, .jpeg" style="display: none;" />
-            <label for="imagenInput" id="imagenLabel" class="custom-button">Seleccionar Imagen</label>
+            <input type="file" id="imagen-input" accept=".jpg, .jpeg" style="display: none;" />
+            <label for="imagen-input" id="imagen-label" class="custom-button">Seleccionar Imagen</label>
             <div>
-                <img id="imagenMostrada" src="#" alt="Imagen" style="display: none; max-width: 100%;" />
-                <input type="button" id="eliminarImagen" value="Eliminar" style="display: none; "/>
+                <img id="imagen-mostrada" src="#" alt="Imagen" style="display: none; max-width: 100%;" />
+                <input type="button" id="eliminar-imagen" value="Eliminar" style="display: none; "/>
             </div>
             
             <div class="botones-der">
-                <button id="btn_siguiente1" class="botones-der" type="button">Siguiente</button>
+                <button id="btn-siguiente1" class="botones-der" type="button">Siguiente</button>
             </div>
         </section>
 
         <!-- SECTION DE LAS DIRECCIONES DEL COMERCIO Y DIRECCION DE ENTREGA -->
         <section id="seccion-direcciones">
-
             
             <h2>Dirección del Comercio:</h2>
             
             <div class="inline-container">
-                <label for="comercio_calle">Calle y número:</label>
-                <input type="text" id="comercio_calle" name="calle" required>
+                <label for="comercio-calle">Calle y número:</label>
+                <input type="text" id="comercio-calle" name="calle" required>
             </div>
                          
-            <label for="comercio_ciudad">Ciudad:</label>
-            <input id="comercio_ciudad" type="text" placeholder="Ingrese una ciudad" list="ciudades" required>
+            <label for="comercio-ciudad">Ciudad:</label>
+            <input id="comercio-ciudad" type="text" placeholder="Ingrese una ciudad" list="ciudades" required>
             <datalist id="ciudades">
                 <option value="Córdoba"></option>
                 <option value="Carlos Paz"></option>
@@ -104,11 +102,11 @@
     
             <div id="section">
                 <h2>Dirección de Entrega:</h2>
-                <label for="entrega_calle">Calle y número:</label>
-                <input type="text" id="entrega_calle" name="calle" required>
+                <label for="entrega-calle">Calle y número:</label>
+                <input type="text" id="entrega-calle" name="calle" required>
 
-                <label for="entrega_ciudad">Ciudad:</label>
-                <input id="entrega_ciudad" type="text" placeholder="Ingrese una ciudad" list="ciudades" required>
+                <label for="entrega-ciudad">Ciudad:</label>
+                <input id="entrega-ciudad" type="text" placeholder="Ingrese una ciudad" list="ciudades" required>
                 <datalist id="ciudades">
                     <option value="Córdoba"></option>
                     <option value="Carlos Paz"></option>
@@ -136,7 +134,7 @@
             </div>
 
             <div class="botones-der">
-                <button id="btn_siguiente2" class="botones-der" type="button">Siguiente</button>
+                <button id="btn-siguiente2" class="botones-der" type="button">Siguiente</button>
                 
             </div>
             
@@ -179,20 +177,20 @@
                 </div>
         
 
-                <div id="tarjeta_info" style="display: none;">
+                <div id="tarjeta-info" style="display: none;">
                     <h3>Información de Tarjeta:</h3>
                     <div>
-                        <label for="numeroTarjeta">Número de Tarjeta:</label>
-                        <input type="text" id="numeroTarjeta" pattern="[0-9]{19}" placeholder="XXXX XXXX XXXX XXXX" maxlength="19"/>
-                        <p>Tipo de Tarjeta: <span id="tipoTarjeta"></span></p>
+                        <label for="numero-tarjeta">Número de Tarjeta:</label>
+                        <input type="text" id="numero-tarjeta" pattern="[0-9]{19}" placeholder="XXXX XXXX XXXX XXXX" maxlength="19"/>
+                        <p>Tipo de Tarjeta: <span id="tipo-tarjeta"></span></p>
                     </div>
                         
-                    <div class="inputTarjeta">
-                        <label for="nombreTarjeta">Nombre de la tarjeta:</label>
-                        <input type="text" id="nombreTarjeta" placeholder="Nombre">
+                    <div class="input-tarjeta">
+                        <label for="nombre-tarjeta">Nombre de la tarjeta:</label>
+                        <input type="text" id="nombre-tarjeta" placeholder="Nombre">
                     </div>
 
-                    <div class="inputTarjeta">
+                    <div class="input-tarjeta">
                         <label for="cc-exp">Fecha de Vencimiento (MM/AAAA):</label>
                         <figure class="payment clearfix">
                             <input id="cc-exp" type="text" class="cc-exp cc-exp__example" placeholder="MM / YYYY" autocompletetype="cc-exp" required="required">
@@ -208,7 +206,7 @@
                 <button id="btn_anterior2" class="material-symbols-outlined" type="button">arrow_back</button>
             </div> -->
             <div class="botones-der">
-                <button id="btn_siguiente3" class="botones-der" type="button">Siguiente</button>
+                <button id="btn-siguiente3" class="botones-der" type="button">Siguiente</button>
             </div>
             
 
@@ -218,18 +216,18 @@
             <div id="section" class="radio-label">
                 <h2>Fecha y Hora de Recepción:</h2>
                 <div>
-                    <input type="radio" id="lo_antes_posible" name="recepcion">
-                    <label for="lo_antes_posible" class="radio-label">
+                    <input type="radio" id="lo-antes-posible" name="recepcion">
+                    <label for="lo-antes-posible" class="radio-label">
                         <span class="custom-radio"></span> Lo antes posible
                     </label>
                 </div>
                 
                 <div>
-                    <input type="radio" id="fecha_hora_programada" name="recepcion">
-                    <label for="fecha_hora_programada" class="radio-label">
+                    <input type="radio" id="fecha-hora-programada" name="recepcion">
+                    <label for="fecha-hora-programada" class="radio-label">
                         <span class="custom-radio"></span> Programar fecha/hora de entrega:
                     </label>
-                    <input type="datetime-local" id="fecha_hora_entrega" name="fecha_hora_entrega" style="display: none;">
+                    <input type="datetime-local" id="fecha-hora-entrega" name="fecha-hora-entrega" style="display: none;">
                 </div>
                 <button type="submit" id="submit">Realizar Pedido</button>
                 <!-- <div class = "botones_izq">
@@ -243,23 +241,23 @@
             <h2>Detalles del Pedido</h2>
             <div class="detalle">
                 <h3>Monto a Pagar</h3>
-                <p id="montoPagar"></p>
+                <p id="monto-pagar"></p>
             </div>
             <div class="detalle">
                 <h3>Dirección del Comercio</h3>
-                <p id="direccionComercio"></p>
+                <p id="direccion-comercio"></p>
             </div>
             <div class="detalle">
                 <h3>Dirección de Entrega</h3>
-                <p id="direccionEntrega"></p>
+                <p id="direccion-entrega"></p>
             </div>
             <div class="detalle">
                 <h3>Forma de Pago</h3>
-                <p id="formaPago"></p>
+                <p id="forma-pago"></p>
             </div>
         </section>
         
-        <p id="mensajeError" style="color: red;"></p>
+        <p id="mensaje-error" style="color: red;"></p>
         
         <div id="popup" class="oculto">
             <div class="popup-contenido">
