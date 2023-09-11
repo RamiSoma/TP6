@@ -254,6 +254,7 @@ function volverPag(){
     AbrirFormaPago();
     volver === 1;
   }
+  document.getElementById("mensaje-error").textContent = "";
 }
 
 // Agregar listener del boton SIGUIENTE para que pase a la forma de pago
