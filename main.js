@@ -295,9 +295,11 @@ tarjetaRadioButton.addEventListener("change", function () {
         // Si se selecciona tarjeta de débito, mostrar el campo de información de tarjeta
         tarjetaInfoDiv.style.display = "block";
         efectivoInfoDiv.style.display = "none";
+        mensajeError.textContent = "";
     } else {
         // De lo contrario, ocultar el campo de información de tarjeta
         tarjetaInfoDiv.style.display = "none";
+        mensajeError.textContent = "";
     }
 });
 
@@ -436,10 +438,12 @@ efectivoRadioButton.addEventListener("change", function () {
     if (tarjetaRadioButton.checked) {
         // Si se selecciona tarjeta de débito, mostrar el campo de información de tarjeta
         tarjetaInfoDiv.style.display = "none";
+        mensajeError.textContent = "";
     } else {
         // De lo contrario, ocultar el campo de información de tarjeta
         tarjetaInfoDiv.style.display = "none";
         efectivoInfoDiv.style.display = "grid";
+        mensajeError.textContent = "";
     }
 });
 
