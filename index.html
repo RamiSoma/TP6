@@ -18,7 +18,7 @@
     </div>
     
 
-    <form id="pedidoForm">
+    <div id="pedidoForm">
 
         <!-- SECTION DE SELECCIONAR LOS PRODUCTOS -->
         <img class="group-icon" src="Recursos/group-3.svg" />
@@ -84,6 +84,9 @@
                 <option value="Carlos Paz"></option>
             </datalist>
             <div id="sugerencias1" class="sugerencias"></div>
+            <div class="contenedor-mapa">
+                <img src = "./Recursos/mapaCba.png" class="mapa">
+            </div>
 
             <!-- <select id="comercio_ciudad" name="ciudad" required>
                 <option value="ciudad1">Calera</option>
@@ -111,6 +114,9 @@
                     <option value="Carlos Paz"></option>
                 </datalist>
                 <div id="sugerencias2" class="sugerencias"></div>
+                <div class="contenedor-mapa">
+                    <img src = "./Recursos/mapaCba.png" class="mapa">
+                </div>
             
                 <!-- <label for="entrega_ciudad">Ciudad:</label>
                 <select id="entrega_ciudad" name="ciudad" required>
@@ -182,11 +188,8 @@
                     </div>
                         
                     <div class="inputTarjeta">
-                        <label for="nombreTarjeta">Nombre:</label>
+                        <label for="nombreTarjeta">Nombre de la tarjeta:</label>
                         <input type="text" id="nombreTarjeta" placeholder="Nombre">
-
-                        <label for="apellidoTarjeta">Apellido:</label>
-                        <input type="text" id="apellidoTarjeta" placeholder="Apellido">
                     </div>
 
                     <div class="inputTarjeta">
@@ -228,7 +231,7 @@
                     </label>
                     <input type="datetime-local" id="fecha_hora_entrega" name="fecha_hora_entrega" style="display: none;">
                 </div>
-                    <button type="submit">Realizar Pedido</button>
+                <button type="submit" id="submit">Realizar Pedido</button>
                 <!-- <div class = "botones_izq">
                     <button id="btn_anterior3" class="material-symbols-outlined" type="button">arrow_back</button>
                 </div> -->
@@ -236,12 +239,35 @@
             </div>
         </section>
         
-        
+        <section id="seccion-datos" style="display: none;">
+            <h2>Detalles del Pedido</h2>
+            <div class="detalle">
+                <h3>Monto a Pagar</h3>
+                <p id="montoPagar"></p>
+            </div>
+            <div class="detalle">
+                <h3>Dirección del Comercio</h3>
+                <p id="direccionComercio"></p>
+            </div>
+            <div class="detalle">
+                <h3>Dirección de Entrega</h3>
+                <p id="direccionEntrega"></p>
+            </div>
+            <div class="detalle">
+                <h3>Forma de Pago</h3>
+                <p id="formaPago"></p>
+            </div>
+        </section>
         
         <p id="mensajeError" style="color: red;"></p>
         
+        <div id="popup" class="oculto">
+            <div class="popup-contenido">
+                <p>COMPRA HECHA EXITOSAMENTE PERRITO MAQUIAVELICO!!</p>
+            </div>
+        </div>
         
-    </form>
+    </div>
     
     <script src="./main.js" type="module"></script>
 </body>
