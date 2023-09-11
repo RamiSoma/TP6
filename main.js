@@ -574,10 +574,10 @@ function verificarFecha() {
     }else if ( fechaHoraEntrega >= fechaMaxima){
       document.getElementById("mensaje-error").textContent = "La programación del pedido puede ser de hasta 7 dias posteriores! :D";
       return false;
-    } else if (fechaHoraEntrega.getHours() <= 7 || 
-                fechaHoraEntrega.getHours() >= 23 || 
-                fechaHoraEntrega.getMinutes() <= 0 || 
-                fechaHoraEntrega.getMinutes() >= 59 ) {
+    } else if (fechaHoraEntrega.getHours() < 7 || 
+                fechaHoraEntrega.getHours() > 23 || 
+                fechaHoraEntrega.getMinutes() < 0 || 
+                fechaHoraEntrega.getMinutes() > 59 ) {
                   document.getElementById("mensaje-error").textContent = "Recordá que el comercio abre de 7 a 23:59 ! :D";
                   return false;                
     }else{
