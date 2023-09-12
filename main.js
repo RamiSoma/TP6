@@ -601,48 +601,53 @@ function AbrirRecepcion() {
   //botonAnterior.style.display = "none";
 }
 
-// Agregar listener del boton ANTERIOR para que vuelva a la forma de pago
-// botonAnteriorRecepcion.addEventListener("click", AbrirFormaPago)
-botonRealizarPedido.addEventListener("click", function(){
-  if(fechaProgramada.checked){
-    if (verificarFecha()){
+// Agregar un listener al campo de entrada de fecha y hora
+var fechaHoraEntregaInput = document.getElementById("fecha-hora-entrega");
+fechaHoraEntregaInput.addEventListener("input", verificarFecha);
+
+// Listener del botón ANTERIOR para volver a la forma de pago (descomenta si es necesario)
+// botonAnteriorRecepcion.addEventListener("click", AbrirFormaPago);
+
+botonRealizarPedido.addEventListener("click", function () {
+  if (fechaProgramada.checked) {
+    if (verificarFecha()) {
       confirmarPedido();
     }
   }
-  if(loAntesPosible.checked){
+  if (loAntesPosible.checked) {
     confirmarPedido();
   }
-})
+});
 
 function verificarFecha() {
-    var fechaEntrega = document.getElementById("fecha-hora-entrega").value;
-    const fechaHoraEntrega = new Date(fechaEntrega);
-    var fechaActual = new Date();
-    const fechaMaxima = new Date();
-    fechaMaxima.setDate(fechaActual.getDate() + 7);
+  var fechaEntrega = fechaHoraEntregaInput.value;
+  const fechaHoraEntrega = new Date(fechaEntrega);
+  var fechaActual = new Date();
+  const fechaMaxima = new Date();
+  fechaMaxima.setDate(fechaActual.getDate() + 7);
 
-    // Sumar 30 minutos a la fecha actual
-    fechaActual.setMinutes(fechaActual.getMinutes() + 30);
+  // Sumar 30 minutos a la fecha actual
+  fechaActual.setMinutes(fechaActual.getMinutes() + 30);
 
-    if (!fechaEntrega) {
-        document.getElementById("mensaje-error").textContent = "Debe ingresar un valor en la fecha.";
-        return false;
-    }else if(fechaHoraEntrega <= fechaActual ){
-      document.getElementById("mensaje-error").textContent = "La fecha debe ser mayor a hoy! :D";
-      return false;
-    }else if ( fechaHoraEntrega >= fechaMaxima){
-      document.getElementById("mensaje-error").textContent = "La programación del pedido puede ser de hasta 7 dias posteriores! :D";
-      return false;
-    } else if (fechaHoraEntrega.getHours() < 7 || 
-                fechaHoraEntrega.getHours() > 23 || 
-                fechaHoraEntrega.getMinutes() < 0 || 
-                fechaHoraEntrega.getMinutes() > 59 ) {
-                  document.getElementById("mensaje-error").textContent = "Recordá que el comercio abre de 7 a 23:59 ! :D";
-                  return false;                
-    }else{
-      document.getElementById("mensaje-error").textContent = "";
-      return true;
-    }
+  if (!fechaEntrega) {
+    document.getElementById("mensaje-error").textContent = "Debe ingresar un valor en la fecha.";
+    return false;
+  } else if (fechaHoraEntrega <= fechaActual) {
+    document.getElementById("mensaje-error").textContent = "La fecha debe ser mayor a hoy! :D";
+    return false;
+  } else if (fechaHoraEntrega >= fechaMaxima) {
+    document.getElementById("mensaje-error").textContent = "La programación del pedido puede ser de hasta 7 días posteriores! :D";
+    return false;
+  } else if (fechaHoraEntrega.getHours() < 7 ||
+    fechaHoraEntrega.getHours() > 23 ||
+    fechaHoraEntrega.getMinutes() < 0 ||
+    fechaHoraEntrega.getMinutes() > 59) {
+    document.getElementById("mensaje-error").textContent = "Recuerda que el comercio abre de 7 a 23:59! :D";
+    return false;
+  } else {
+    document.getElementById("mensaje-error").textContent = "";
+    return true;
+  }
 }
 
 function confirmarPedido(){
