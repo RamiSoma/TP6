@@ -54,6 +54,7 @@ var flagTarjeta = false;
 
 // Variable volver
 var volver = 0;
+var inicio = document.getElementById("btn-volver-inicio")
 
 // Primero se carga la página y cuando se carga hacer la funcion cargar página
 window.addEventListener("load", CargarPagina)
@@ -685,7 +686,7 @@ function realizarConfirmacion(){
     setTimeout(function () {
         popup.style.opacity = "0";
         popup.style.pointerEvents = "none";
-    }, 5000);
+    }, 3000);
 
     seccionRecepcion.style.display = "none";
     seccionDatos.style.display = "block";
@@ -701,7 +702,7 @@ function realizarConfirmacion(){
     setTimeout(function () {
         cancelo.style.opacity = "0";
         cancelo.style.pointerEvents = "none";
-    }, 3000);
+    }, 2000);
 
   })
 
@@ -767,4 +768,10 @@ loAntesPosible.addEventListener("change", function(){
   if (loAntesPosible.checked){
     inputFecha.style.display = "none";
   }
+})
+
+inicio.addEventListener("click",function(){
+  location.reload();
+ /* volver = 0
+  volverPag();*/
 })
