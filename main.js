@@ -332,7 +332,9 @@ function AbrirFormaPago() {
   totalProductosTexto = totalProductosTexto.replace('$', '');
 
   // Reemplaza la coma por un punto para que JavaScript lo interprete como número decimal
+  totalProductosTexto = totalProductosTexto.replace('.', '');
   totalProductosTexto = totalProductosTexto.replace(',', '.');
+
 
   // Convierte totalProductosTexto a un número decimal
   var precioProductos = parseFloat(totalProductosTexto);
