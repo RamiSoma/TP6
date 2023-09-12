@@ -309,6 +309,13 @@ tarjetaRadioButton.addEventListener("change", function () {
 // Agregar listener PARA CUANDO SE INGRESE LA TARJETA
 
 numeroTarjetaInput.addEventListener('input', function () {
+  // Eliminar caracteres no numéricos, comas y puntos
+  var numeroTarjeta = numeroTarjetaInput.value.replace(/[^\d]/g, '');
+  // Formatear el número de tarjeta con espacios cada 4 dígitos
+  numeroTarjeta = formatNumber(numeroTarjeta);
+  // Actualizar el valor del campo de entrada
+  numeroTarjetaInput.value = numeroTarjeta;
+  // Validar la tarjeta después del formateo
   ValidarTarjeta();
 });
 
@@ -417,7 +424,14 @@ function ValidarFechaVencimiento() {
 
 // Agregar listener para cuando se ingresa EL CODIGO DE SEGURIDAD
 cvcInput.addEventListener('input', function () {
-  var resultado = ValidarCodigoSeguridad();;
+  // Eliminar caracteres no numéricos
+  var cvc = cvcInput.value.replace(/[^\d]/g, '');
+  // Limitar la longitud a 3 caracteres
+  cvc = cvc.substring(0, 3);
+  // Actualizar el valor del campo de entrada
+  cvcInput.value = cvc;
+  // Validar el CVC después del formateo
+  ValidarCodigoSeguridad();
 });
 
 // Funcion que valida el codigo de seguridad
