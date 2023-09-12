@@ -300,7 +300,7 @@ botonSiguienteDirecciones.addEventListener("click", function(){
 
     entregaCalle = document.getElementById("entrega-calle").value;
     entregaCiudad = document.getElementById("entrega-ciudad").value;
-    if (comercioCalle === entregaCalle) {
+    if ((comercioCalle === entregaCalle) && (entregaCalle === entregaCiudad) ) {
       document.getElementById("mensaje-error").textContent = "Las direcciones NO deben coincidir";
     } else if (comercioCalle != "" && comercioCiudad != null && entregaCalle != "" && entregaCiudad != "" && comercioCiudad != "" && entregaCiudad != null) {
         if ((entregaCiudad.toLowerCase() === "córdoba" || entregaCiudad.toLowerCase() === "cordoba" || entregaCiudad.toLowerCase() === "carlos paz") && (comercioCiudad.toLowerCase() === "córdoba" || comercioCiudad.toLowerCase() === "cordoba" || comercioCiudad.toLowerCase() === "carlos paz") ) {
