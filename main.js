@@ -656,22 +656,25 @@ var mensajeError = document.getElementById('mensaje-error');
 var typingTimeout;
 
 montoInput.addEventListener('input', function () {
-    var montoValue = montoInput.value;
+    clearTimeout(typingTimeout);
+
+    // Obtener el valor actual del campo de entrada
+    var inputValue = montoInput.value;
 
     // Remover caracteres no numéricos excepto comas, puntos y el signo negativo
-    montoValue = montoValue.replace(/[^\d,-.]/g, '');
+    inputValue = inputValue.replace(/[^\d,-.]/g, '');
 
     // Eliminar ceros a la izquierda, pero mantener un 0 inicial
-    montoValue = montoValue.replace(/^0(?=\d)/, '');
+    inputValue = inputValue.replace(/^0(?=\d)/, '');
 
     // Verificar si el valor es negativo
-    if (montoValue.startsWith('-')) {
-        montoValue = montoValue.substring(1); // Eliminar el signo negativo
+    if (inputValue.startsWith('-')) {
+        inputValue = inputValue.substring(1); // Eliminar el signo negativo
     }
 
     // Realizar la verificación de caracteres no permitidos fuera del timeout
-    if (!/^-?\d*(,\d{0,2})?$/.test(montoValue)) {
-        // Si se ingresan caracteres no permitidos, mostrar un mensaje de error
+    if (!/^-?\d*(,\d{0,2})?$/.test(inputValue) && inputValue !== '') {
+        // Si se ingresan caracteres no permitidos (excepto campo vacío), mostrar un mensaje de error
         mensajeError.textContent = 'Ingresa solo números y caracteres válidos';
         return;
     }
@@ -679,32 +682,26 @@ montoInput.addEventListener('input', function () {
     // Borrar el mensaje de error si es válido
     mensajeError.textContent = '';
 
-    // Iniciar el timeout para el formateo como ARS y cambio de punto a coma (ajusta según lo necesites)
-    clearTimeout(typingTimeout);
     typingTimeout = setTimeout(function () {
-        // Formatear como moneda (ARS) y cambiar punto a coma después del tiempo de espera
-        var inputValue = montoInput.value;
+        // Formatear como moneda (ARS) después del tiempo de espera
+        var numericValue = parseFloat(inputValue.replace(',', '.'));
+        var formattedValue = new Intl.NumberFormat('es-AR', {
+            style: 'currency',
+            currency: 'ARS',
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+        }).format(numericValue);
+
         if (inputValue === '') {
             // Si el campo está vacío, no mostrar NaN
             montoInput.value = '';
             prevMontoValue = '';
-            return;
-        }
-        if (!isNaN(inputValue.replace(',', '.'))) {
-            var numericValue = parseFloat(inputValue.replace(',', '.'));
-            var formattedValue = new Intl.NumberFormat('es-AR', {
-                style: 'currency',
-                currency: 'ARS',
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2,
-            }).format(numericValue);
+        } else {
             montoInput.value = formattedValue;
             prevMontoValue = formattedValue;
         }
     }, 500); // Esperar 0.5 segundos de inactividad para formatear (ajusta según lo necesites)
 });
-
-
 
 
 
