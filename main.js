@@ -361,7 +361,7 @@ function AbrirFormaPago() {
   seccionDirecciones.style.display = "none";
   seccionFormaPago.style.display = "block";
   seccionRecepcion.style.display = "none";
-  volver = 1;
+  volver = 2;
 }
 
 // Resto de tu código...
