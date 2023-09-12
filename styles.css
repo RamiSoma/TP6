@@ -605,6 +605,16 @@ input[type="submit"] {
   transition: opacity 0.5s ease-in-out;
 }
 
+.imagenConf{
+  width: 250px;
+  height: 250px;
+}
+
+.img-popup{
+  width: 250px;
+  height: 250px0;
+}
+
 .confirmame-contenido {
   font-size: 20px;
 }
@@ -659,4 +669,6 @@ input[type="submit"] {
     transition: transform 0.3s ease; /* Agrega una transición suave al efecto */
     cursor: pointer;
   }
+
+
 }
