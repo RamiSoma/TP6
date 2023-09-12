@@ -246,7 +246,7 @@ entregaCiudad.addEventListener('input', function() {
       return;
   }
 
-  const resultados = opciones.filter(opcion => opcion.toLowerCase().includes(texto));
+  const resultados = opciones.filter(opcion => opcion.toLowerCase().replace("ó","o").includes(texto));
 
   resultados.forEach(resultado => {
       const sugerencia = document.createElement('div');
@@ -596,27 +596,28 @@ function formatCurrency(moneda) {
   // Obtén el valor actual del input
   let valorInput = formateador.format(moneda.value);
   input.value = valorInput;
-  /*
-  // Verifica si el número es válido
-  if (!isNaN(valorInput)) {
-      // Formatea el número en el formato de moneda argentina
-      input.value = number.toLocaleString('es-AR', {
-          style: 'currency',
-          currency: 'ARS'
-      });
-  } else {
-      // Si el número no es válido, muestra un valor vacío o un mensaje de error
-      input.value = '';
-  }*/
 }
 
 // Agregar listener del boton SIGUIENTE para que se pase a la forma de pago
 botonRealizarPedido.addEventListener("click", function(){
   if (tarjetaRadioButton.checked || efectivoRadioButton.checked) {
     var montoPaga = document.getElementById("monto").value;
-    var totalProductos = parseFloat(document.getElementById("total").value.replace(',', '.')); // Obtén el total formateado como número
+    // Elimina el símbolo de moneda "$" si está presente
+    montoPaga = montoPaga.replace('$', '');
+    // Reemplaza la coma por un punto para que JavaScript lo interprete como número decimal
+    montoPaga = montoPaga.replace('.', '');
+    montoPaga = parseFloat(montoPaga.replace(',', '.'));
+
+    var totalProductos = document.getElementById("total").value; // Obtén el total formateado como número
+    // Elimina el símbolo de moneda "$" si está presente
+    totalProductos = totalProductos.replace('$', '');
+
+    // Reemplaza la coma por un punto para que JavaScript lo interprete como número decimal
+    totalProductos = totalProductos.replace('.', '');
+    totalProductos = parseFloat(totalProductos.replace(',', '.'));
+
     if (efectivoRadioButton.checked) {
-      if (montoPaga != null && parseFloat(montoPaga.replace(',', '.')) >= totalProductos + 500) {
+      if (montoPaga != null && parseFloat(montoPaga) >= totalProductos + 500) {
         ConfirmarPedido();
         document.getElementById("mensaje-error").textContent = "";
       } else {
