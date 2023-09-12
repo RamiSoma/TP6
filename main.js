@@ -362,11 +362,14 @@ function AbrirFormaPago() {
     formaEntrega.innerHTML = "Entrega: Lo antes posible";
   }
   else{
-    formaEntrega.innerHTML = "Entrega: "
+    var fechaHora = document.getElementById("fecha-hora-entrega").value;
+    const [fechaPart, horaPart] = fechaHora.split("T");
+    const [año, mes, dia] = fechaPart.split("-").map(Number);
+    formaEntrega.innerHTML = 'Entrega: ' + dia + '/' + mes + ' a las ' + horaPart + ' hs';
   }
 
   // Resto de tu código
-  totalProductosMostrar.innerHTML = "Productos:" + totalProductos;
+  totalProductosMostrar.innerHTML = "Productos: " + totalProductos;
   seccionDirecciones.style.display = "none";
   seccionFormaPago.style.display = "block";
   seccionRecepcion.style.display = "none";
