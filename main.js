@@ -76,50 +76,57 @@ var prevValue = '';
 var typingTimeout;
 
 totalInput.addEventListener('input', function () {
-    // Obtener el valor actual del campo de entrada
-    var inputValue = totalInput.value;
+  var montoValue = totalInput.value;
 
-    // Realizar la verificación de caracteres no permitidos fuera del timeout
-    if (!/^-?\d*(,\d{0,2})?$/.test(inputValue) && inputValue !== '') {
-        // Si se ingresan caracteres no permitidos (excepto campo vacío), mostrar un mensaje de error
-        totalInput.value = prevValue;
-        return;
-    }
+  // Remover caracteres no numéricos excepto comas, puntos y el signo negativo
+  montoValue = montoValue.replace(/[^\d,-.]/g, '');
 
-    clearTimeout(typingTimeout);
+  // Eliminar ceros a la izquierda, pero mantener un 0 inicial
+  montoValue = montoValue.replace(/^0(?=\d)/, '');
 
-    typingTimeout = setTimeout(function () {
-        // Remover caracteres no numéricos excepto comas y puntos
-        inputValue = inputValue.replace(/[^\d,.]/g, '');
+  // Verificar si el valor es negativo
+  if (montoValue.startsWith('-')) {
+      montoValue = montoValue.substring(1); // Eliminar el signo negativo
+  }
 
-        // Reemplazar puntos por comas para el separador decimal
-        inputValue = inputValue.replace(/\./g, ',');
+  // Realizar la verificación de caracteres no permitidos fuera del timeout
+  if (!/^-?\d*(,\d{0,2})?$/.test(montoValue)) {
+      // Si se ingresan caracteres no permitidos, mostrar un mensaje de error
+      mensajeError.textContent = 'Ingresa solo números y caracteres válidos';
+      return;
+  }
 
-        // Eliminar ceros a la izquierda, pero mantener un 0 inicial
-        inputValue = inputValue.replace(/^0(?=\d)/, '');
+  // Borrar el mensaje de error si es válido
+  mensajeError.textContent = '';
 
-        if (inputValue === '') {
-            // Si el campo está vacío, no mostrar NaN
-            totalInput.value = '';
-            prevValue = '';
-            return;
-        }
+  // Iniciar el timeout para el formateo como ARS y cambio de punto a coma (ajusta según lo necesites)
+  clearTimeout(typingTimeout);
+  typingTimeout = setTimeout(function () {
+      // Formatear como moneda (ARS) y cambiar punto a coma después del tiempo de espera                          
+      var inputValue = totalInput.value;
 
-        // Formatear como moneda (ARS)
-        if (!isNaN(inputValue.replace(',', '.'))) {
-            var numericValue = parseFloat(inputValue.replace(',', '.'));
-            var formattedValue = new Intl.NumberFormat('es-AR', {
-                style: 'currency',
-                currency: 'ARS',
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2,
-            }).format(numericValue);
-            totalInput.value = formattedValue;
-            prevValue = formattedValue;
-        } else {
-            totalInput.value = prevValue;
-        }
-    }, 500); // Esperar 0.5 segundos de inactividad para formatear (ajusta según lo necesites)
+      if (inputValue === '') {
+          // Si el campo está vacío, no mostrar NaN
+          totalInput.value = '';
+          prevMontoValue = '';
+          return;
+      }
+
+                  
+      if (!isNaN(inputValue.replace(',', '.'))) {
+          var numericValue = parseFloat(inputValue.replace(',', '.'));
+          var formattedValue = new Intl.NumberFormat('es-AR', {
+              style: 'currency',
+              currency: 'ARS',
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+          }).format(numericValue);
+          totalInput.value = formattedValue;
+          prevMontoValue = formattedValue;
+      
+                   
+      }
+  }, 500); // Esperar 0.5 segundos de inactividad para formatear (ajusta según lo necesites)
 });
 
 
@@ -239,7 +246,7 @@ entregaCiudad.addEventListener('input', function() {
       return;
   }
 
-  const resultados = opciones.filter(opcion => opcion.toLowerCase().includes(texto));
+  const resultados = opciones.filter(opcion => opcion.toLowerCase().replace("ó","o").includes(texto));
 
   resultados.forEach(resultado => {
       const sugerencia = document.createElement('div');
@@ -300,7 +307,7 @@ botonSiguienteDirecciones.addEventListener("click", function(){
 
     entregaCalle = document.getElementById("entrega-calle").value;
     entregaCiudad = document.getElementById("entrega-ciudad").value;
-    if ((comercioCalle === entregaCalle) && (entregaCalle === entregaCiudad) ) {
+    if ((comercioCalle === entregaCalle) && (comercioCiudad === entregaCiudad) ) {
       document.getElementById("mensaje-error").textContent = "Las direcciones NO deben coincidir";
     } else if (comercioCalle != "" && comercioCiudad != null && entregaCalle != "" && entregaCiudad != "" && comercioCiudad != "" && entregaCiudad != null) {
         if ((entregaCiudad.toLowerCase() === "córdoba" || entregaCiudad.toLowerCase() === "cordoba" || entregaCiudad.toLowerCase() === "carlos paz") && (comercioCiudad.toLowerCase() === "córdoba" || comercioCiudad.toLowerCase() === "cordoba" || comercioCiudad.toLowerCase() === "carlos paz") ) {
@@ -325,7 +332,10 @@ function AbrirFormaPago() {
   totalProductosTexto = totalProductosTexto.replace('$', '');
 
   // Reemplaza la coma por un punto para que JavaScript lo interprete como número decimal
+  totalProductosTexto = totalProductosTexto.replace('.', '');
+
   totalProductosTexto = totalProductosTexto.replace(',', '.');
+
 
   // Convierte totalProductosTexto a un número decimal
   var precioProductos = parseFloat(totalProductosTexto);
@@ -346,12 +356,24 @@ function AbrirFormaPago() {
   // Muestra el subtotal en el formato deseado
   subtotalMostrar.innerHTML = "Subtotal: $" + subtotalFormateado;
 
+  // Mostrar la forma de entrega
+  var formaEntrega = document.getElementById("entrega");
+  if (loAntesPosible.checked) {
+    formaEntrega.innerHTML = "Entrega: Lo antes posible";
+  }
+  else{
+    var fechaHora = document.getElementById("fecha-hora-entrega").value;
+    const [fechaPart, horaPart] = fechaHora.split("T");
+    const [año, mes, dia] = fechaPart.split("-").map(Number);
+    formaEntrega.innerHTML = 'Entrega: ' + dia + '/' + mes + ' a las ' + horaPart + ' hs';
+  }
+
   // Resto de tu código
-  totalProductosMostrar.innerHTML = "Productos:" + totalProductos;
+  totalProductosMostrar.innerHTML = "Productos: " + totalProductos;
   seccionDirecciones.style.display = "none";
   seccionFormaPago.style.display = "block";
   seccionRecepcion.style.display = "none";
-  volver = 1;
+  volver = 2;
 }
 
 // Resto de tu código...
@@ -587,27 +609,28 @@ function formatCurrency(moneda) {
   // Obtén el valor actual del input
   let valorInput = formateador.format(moneda.value);
   input.value = valorInput;
-  /*
-  // Verifica si el número es válido
-  if (!isNaN(valorInput)) {
-      // Formatea el número en el formato de moneda argentina
-      input.value = number.toLocaleString('es-AR', {
-          style: 'currency',
-          currency: 'ARS'
-      });
-  } else {
-      // Si el número no es válido, muestra un valor vacío o un mensaje de error
-      input.value = '';
-  }*/
 }
 
 // Agregar listener del boton SIGUIENTE para que se pase a la forma de pago
 botonRealizarPedido.addEventListener("click", function(){
   if (tarjetaRadioButton.checked || efectivoRadioButton.checked) {
     var montoPaga = document.getElementById("monto").value;
-    var totalProductos = parseFloat(document.getElementById("total").value.replace(',', '.')); // Obtén el total formateado como número
+    // Elimina el símbolo de moneda "$" si está presente
+    montoPaga = montoPaga.replace('$', '');
+    // Reemplaza la coma por un punto para que JavaScript lo interprete como número decimal
+    montoPaga = montoPaga.replace('.', '');
+    montoPaga = parseFloat(montoPaga.replace(',', '.'));
+
+    var totalProductos = document.getElementById("total").value; // Obtén el total formateado como número
+    // Elimina el símbolo de moneda "$" si está presente
+    totalProductos = totalProductos.replace('$', '');
+
+    // Reemplaza la coma por un punto para que JavaScript lo interprete como número decimal
+    totalProductos = totalProductos.replace('.', '');
+    totalProductos = parseFloat(totalProductos.replace(',', '.'));
+
     if (efectivoRadioButton.checked) {
-      if (montoPaga != null && parseFloat(montoPaga.replace(',', '.')) >= totalProductos + 500) {
+      if (montoPaga != null && parseFloat(montoPaga) >= totalProductos + 500) {
         ConfirmarPedido();
         document.getElementById("mensaje-error").textContent = "";
       } else {
