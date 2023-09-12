@@ -772,16 +772,15 @@ function ConfirmarPedido(){
     direccionComercio.textContent = comercioCalle + ' - ' + comercioCiudad;
     direccionEntrega.textContent = entregaCalle + ' - ' + entregaCiudad;
     if (efectivoRadioButton.checked) {
-      formaPago.textContent = "efectivo";
+      formaPago.textContent = "Efectivo";
     } else {
-      formaPago.textContent = "tarjeta de débito/crédito";
+      formaPago.textContent = "Tarjeta de débito/crédito";
     }
     if (loAntesPosible.checked) {
       recepcion.textContent = "Lo antes posible" ;
     } else {
       recepcion.textContent = 'Pedido programado para el día ' + dia + '/' + mes + ' a las ' + horaPart + ' hs';
     }
-
     realizarConfirmacion();
 }
 
