@@ -663,7 +663,12 @@ function ConfirmarPedido(){
     const direccionComercio = document.getElementById("direccion-comercio");
     const direccionEntrega = document.getElementById("direccion-entrega");
     const formaPago = document.getElementById("forma-pago");
+    const recepcion = document.getElementById("recepcion");
+    var fechaHora = document.getElementById("fecha-hora-entrega").value;
 
+    const [fechaPart, horaPart] = fechaHora.split("T");
+    const [año, mes, dia] = fechaPart.split("-").map(Number);
+    
     montoPagar.textContent = '$' + totalProductos + ' + $500 de envío';
     direccionComercio.textContent = comercioCalle + ' - ' + comercioCiudad;
     direccionEntrega.textContent = entregaCalle + ' - ' + entregaCiudad;
@@ -671,6 +676,11 @@ function ConfirmarPedido(){
       formaPago.textContent = "efectivo";
     } else {
       formaPago.textContent = "tarjeta de débito/crédito";
+    }
+    if (loAntesPosible.checked) {
+      recepcion.textContent = "Lo antes posible" ;
+    } else {
+      recepcion.textContent = 'Pedido programado para el día ' + dia + '/' + mes + ' a las ' + horaPart + ' hs';
     }
 
     realizarConfirmacion();
