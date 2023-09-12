@@ -51,7 +51,8 @@
 
             <div>
                 <label for="total">Ingrese el total de los productos:</label>
-                <input type="text" id="total" name="total" placeholder="$0,00" required>
+                <input type="text" id="total" name="total" placeholder="$0,00" pattern="[0-9]+([.,][0-9]+)?" required>
+                <span id="numeroPesos"></span>
             </div>
             
             <h2>Subir Imagen (5MB Máximo)</h2>
@@ -157,7 +158,7 @@
                 <h2>Forma de Pago:</h2>
         
                 <div>
-                    <input type="radio" id="efectivo" name="forma_pago">
+                    <input type="radio" id="efectivo" name="forma_pago" pattern="[0-9]+([.,][0-9]+)?">
                     <label for="efectivo" class="radio-label">
                         <span class="custom-radio"></span> Efectivo
                     </label>
@@ -225,9 +226,14 @@
                 <p id="direccion-entrega"></p>
             </div>
             <div class="detalle">
+                <h3>Recepción</h3>
+                <p id="recepcion"></p>
+            </div>
+            <div class="detalle">
                 <h3>Forma de Pago</h3>
                 <p id="forma-pago"></p>
             </div>
+            
             <div>
                 <button class="btn-conf" id="btn-volver-inicio">
                     Volver al inicio
