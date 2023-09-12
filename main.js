@@ -768,7 +768,7 @@ function ConfirmarPedido(){
     const [fechaPart, horaPart] = fechaHora.split("T");
     const [año, mes, dia] = fechaPart.split("-").map(Number);
     
-    montoPagar.textContent = '$' + totalProductos + ' + $500 de envío';
+    montoPagar.textContent = totalProductos + ' + $500 de envío';
     direccionComercio.textContent = comercioCalle + ' - ' + comercioCiudad;
     direccionEntrega.textContent = entregaCalle + ' - ' + entregaCiudad;
     if (efectivoRadioButton.checked) {
