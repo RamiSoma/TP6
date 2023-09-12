@@ -54,6 +54,7 @@ var flagTarjeta = false;
 
 // Variable volver
 var volver = 0;
+var inicio = document.getElementById("btn-volver-inicio")
 
 // Primero se carga la página y cuando se carga hacer la funcion cargar página
 window.addEventListener("load", CargarPagina)
@@ -68,6 +69,8 @@ function CargarPagina() {
   seccionRecepcion.style.display = "none";
   botonAnterior.style.display = "none";
 }
+
+
 
 // Agregar evento input al campo de entrada
 var totalInput = document.getElementById('total');
@@ -314,6 +317,13 @@ tarjetaRadioButton.addEventListener("change", function () {
 // Agregar listener PARA CUANDO SE INGRESE LA TARJETA
 
 numeroTarjetaInput.addEventListener('input', function () {
+  // Eliminar caracteres no numéricos, comas y puntos
+  var numeroTarjeta = numeroTarjetaInput.value.replace(/[^\d]/g, '');
+  // Formatear el número de tarjeta con espacios cada 4 dígitos
+  numeroTarjeta = formatNumber(numeroTarjeta);
+  // Actualizar el valor del campo de entrada
+  numeroTarjetaInput.value = numeroTarjeta;
+  // Validar la tarjeta después del formateo
   ValidarTarjeta();
 });
 
@@ -372,6 +382,25 @@ function ValidarTarjeta() {
   }
 }
 
+var nombreTarjetaInput = document.getElementById('nombre-tarjeta');
+
+nombreTarjetaInput.addEventListener('input', function () {
+  var nombreTarjeta = nombreTarjetaInput.value;
+  var soloLetras = /^[A-Za-z\s]+$/;
+
+  if (!soloLetras.test(nombreTarjeta)) {
+    // Si se ingresan caracteres no permitidos, muestra un mensaje de error
+    nombreTarjetaInput.style.backgroundColor = 'rgb(255, 197, 197)';
+    document.getElementById('mensaje-error').textContent = 'Ingresa solo letras en este campo';
+    // Elimina los caracteres no permitidos
+    nombreTarjetaInput.value = nombreTarjeta.replace(/[^A-Za-z\s]+/g, '');
+  } else {
+    // Si la entrada es válida, restaura los estilos y elimina el mensaje de error
+    nombreTarjetaInput.style.backgroundColor = '';
+    document.getElementById('mensaje-error').textContent = '';
+  }
+});
+
 // Agregar evento input al input de fecha de vencimiento
 var mensajeError = document.getElementById('mensaje-error');
 
@@ -422,7 +451,14 @@ function ValidarFechaVencimiento() {
 
 // Agregar listener para cuando se ingresa EL CODIGO DE SEGURIDAD
 cvcInput.addEventListener('input', function () {
-  var resultado = ValidarCodigoSeguridad();;
+  // Eliminar caracteres no numéricos
+  var cvc = cvcInput.value.replace(/[^\d]/g, '');
+  // Limitar la longitud a 3 caracteres
+  cvc = cvc.substring(0, 3);
+  // Actualizar el valor del campo de entrada
+  cvcInput.value = cvc;
+  // Validar el CVC después del formateo
+  ValidarCodigoSeguridad();
 });
 
 // Funcion que valida el codigo de seguridad
@@ -568,7 +604,13 @@ function AbrirRecepcion() {
   //botonAnterior.style.display = "none";
 }
 
-// Agregar listener del boton SIGUIENTE DE LA RECEPCION para que vuelva a la forma de pago
+
+
+// Agregar un listener al campo de entrada de fecha y hora
+var fechaHoraEntregaInput = document.getElementById("fecha-hora-entrega");
+fechaHoraEntregaInput.addEventListener("input", verificarFecha);
+// Agregar listener del boton ANTERIOR para que vuelva a la forma de pago
+// botonAnteriorRecepcion.addEventListener("click", AbrirFormaPago)
 botonSiguienteRecepcion.addEventListener("click", function(){
   if(fechaProgramada.checked){
     if (VerificarFecha()){
@@ -578,37 +620,37 @@ botonSiguienteRecepcion.addEventListener("click", function(){
   if(loAntesPosible.checked){
     AbrirFormaPago();
   }
-})
+});
 
 function VerificarFecha() {
-    var fechaEntrega = document.getElementById("fecha-hora-entrega").value;
-    const fechaHoraEntrega = new Date(fechaEntrega);
-    var fechaActual = new Date();
-    const fechaMaxima = new Date();
-    fechaMaxima.setDate(fechaActual.getDate() + 7);
+  var fechaEntrega = fechaHoraEntregaInput.value;
+  const fechaHoraEntrega = new Date(fechaEntrega);
+  var fechaActual = new Date();
+  const fechaMaxima = new Date();
+  fechaMaxima.setDate(fechaActual.getDate() + 7);
 
-    // Sumar 30 minutos a la fecha actual
-    fechaActual.setMinutes(fechaActual.getMinutes() + 30);
+  // Sumar 30 minutos a la fecha actual
+  fechaActual.setMinutes(fechaActual.getMinutes() + 30);
 
-    if (!fechaEntrega) {
-        document.getElementById("mensaje-error").textContent = "Debe ingresar un valor en la fecha.";
-        return false;
-    }else if(fechaHoraEntrega <= fechaActual ){
-      document.getElementById("mensaje-error").textContent = "La fecha debe ser mayor a hoy! :D";
-      return false;
-    }else if ( fechaHoraEntrega >= fechaMaxima){
-      document.getElementById("mensaje-error").textContent = "La programación del pedido puede ser de hasta 7 dias posteriores! :D";
-      return false;
-    } else if (fechaHoraEntrega.getHours() < 7 || 
-                fechaHoraEntrega.getHours() > 23 || 
-                fechaHoraEntrega.getMinutes() < 0 || 
-                fechaHoraEntrega.getMinutes() > 59 ) {
-                  document.getElementById("mensaje-error").textContent = "Recordá que el comercio abre de 7 a 23:59 ! :D";
-                  return false;                
-    }else{
-      document.getElementById("mensaje-error").textContent = "";
-      return true;
-    }
+  if (!fechaEntrega) {
+    document.getElementById("mensaje-error").textContent = "Debe ingresar un valor en la fecha.";
+    return false;
+  } else if (fechaHoraEntrega <= fechaActual) {
+    document.getElementById("mensaje-error").textContent = "La fecha debe ser mayor a hoy! :D";
+    return false;
+  } else if (fechaHoraEntrega >= fechaMaxima) {
+    document.getElementById("mensaje-error").textContent = "La programación del pedido puede ser de hasta 7 días posteriores! :D";
+    return false;
+  } else if (fechaHoraEntrega.getHours() < 7 ||
+    fechaHoraEntrega.getHours() > 23 ||
+    fechaHoraEntrega.getMinutes() < 0 ||
+    fechaHoraEntrega.getMinutes() > 59) {
+    document.getElementById("mensaje-error").textContent = "Recuerda que el comercio abre de 7 a 23:59! :D";
+    return false;
+  } else {
+    document.getElementById("mensaje-error").textContent = "";
+    return true;
+  }
 }
 
 function ConfirmarPedido(){
@@ -646,7 +688,7 @@ function realizarConfirmacion(){
     setTimeout(function () {
         popup.style.opacity = "0";
         popup.style.pointerEvents = "none";
-    }, 5000);
+    }, 3000);
 
     seccionRecepcion.style.display = "none";
     seccionDatos.style.display = "block";
@@ -662,7 +704,7 @@ function realizarConfirmacion(){
     setTimeout(function () {
         cancelo.style.opacity = "0";
         cancelo.style.pointerEvents = "none";
-    }, 3000);
+    }, 2000);
 
   })
 
@@ -728,4 +770,10 @@ loAntesPosible.addEventListener("change", function(){
   if (loAntesPosible.checked){
     inputFecha.style.display = "none";
   }
+})
+
+inicio.addEventListener("click",function(){
+  location.reload();
+ /* volver = 0
+  volverPag();*/
 })
