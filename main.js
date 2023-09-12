@@ -70,65 +70,58 @@ function CargarPagina() {
   botonAnterior.style.display = "none";
 }
 
-
 var totalInput = document.getElementById('total');
-var prevValue = '';
+var prevMontoValue = '';
+var mensajeError = document.getElementById('mensaje-error');
 var typingTimeout;
 
 totalInput.addEventListener('input', function () {
-  var montoValue = totalInput.value;
+    clearTimeout(typingTimeout);
 
-  // Remover caracteres no numéricos excepto comas, puntos y el signo negativo
-  montoValue = montoValue.replace(/[^\d,-.]/g, '');
+    // Obtener el valor actual del campo de entrada
+    var inputValue = totalInput.value;
 
-  // Eliminar ceros a la izquierda, pero mantener un 0 inicial
-  montoValue = montoValue.replace(/^0(?=\d)/, '');
+    // Remover caracteres no numéricos excepto comas, puntos y el signo negativo
+    inputValue = inputValue.replace(/[^\d,-.]/g, '');
 
-  // Verificar si el valor es negativo
-  if (montoValue.startsWith('-')) {
-      montoValue = montoValue.substring(1); // Eliminar el signo negativo
-  }
+    // Eliminar ceros a la izquierda, pero mantener un 0 inicial
+    inputValue = inputValue.replace(/^0(?=\d)/, '');
 
-  // Realizar la verificación de caracteres no permitidos fuera del timeout
-  if (!/^-?\d*(,\d{0,2})?$/.test(montoValue)) {
-      // Si se ingresan caracteres no permitidos, mostrar un mensaje de error
-      mensajeError.textContent = 'Ingresa solo números y caracteres válidos';
-      return;
-  }
+    // Verificar si el valor es negativo
+    if (inputValue.startsWith('-')) {
+        inputValue = inputValue.substring(1); // Eliminar el signo negativo
+    }
 
-  // Borrar el mensaje de error si es válido
-  mensajeError.textContent = '';
+    // Realizar la verificación de caracteres no permitidos fuera del timeout
+    if (!/^-?\d*(,\d{0,2})?$/.test(inputValue) && inputValue !== '') {
+        // Si se ingresan caracteres no permitidos (excepto campo vacío), mostrar un mensaje de error
+        mensajeError.textContent = 'Ingresa solo números y caracteres válidos';
+        return;
+    }
 
-  // Iniciar el timeout para el formateo como ARS y cambio de punto a coma (ajusta según lo necesites)
-  clearTimeout(typingTimeout);
-  typingTimeout = setTimeout(function () {
-      // Formatear como moneda (ARS) y cambiar punto a coma después del tiempo de espera                          
-      var inputValue = totalInput.value;
+    // Borrar el mensaje de error si es válido
+    mensajeError.textContent = '';
 
-      if (inputValue === '') {
-          // Si el campo está vacío, no mostrar NaN
-          totalInput.value = '';
-          prevMontoValue = '';
-          return;
-      }
+    typingTimeout = setTimeout(function () {
+        // Formatear como moneda (ARS) después del tiempo de espera
+        var numericValue = parseFloat(inputValue.replace(',', '.'));
+        var formattedValue = new Intl.NumberFormat('es-AR', {
+            style: 'currency',
+            currency: 'ARS',
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+        }).format(numericValue);
 
-                  
-      if (!isNaN(inputValue.replace(',', '.'))) {
-          var numericValue = parseFloat(inputValue.replace(',', '.'));
-          var formattedValue = new Intl.NumberFormat('es-AR', {
-              style: 'currency',
-              currency: 'ARS',
-              minimumFractionDigits: 2,
-              maximumFractionDigits: 2,
-          }).format(numericValue);
-          totalInput.value = formattedValue;
-          prevMontoValue = formattedValue;
-      
-                   
-      }
-  }, 500); // Esperar 0.5 segundos de inactividad para formatear (ajusta según lo necesites)
+        if (inputValue === '') {
+            // Si el campo está vacío, no mostrar NaN
+            totalInput.value = '';
+            prevMontoValue = '';
+        } else {
+            totalInput.value = formattedValue;
+            prevMontoValue = formattedValue;
+        }
+    }, 500); // Esperar 0.5 segundos de inactividad para formatear (ajusta según lo necesites)
 });
-
 
 
 // Listener para que vea cuando se sube una foto
