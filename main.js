@@ -307,7 +307,7 @@ botonSiguienteDirecciones.addEventListener("click", function(){
 
     entregaCalle = document.getElementById("entrega-calle").value;
     entregaCiudad = document.getElementById("entrega-ciudad").value;
-    if ((comercioCalle === entregaCalle) && (entregaCalle === entregaCiudad) ) {
+    if ((comercioCalle === entregaCalle) && (comercioCiudad === entregaCiudad) ) {
       document.getElementById("mensaje-error").textContent = "Las direcciones NO deben coincidir";
     } else if (comercioCalle != "" && comercioCiudad != null && entregaCalle != "" && entregaCiudad != "" && comercioCiudad != "" && entregaCiudad != null) {
         if ((entregaCiudad.toLowerCase() === "córdoba" || entregaCiudad.toLowerCase() === "cordoba" || entregaCiudad.toLowerCase() === "carlos paz") && (comercioCiudad.toLowerCase() === "córdoba" || comercioCiudad.toLowerCase() === "cordoba" || comercioCiudad.toLowerCase() === "carlos paz") ) {
@@ -333,6 +333,7 @@ function AbrirFormaPago() {
 
   // Reemplaza la coma por un punto para que JavaScript lo interprete como número decimal
   totalProductosTexto = totalProductosTexto.replace('.', '');
+
   totalProductosTexto = totalProductosTexto.replace(',', '.');
 
 
@@ -360,7 +361,7 @@ function AbrirFormaPago() {
   seccionDirecciones.style.display = "none";
   seccionFormaPago.style.display = "block";
   seccionRecepcion.style.display = "none";
-  volver = 1;
+  volver = 2;
 }
 
 // Resto de tu código...
