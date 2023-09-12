@@ -71,30 +71,51 @@ function CargarPagina() {
 }
 
 
-
-// Agregar evento input al campo de entrada
 var totalInput = document.getElementById('total');
-var prevValue = totalInput.value;
+var prevValue = '';
+var typingTimeout;
 
 totalInput.addEventListener('input', function () {
-    var inputValue = totalInput.value;
+    clearTimeout(typingTimeout);
 
-    // Reemplazar puntos por comas y eliminar caracteres no numéricos
-    inputValue = inputValue.replace(/\./g, ',').replace(/[^\d,]/g, '');
+    typingTimeout = setTimeout(function () {
+        var inputValue = totalInput.value;
 
-    // Verificar si ya hay una coma presente en el valor
-    var commaCount = (inputValue.match(/,/g) || []).length;
+        // Remover caracteres no numéricos excepto comas y puntos
+        inputValue = inputValue.replace(/[^\d,.]/g, '');
 
-    if (commaCount > 1 || inputValue.startsWith(',')) {
-        // Si ya hay una coma como primer carácter o se intenta agregar otra coma,
-        // eliminar la coma recién ingresada y asegurarse de que no sea el primer carácter
-        inputValue = prevValue;
-    }
+        // Reemplazar puntos por comas para el separador decimal
+        inputValue = inputValue.replace(/\./g, ',');
 
-    // Actualizar el valor del campo de entrada
-    totalInput.value = inputValue;
-    prevValue = inputValue;
+        // Eliminar ceros a la izquierda, pero mantener un 0 inicial
+        inputValue = inputValue.replace(/^0(?=\d)/, '');
+
+        if (inputValue === '') {
+            // Si el campo está vacío, no mostrar NaN
+            totalInput.value = '';
+            prevValue = '';
+            return;
+        }
+
+        // Formatear como moneda (ARS)
+        if (!isNaN(inputValue.replace(',', '.'))) {
+            var numericValue = parseFloat(inputValue.replace(',', '.'));
+            var formattedValue = new Intl.NumberFormat('es-AR', {
+                style: 'currency',
+                currency: 'ARS',
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+            }).format(numericValue);
+            totalInput.value = formattedValue;
+            prevValue = formattedValue;
+        } else {
+            totalInput.value = prevValue;
+        }
+    }, 500); // Esperar 1 segundo de inactividad para formatear (ajusta según lo necesites)
 });
+
+
+
 
 
 
@@ -290,16 +311,40 @@ botonSiguienteDirecciones.addEventListener("click", function(){
   
 })
 
-// AGREGAR VALIDACIONES Y COSAS DE LA CALLE Y DIRECCIONES
+// AGREGAR VALIDACIONES Y COSAS DE LA CALLE Y DIRECCIONE
 
-// Funcion que pasa a la forma de pago
 function AbrirFormaPago() {
+  // Supongamos que totalProductos es un valor con coma como separador decimal
+  var totalProductosTexto = totalProductos; // Asegúrate de que totalProductos se maneje como texto
+
+  // Reemplaza la coma por un punto para que JavaScript lo interprete como número decimal
+  totalProductosTexto = totalProductosTexto.replace(',', '.');
+
+  // Convierte totalProductosTexto a un número decimal
+  var precioProductos = parseFloat(totalProductosTexto);
+
+  // Asegúrate de que costoEnvio se maneje como número decimal
+  var costoEnvio = 500.0; // Siempre se considera como número decimal
+
+  // Redondea los números a dos decimales antes de la suma
+  precioProductos = Math.round(precioProductos * 100) / 100;
+  costoEnvio = Math.round(costoEnvio * 100) / 100;
+
+  // Calcula el subtotal incluyendo el envío
+  var subtotal = precioProductos + costoEnvio;
+
+  // Formatea el subtotal para mostrarlo con coma como separador decimal
+  var subtotalFormateado = subtotal.toLocaleString('es-AR', { minimumFractionDigits: 2 });
+
+  // Muestra el subtotal en el formato deseado
+  subtotalMostrar.innerHTML = "Subtotal: $" + subtotalFormateado;
+
+  // Resto de tu código
   totalProductosMostrar.innerHTML = "Productos: $" + totalProductos;
-  subtotal = parseFloat(totalProductos) + 500
-  subtotalMostrar.innerHTML = "Subtotal: $" + subtotal;
-  seccionRecepcion.style.display = "none";
+  seccionDirecciones.style.display = "none";
   seccionFormaPago.style.display = "block";
-  volver = 2;
+  seccionRecepcion.style.display = "none";
+  volver = 1;
 }
 
 // Agregar listener del boton ANTERIOR para que vuelva a las direcciones
@@ -658,6 +703,8 @@ function VerificarFecha() {
     return true;
   }
 }
+
+
 
 function ConfirmarPedido(){
     const montoPagar = document.getElementById("monto-pagar");
