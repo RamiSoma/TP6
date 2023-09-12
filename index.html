@@ -86,20 +86,6 @@
             <div class="contenedor-mapa">
                 <img src = "./Recursos/mapaCba.png" class="mapa">
             </div>
-
-            <!-- <select id="comercio_ciudad" name="ciudad" required>
-                <option value="ciudad1">Calera</option>
-                <option value="ciudad2">Córdoba</option>
-                <option value="ciudad3">Cosquín</option>
-                <option value="ciudad4">Mendiolaza</option>
-                <option value="ciudad5">Villa Allende</option>
-                <option value="ciudad6">Villa Carlos Paz</option>
-                <option value="ciudad6">San BOWER XD</option>
-                <option value="ciudad6">Curso 221 - edificio Central</option>
-                <option value="ciudad6">Rami ramero</option>
-
-                Agrega aquí las ciudades disponibles
-            </select> -->
     
             <div id="section">
                 <h2>Dirección de Entrega:</h2>
@@ -114,32 +100,43 @@
                 <div class="contenedor-mapa">
                     <img src = "./Recursos/mapaCba.png" class="mapa">
                 </div>
-            
-                <!-- <label for="entrega_ciudad">Ciudad:</label>
-                <select id="entrega_ciudad" name="ciudad" required>
-                    <option value="ciudad1">Calera</option>
-                    <option value="ciudad2">Córdoba</option>
-                    <option value="ciudad3">Cosquín</option>
-                    <option value="ciudad4">Mendiolaza</option>
-                    <option value="ciudad5">Villa Allende</option>
-                    <option value="ciudad6">Villa Carlos Paz</option>
-                    <option value="ciudad6">San BOWER XD</option>
-                    <option value="ciudad6">Curso 221 - edificio Central</option>
-                    Agrega aquí las ciudades disponibles
-                </select> -->
-        
+
                 <label for="referencia">Referencia (opcional):</label>
                 <input type="text" id="referencia" name="referencia">
             </div>
 
             <div class="botones-der">
                 <button id="btn-siguiente2" class="botones-der" type="button">Siguiente</button>
-                
             </div>
-            
-
         </section>
         
+        <!-- SECCIÓN RECEPCIÓN -->
+        <section id="seccion-recepcion">
+            <div id="section" class="radio-label">
+                <h2>Fecha y Hora de Recepción:</h2>
+                <div>
+                    <input type="radio" id="lo-antes-posible" name="recepcion">
+                    <label for="lo-antes-posible" class="radio-label">
+                        <span class="custom-radio"></span> Lo antes posible
+                    </label>
+                </div>
+                
+                <div>
+                    <input type="radio" id="fecha-hora-programada" name="recepcion">
+                    <label for="fecha-hora-programada" class="radio-label">
+                        <span class="custom-radio"></span> Programar fecha/hora de entrega:
+                    </label>
+                    <input type="datetime-local" id="fecha-hora-entrega" name="fecha-hora-entrega" style="display: none;">
+                </div>
+                
+                <div class="botones-der">
+                    <button id="btn-siguiente3" class="botones-der" type="button">Siguiente</button>
+                </div>
+                
+            </div>
+        </section>
+
+        <!-- SECCIÓN FORMA DE PAGO -->
         <section id="seccion-forma-pago">
             <!-- Aquí puedes incluir los productos seleccionados en el carrito ESTO CREO QUE NO VA -->
             <div id="section" class="radio-label">
@@ -203,36 +200,7 @@
             <!-- <div class = "botones_izq">
                 <button id="btn_anterior2" class="material-symbols-outlined" type="button">arrow_back</button>
             </div> -->
-            <div class="botones-der">
-                <button id="btn-siguiente3" class="botones-der" type="button">Siguiente</button>
-            </div>
-            
-
-        </section>
-        
-        <section id="seccion-recepcion">
-            <div id="section" class="radio-label">
-                <h2>Fecha y Hora de Recepción:</h2>
-                <div>
-                    <input type="radio" id="lo-antes-posible" name="recepcion">
-                    <label for="lo-antes-posible" class="radio-label">
-                        <span class="custom-radio"></span> Lo antes posible
-                    </label>
-                </div>
-                
-                <div>
-                    <input type="radio" id="fecha-hora-programada" name="recepcion">
-                    <label for="fecha-hora-programada" class="radio-label">
-                        <span class="custom-radio"></span> Programar fecha/hora de entrega:
-                    </label>
-                    <input type="datetime-local" id="fecha-hora-entrega" name="fecha-hora-entrega" style="display: none;">
-                </div>
-                <button type="submit" id="submit">Realizar Pedido</button>
-                <!-- <div class = "botones_izq">
-                    <button id="btn_anterior3" class="material-symbols-outlined" type="button">arrow_back</button>
-                </div> -->
-                
-            </div>
+            <button type="submit" id="submit">Realizar Pedido</button>
         </section>
         
         <section id="seccion-datos" style="display: none;">

@@ -19,8 +19,8 @@ var inputMontoProductos = document.getElementById("total")
 // Variables de botones
 const botonSiguienteProducto = document.getElementById("btn-siguiente1");
 const botonSiguienteDirecciones = document.getElementById("btn-siguiente2");
+const botonSiguienteRecepcion = document.getElementById("btn-siguiente3");
 const botonAnterior = document.getElementById("btn-anterior");
-const botonSiguienteFormaPago = document.getElementById("btn-siguiente3");
 // const botonAnteriorFormaPago = document.getElementById("btn_anterior2");
 // const botonAnteriorRecepcion = document.getElementById("btn_anterior3");
 const botonRealizarPedido = document.getElementById("submit");
@@ -234,8 +234,10 @@ document.addEventListener('click', function(event) {
 function AbrirDirecciones() {
   seccionProductos.style.display = "none";
   seccionDirecciones.style.display = "block";
+  seccionRecepcion.style.display = "none";
   seccionFormaPago.style.display = "none";
   botonAnterior.style.display = "block";
+  volver = 0;
 }
 
 // Agregar listener del boton ANTERIOR para que vuelva a los productos
@@ -251,13 +253,17 @@ function volverPag(){
     volver = 0;
   }
   if (volver === 2) {
-    AbrirFormaPago();
+    AbrirRecepcion();
     volver === 1;
   }
+  // if (volver === 3) {
+  //   AbrirFormaPago();
+  //   volver === 2;
+  // }
   document.getElementById("mensaje-error").textContent = "";
 }
 
-// Agregar listener del boton SIGUIENTE para que pase a la forma de pago
+// Agregar listener del boton SIGUIENTE para que pase a la recepción
 botonSiguienteDirecciones.addEventListener("click", function(){
     comercioCalle = document.getElementById("comercio-calle").value;
     comercioCiudad = document.getElementById("comercio-ciudad").value;
@@ -265,7 +271,7 @@ botonSiguienteDirecciones.addEventListener("click", function(){
     entregaCiudad = document.getElementById("entrega-ciudad").value;
     if (comercioCalle != "" && comercioCiudad != null && entregaCalle != "" && entregaCiudad != "" && comercioCiudad != "" && entregaCiudad != null) {
         if ((entregaCiudad.toLowerCase() === "córdoba" || entregaCiudad.toLowerCase() === "cordoba" || entregaCiudad.toLowerCase() === "carlos paz") && (comercioCiudad.toLowerCase() === "córdoba" || comercioCiudad.toLowerCase() === "cordoba" || comercioCiudad.toLowerCase() === "carlos paz") ) {
-          AbrirFormaPago();
+          AbrirRecepcion();
           document.getElementById("mensaje-error").textContent = "";
         } else {
           document.getElementById("mensaje-error").textContent = "La ciudad no es válida";
@@ -283,10 +289,9 @@ function AbrirFormaPago() {
   totalProductosMostrar.innerHTML = "Productos: $" + totalProductos;
   subtotal = parseFloat(totalProductos) + 500
   subtotalMostrar.innerHTML = "Subtotal: $" + subtotal;
-  seccionDirecciones.style.display = "none";
-  seccionFormaPago.style.display = "block";
   seccionRecepcion.style.display = "none";
-  volver = 1;
+  seccionFormaPago.style.display = "block";
+  volver = 2;
 }
 
 // Agregar listener del boton ANTERIOR para que vuelva a las direcciones
@@ -497,23 +502,21 @@ function formatCurrency(moneda) {
   }*/
 }
 
-
-
-// Agregar listener del boton SIGUIENTE para que se pase a la recepcion
-botonSiguienteFormaPago.addEventListener("click", function(){
+// Agregar listener del boton SIGUIENTE para que se pase a la forma de pago
+botonRealizarPedido.addEventListener("click", function(){
   if (tarjetaRadioButton.checked || efectivoRadioButton.checked) {
     var montoPaga = document.getElementById("monto").value;
     totalProductos = document.getElementById("total").value;
     if (efectivoRadioButton.checked){
       if(montoPaga != null && parseInt(montoPaga) >= parseInt(totalProductos) + 500){
-      AbrirRecepcion();
+      ConfirmarPedido();
       document.getElementById("mensaje-error").textContent = "";
     }else{
       document.getElementById("mensaje-error").textContent = "Ingresar un valor mayor que el monto de compra";
     }}
     if (tarjetaRadioButton.checked) {
       if (tarjetaRadioButton.checked  && nombreTarjeta.value.replace(" ","") != "" && ValidarFechaVencimiento() && ValidarCodigoSeguridad() == 'Válido' && (ValidarTarjeta() == 'Visa' || ValidarTarjeta() == 'Mastercard')) {
-        AbrirRecepcion();
+        ConfirmarPedido();
         document.getElementById("mensaje-error").textContent = "";
       } else {
         document.getElementById("mensajeError").textContent = "Deben llenarse todos los campos";
@@ -556,30 +559,28 @@ montoInput.addEventListener('input', function () {
     mensajeError.textContent = '';
 });
 
-
-
 // Funcion que pasa a la recepcion
 function AbrirRecepcion() {
+  seccionDirecciones.style.display = "none";
   seccionFormaPago.style.display = "none";
   seccionRecepcion.style.display = "block";
-  volver = 2;
+  volver = 1;
   //botonAnterior.style.display = "none";
 }
 
-// Agregar listener del boton ANTERIOR para que vuelva a la forma de pago
-// botonAnteriorRecepcion.addEventListener("click", AbrirFormaPago)
-botonRealizarPedido.addEventListener("click", function(){
+// Agregar listener del boton SIGUIENTE DE LA RECEPCION para que vuelva a la forma de pago
+botonSiguienteRecepcion.addEventListener("click", function(){
   if(fechaProgramada.checked){
-    if (verificarFecha()){
-      confirmarPedido();
+    if (VerificarFecha()){
+      AbrirFormaPago();
     }
   }
   if(loAntesPosible.checked){
-    confirmarPedido();
+    AbrirFormaPago();
   }
 })
 
-function verificarFecha() {
+function VerificarFecha() {
     var fechaEntrega = document.getElementById("fecha-hora-entrega").value;
     const fechaHoraEntrega = new Date(fechaEntrega);
     var fechaActual = new Date();
@@ -610,7 +611,7 @@ function verificarFecha() {
     }
 }
 
-function confirmarPedido(){
+function ConfirmarPedido(){
     const montoPagar = document.getElementById("monto-pagar");
     const direccionComercio = document.getElementById("direccion-comercio");
     const direccionEntrega = document.getElementById("direccion-entrega");
