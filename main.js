@@ -356,6 +356,15 @@ function AbrirFormaPago() {
   // Muestra el subtotal en el formato deseado
   subtotalMostrar.innerHTML = "Subtotal: $" + subtotalFormateado;
 
+  // Mostrar la forma de entrega
+  var formaEntrega = document.getElementById("entrega");
+  if (loAntesPosible.checked) {
+    formaEntrega.innerHTML = "Entrega: Lo antes posible";
+  }
+  else{
+    formaEntrega.innerHTML = "Entrega: "
+  }
+
   // Resto de tu código
   totalProductosMostrar.innerHTML = "Productos:" + totalProductos;
   seccionDirecciones.style.display = "none";
