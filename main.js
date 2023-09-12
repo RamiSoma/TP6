@@ -76,11 +76,19 @@ var prevValue = '';
 var typingTimeout;
 
 totalInput.addEventListener('input', function () {
+    // Obtener el valor actual del campo de entrada
+    var inputValue = totalInput.value;
+
+    // Realizar la verificación de caracteres no permitidos fuera del timeout
+    if (!/^-?\d*(,\d{0,2})?$/.test(inputValue) && inputValue !== '') {
+        // Si se ingresan caracteres no permitidos (excepto campo vacío), mostrar un mensaje de error
+        totalInput.value = prevValue;
+        return;
+    }
+
     clearTimeout(typingTimeout);
 
     typingTimeout = setTimeout(function () {
-        var inputValue = totalInput.value;
-
         // Remover caracteres no numéricos excepto comas y puntos
         inputValue = inputValue.replace(/[^\d,.]/g, '');
 
@@ -111,12 +119,8 @@ totalInput.addEventListener('input', function () {
         } else {
             totalInput.value = prevValue;
         }
-    }, 500); // Esperar 1 segundo de inactividad para formatear (ajusta según lo necesites)
+    }, 500); // Esperar 0.5 segundos de inactividad para formatear (ajusta según lo necesites)
 });
-
-
-
-
 
 
 
@@ -317,13 +321,16 @@ function AbrirFormaPago() {
   // Supongamos que totalProductos es un valor con coma como separador decimal
   var totalProductosTexto = totalProductos; // Asegúrate de que totalProductos se maneje como texto
 
+  // Elimina el símbolo de moneda "$" si está presente
+  totalProductosTexto = totalProductosTexto.replace('$', '');
+
   // Reemplaza la coma por un punto para que JavaScript lo interprete como número decimal
   totalProductosTexto = totalProductosTexto.replace(',', '.');
 
   // Convierte totalProductosTexto a un número decimal
   var precioProductos = parseFloat(totalProductosTexto);
 
-  // Asegúrate de que costoEnvio se maneje como número decimal
+  // Asegúrate de que costoEnvío se maneje como número decimal
   var costoEnvio = 500.0; // Siempre se considera como número decimal
 
   // Redondea los números a dos decimales antes de la suma
@@ -340,12 +347,15 @@ function AbrirFormaPago() {
   subtotalMostrar.innerHTML = "Subtotal: $" + subtotalFormateado;
 
   // Resto de tu código
-  totalProductosMostrar.innerHTML = "Productos: $" + totalProductos;
+  totalProductosMostrar.innerHTML = "Productos:" + totalProductos;
   seccionDirecciones.style.display = "none";
   seccionFormaPago.style.display = "block";
   seccionRecepcion.style.display = "none";
   volver = 1;
 }
+
+// Resto de tu código...
+
 
 // Agregar listener del boton ANTERIOR para que vuelva a las direcciones
 // botonAnteriorFormaPago.addEventListener("click", AbrirDirecciones)
@@ -595,58 +605,86 @@ function formatCurrency(moneda) {
 botonRealizarPedido.addEventListener("click", function(){
   if (tarjetaRadioButton.checked || efectivoRadioButton.checked) {
     var montoPaga = document.getElementById("monto").value;
-    totalProductos = document.getElementById("total").value;
-    if (efectivoRadioButton.checked){
-      if(montoPaga != null && parseInt(montoPaga) >= parseInt(totalProductos) + 500){
-      ConfirmarPedido();
-      document.getElementById("mensaje-error").textContent = "";
-    }else{
-      document.getElementById("mensaje-error").textContent = "Ingresar un valor mayor que el monto de compra";
-    }}
+    var totalProductos = parseFloat(document.getElementById("total").value.replace(',', '.')); // Obtén el total formateado como número
+    if (efectivoRadioButton.checked) {
+      if (montoPaga != null && parseFloat(montoPaga.replace(',', '.')) >= totalProductos + 500) {
+        ConfirmarPedido();
+        document.getElementById("mensaje-error").textContent = "";
+      } else {
+        document.getElementById("mensaje-error").textContent = "Ingresar un valor mayor que el monto de compra";
+      }
+    }
     if (tarjetaRadioButton.checked) {
-      if (tarjetaRadioButton.checked  && nombreTarjeta.value.replace(" ","") != "" && ValidarFechaVencimiento() && ValidarCodigoSeguridad() == 'Válido' && (ValidarTarjeta() == 'Visa' || ValidarTarjeta() == 'Mastercard')) {
+      if (tarjetaRadioButton.checked && nombreTarjeta.value.replace(" ","") != "" && ValidarFechaVencimiento() && ValidarCodigoSeguridad() == 'Válido' && (ValidarTarjeta() == 'Visa' || ValidarTarjeta() == 'Mastercard')) {
         ConfirmarPedido();
         document.getElementById("mensaje-error").textContent = "";
       } else {
         document.getElementById("mensajeError").textContent = "Deben llenarse todos los campos";
-    }}
+      }
+    }
   } else {
     document.getElementById("mensaje-error").textContent = "Debe seleccionar una forma de pago";
   }
 });
 
-// Agregar evento input al campo de entrada monto
 var montoInput = document.getElementById('monto');
-var prevMontoValue = montoInput.value;
-var mensajeError = document.getElementById('mensaje-error'); // Asegúrate de que el mensaje de error tenga el ID correcto
+var prevMontoValue = '';
+var mensajeError = document.getElementById('mensaje-error');
+var typingTimeout;
 
 montoInput.addEventListener('input', function () {
     var montoValue = montoInput.value;
 
-    // Reemplazar punto por coma y eliminar caracteres no numéricos
-    montoValue = montoValue.replace(/\./g, ',').replace(/[^\d,]/g, '');
+    // Remover caracteres no numéricos excepto comas, puntos y el signo negativo
+    montoValue = montoValue.replace(/[^\d,-.]/g, '');
 
-    // Verificar si ya hay una coma presente en el valor
-    var commaCount = (montoValue.match(/,/g) || []).length;
-
-    if (commaCount > 1 || montoValue.startsWith(',')) {
-        // Si ya hay una coma como primer carácter o se intenta agregar otra coma,
-        // eliminar la coma recién ingresada y asegurarse de que no sea el primer carácter
-        montoValue = prevMontoValue;
-    }
+    // Eliminar ceros a la izquierda, pero mantener un 0 inicial
+    montoValue = montoValue.replace(/^0(?=\d)/, '');
 
     // Verificar si el valor es negativo
     if (montoValue.startsWith('-')) {
         montoValue = montoValue.substring(1); // Eliminar el signo negativo
     }
 
-    // Actualizar el valor del campo de entrada monto
-    montoInput.value = montoValue;
-    prevMontoValue = montoValue;
+    // Realizar la verificación de caracteres no permitidos fuera del timeout
+    if (!/^-?\d*(,\d{0,2})?$/.test(montoValue)) {
+        // Si se ingresan caracteres no permitidos, mostrar un mensaje de error
+        mensajeError.textContent = 'Ingresa solo números y caracteres válidos';
+        return;
+    }
 
-    // Borrar el mensaje de error
+    // Borrar el mensaje de error si es válido
     mensajeError.textContent = '';
+
+    // Iniciar el timeout para el formateo como ARS y cambio de punto a coma (ajusta según lo necesites)
+    clearTimeout(typingTimeout);
+    typingTimeout = setTimeout(function () {
+        // Formatear como moneda (ARS) y cambiar punto a coma después del tiempo de espera
+        var inputValue = montoInput.value;
+        if (inputValue === '') {
+            // Si el campo está vacío, no mostrar NaN
+            montoInput.value = '';
+            prevMontoValue = '';
+            return;
+        }
+        if (!isNaN(inputValue.replace(',', '.'))) {
+            var numericValue = parseFloat(inputValue.replace(',', '.'));
+            var formattedValue = new Intl.NumberFormat('es-AR', {
+                style: 'currency',
+                currency: 'ARS',
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+            }).format(numericValue);
+            montoInput.value = formattedValue;
+            prevMontoValue = formattedValue;
+        }
+    }, 500); // Esperar 0.5 segundos de inactividad para formatear (ajusta según lo necesites)
 });
+
+
+
+
+
 
 // Funcion que pasa a la recepcion
 function AbrirRecepcion() {
