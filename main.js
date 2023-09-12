@@ -368,18 +368,21 @@ function ValidarTarjeta() {
   if (visaPattern.test(numeroTarjeta)) {
     document.getElementById('numero-tarjeta').className = ''; // Quitar la clase 'error'
     numeroTarjetaInput.style.backgroundColor = '';
+    document.getElementById("tipo-tarjeta-label").style.display = "block";
     document.getElementById('tipo-tarjeta').textContent = 'Visa';
     document.getElementById('mensaje-error').textContent = '';
     return 'Visa';
   } else if (mastercardPattern.test(numeroTarjeta)) {
     document.getElementById('numero-tarjeta').className = ''; // Quitar la clase 'error'
     numeroTarjetaInput.style.backgroundColor = '';
+    document.getElementById("tipo-tarjeta-label").style.display = "block";
     document.getElementById('tipo-tarjeta').textContent = 'Mastercard';
     document.getElementById('mensaje-error').textContent = '';
     return 'Mastercard';
   } else {
     document.getElementById('numero-tarjeta').className = 'error'; // Aplicar la clase 'error'
     numeroTarjetaInput.style.backgroundColor = 'rgb(255, 197, 197)';
+    document.getElementById("tipo-tarjeta-label").style.display = "block";
     document.getElementById('tipo-tarjeta').textContent = 'Desconocida';
     document.getElementById('mensaje-error').textContent = 'Tipo de tarjeta desconocido';
     return 'Tipo de tarjeta desconocido';
