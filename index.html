@@ -51,8 +51,7 @@
 
             <div>
                 <label for="total">Ingrese el total de los productos:</label>
-                <input type="text" id="total" name="total" placeholder="$0,00"  required>
-                <span id="numeroPesos"></span>
+                <input type="text" id="total" name="total" placeholder="$0,00" pattern="[0-9]+([.,][0-9]+)?" required>
             </div>
             
             <h2>Subir Imagen (5MB Máximo)</h2>
@@ -254,14 +253,19 @@
 
         <div id="cancelo" class="oculto">
             <div class="confirmame-contenido">
-               <img src="Recursos/error.png" class="img=popup"> 
+                <div class="imagenConf">
+                    <img src="Recursos/error.png" class="img-popup"> 
+                </div>
                 <p>No se realizo el pedido</p>
             </div>
         </div>
 
         <div id="popup" class="oculto">
             <div class="popup-contenido">
-                <img src="Recursos/exito.png" class="img-popup">
+                <div class = "imagenConf">
+                    <img src="Recursos/exito.png" class="img-popup">
+                </div>
+               
                 <p>¡Muchas gracias por tu pedido!</p>
             </div>
         </div>
