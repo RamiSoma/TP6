@@ -69,6 +69,8 @@ function CargarPagina() {
   botonAnterior.style.display = "none";
 }
 
+
+
 // Agregar evento input al campo de entrada
 var totalInput = document.getElementById('total');
 var prevValue = totalInput.value;
