@@ -764,13 +764,14 @@ function ConfirmarPedido(){
     const formaPago = document.getElementById("forma-pago");
     const recepcion = document.getElementById("recepcion");
     var fechaHora = document.getElementById("fecha-hora-entrega").value;
+    var referencia = document.getElementById("referencia").value;
 
     const [fechaPart, horaPart] = fechaHora.split("T");
     const [año, mes, dia] = fechaPart.split("-").map(Number);
     
     montoPagar.textContent = totalProductos + ' + $500 de envío';
     direccionComercio.textContent = comercioCalle + ' - ' + comercioCiudad;
-    direccionEntrega.textContent = entregaCalle + ' - ' + entregaCiudad;
+    direccionEntrega.textContent = entregaCalle + ' - ' + entregaCiudad + " "+ referencia;
     if (efectivoRadioButton.checked) {
       formaPago.textContent = "Efectivo";
     } else {
