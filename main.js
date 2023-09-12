@@ -604,11 +604,9 @@ function AbrirRecepcion() {
   //botonAnterior.style.display = "none";
 }
 
-
-
 // Agregar un listener al campo de entrada de fecha y hora
 var fechaHoraEntregaInput = document.getElementById("fecha-hora-entrega");
-fechaHoraEntregaInput.addEventListener("input", verificarFecha);
+fechaHoraEntregaInput.addEventListener("input", VerificarFecha);
 // Agregar listener del boton ANTERIOR para que vuelva a la forma de pago
 // botonAnteriorRecepcion.addEventListener("click", AbrirFormaPago)
 botonSiguienteRecepcion.addEventListener("click", function(){
@@ -681,6 +679,7 @@ function realizarConfirmacion(){
 
 
   confirmado.addEventListener("click",function(){
+    seccionFormaPago.style.display = "none";
     confirmame.style.opacity = "0";
     popup.style.opacity = "1";
     popup.style.pointerEvents = "auto";
@@ -696,7 +695,7 @@ function realizarConfirmacion(){
   })
 
   cancelado.addEventListener("click",function(){
-    volverPag();
+    AbrirFormaPago();
     confirmame.style.opacity = "0";
     cancelo.style.opacity = "1";
     cancelo.style.pointerEvents = "auto";
