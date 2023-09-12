@@ -374,6 +374,25 @@ function ValidarTarjeta() {
   }
 }
 
+var nombreTarjetaInput = document.getElementById('nombre-tarjeta');
+
+nombreTarjetaInput.addEventListener('input', function () {
+  var nombreTarjeta = nombreTarjetaInput.value;
+  var soloLetras = /^[A-Za-z\s]+$/;
+
+  if (!soloLetras.test(nombreTarjeta)) {
+    // Si se ingresan caracteres no permitidos, muestra un mensaje de error
+    nombreTarjetaInput.style.backgroundColor = 'rgb(255, 197, 197)';
+    document.getElementById('mensaje-error').textContent = 'Ingresa solo letras en este campo';
+    // Elimina los caracteres no permitidos
+    nombreTarjetaInput.value = nombreTarjeta.replace(/[^A-Za-z\s]+/g, '');
+  } else {
+    // Si la entrada es válida, restaura los estilos y elimina el mensaje de error
+    nombreTarjetaInput.style.backgroundColor = '';
+    document.getElementById('mensaje-error').textContent = '';
+  }
+});
+
 // Agregar evento input al input de fecha de vencimiento
 var mensajeError = document.getElementById('mensaje-error');
 
