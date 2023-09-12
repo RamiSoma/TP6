@@ -266,23 +266,27 @@ function volverPag(){
   document.getElementById("mensaje-error").textContent = "";
 }
 
+
 // Agregar listener del boton SIGUIENTE para que pase a la recepción
 botonSiguienteDirecciones.addEventListener("click", function(){
     comercioCalle = document.getElementById("comercio-calle").value;
     comercioCiudad = document.getElementById("comercio-ciudad").value;
+
     entregaCalle = document.getElementById("entrega-calle").value;
     entregaCiudad = document.getElementById("entrega-ciudad").value;
-    if (comercioCalle != "" && comercioCiudad != null && entregaCalle != "" && entregaCiudad != "" && comercioCiudad != "" && entregaCiudad != null) {
+    if (comercioCalle === entregaCalle) {
+      document.getElementById("mensaje-error").textContent = "Las direcciones NO deben coincidir";
+    } else if (comercioCalle != "" && comercioCiudad != null && entregaCalle != "" && entregaCiudad != "" && comercioCiudad != "" && entregaCiudad != null) {
         if ((entregaCiudad.toLowerCase() === "córdoba" || entregaCiudad.toLowerCase() === "cordoba" || entregaCiudad.toLowerCase() === "carlos paz") && (comercioCiudad.toLowerCase() === "córdoba" || comercioCiudad.toLowerCase() === "cordoba" || comercioCiudad.toLowerCase() === "carlos paz") ) {
           AbrirRecepcion();
           document.getElementById("mensaje-error").textContent = "";
         } else {
           document.getElementById("mensaje-error").textContent = "La ciudad no es válida";
-        }
-        
-    }else{
+        } 
+    } else{
         document.getElementById("mensaje-error").textContent = "Debe completar todos los campos...";
     }
+  
 })
 
 // AGREGAR VALIDACIONES Y COSAS DE LA CALLE Y DIRECCIONES
