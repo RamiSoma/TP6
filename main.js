@@ -105,6 +105,7 @@ inputImagen.addEventListener("change", SubirImagen)
 // Listener para que no pueda ingresar negativos en el total de los productos
 //inputMontoProductos.addEventListener("onkeydown", ValidarMontoPositivo(inputMontoProductos))
 
+
 // Funcion que valida un monto positivo
 // function ValidarMontoPositivo(event) {
 //   if (event.key === "-" || event.key === "-") {
@@ -192,7 +193,7 @@ comercioCiudad.addEventListener('input', function() {
         return;
     }
 
-    const resultados = opciones.filter(opcion => opcion.toLowerCase().includes(texto));
+    const resultados = opciones.filter(opcion => opcion.toLowerCase().replace("ó","o").includes(texto));
 
     resultados.forEach(resultado => {
         const sugerencia = document.createElement('div');
